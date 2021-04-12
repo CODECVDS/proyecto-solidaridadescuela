@@ -1,0 +1,4 @@
+Diagrama
+https://github.com/PDSW-ECI/LightweighContainers_DepenendecyInjectionIntro-WordProcessor
+Añadir Permisos
+https://docs.github.com/en/organizations/managing-access-to-your-organizations-repositories/setting-base-permissions-for-an-organization
