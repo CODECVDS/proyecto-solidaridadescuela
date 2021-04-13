@@ -12,6 +12,6 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     private NeedDAO needDAO;
     private CategoryDAO categoryDAO;
 
-    private void registrar();
+    public void registrar(){};
 
 }
