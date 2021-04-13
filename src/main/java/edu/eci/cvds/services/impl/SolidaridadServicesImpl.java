@@ -10,5 +10,6 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
 
     @Inject
     private CategoryDAO categoryDAO;
-    
+
+    private void registrar;
 }
