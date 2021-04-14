@@ -9,6 +9,7 @@
 	<typeAliases>
 		<typeAlias type='edu.eci.cvds.entities.Category' alias='Decanatura' />
 		<typeAlias type='edu.eci.cvds.entities.Need' alias='Programa' />
+		<typeAlias type='edu.eci.cvds.entities.User' alias='Estudiante' />
 	</typeAliases>
 
 	<environments default="test">
@@ -26,6 +27,7 @@
 	<mappers>
 		<mapper resource="mappers/CategoryMapper.xml"></mapper>
 		<mapper resource="mappers/NeedMapper.xml"></mapper>
+		<mapper resource="mappers/UserMapper.xml"></mapper>
 	</mappers>
 
 </configuration>
