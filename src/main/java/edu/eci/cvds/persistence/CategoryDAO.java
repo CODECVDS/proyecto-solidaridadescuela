@@ -1,7 +1,6 @@
 package edu.eci.cvds.persistence;
 
 import edu.eci.cvds.entities.Category;
-import edu.eci.cvds.services.ServicesException;
 
 public interface CategoryDAO {
 

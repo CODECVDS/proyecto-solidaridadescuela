@@ -1,6 +1,5 @@
 package edu.eci.cvds.persistence.mybatisimpl.mappers;
 
-import edu.eci.cvds.entities.Category;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
