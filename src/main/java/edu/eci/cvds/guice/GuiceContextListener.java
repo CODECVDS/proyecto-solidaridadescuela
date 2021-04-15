@@ -3,7 +3,9 @@ package edu.eci.cvds.guice;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import edu.eci.cvds.persistence.CategoryDAO;
+import edu.eci.cvds.persistence.NeedDAO;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisCategoryDAO;
+import edu.eci.cvds.persistence.mybatisimpl.MyBatisNeedDAO;
 import edu.eci.cvds.services.SolidaridadServices;
 import edu.eci.cvds.services.impl.SolidaridadServicesImpl;
 import org.mybatis.guice.XMLMyBatisModule;
@@ -35,6 +37,8 @@ public class GuiceContextListener implements ServletContextListener {
                 bind(SolidaridadServices.class).to(SolidaridadServicesImpl.class);
                 //Categoria
                 bind(CategoryDAO.class).to(MyBatisCategoryDAO.class);
+                //Necesidad
+                bind(NeedDAO.class).to(MyBatisNeedDAO.class);
 
             }
         });

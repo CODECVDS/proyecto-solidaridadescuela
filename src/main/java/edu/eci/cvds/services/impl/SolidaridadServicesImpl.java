@@ -1,6 +1,7 @@
 package edu.eci.cvds.services.impl;
 
 import edu.eci.cvds.entities.Category;
+import edu.eci.cvds.entities.Need;
 import edu.eci.cvds.persistence.NeedDAO;
 import edu.eci.cvds.persistence.CategoryDAO;
 import edu.eci.cvds.persistence.PersistenceException;
@@ -32,6 +33,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             categoryDAO.updateCategory(name,description,status);
         }catch (PersistenceException ex){
             throw new ServicesException("Error al actualizar la categoria",ex);
+        }
+    }
+
+    @Override
+    public void registerNeed(Need need) throws ServicesException{
+        try{
+            needDAO.save(need);
+        }catch(PersistenceException ex){
+            throw new ServicesException("Error al crear la necesidad",ex);
         }
     }
 
