@@ -13,7 +13,7 @@ import javax.inject.Inject;
 public class SolidaridadServicesImpl implements SolidaridadServices {
 
     //@Inject
-    //private NeedDAO needDAO;
+    private NeedDAO needDAO;
 
     @Inject
     private CategoryDAO categoryDAO;
