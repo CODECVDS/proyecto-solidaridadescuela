@@ -14,4 +14,10 @@
         <result property='modificationDate' column='modificationDate' />
     </resultMap>
 
+    <!--addCategory-->
+    <insert parameterType="map" id="addCategory">
+        INSERT INTO category (id,name,description,creationdate,status,modificationdate)
+        VALUES (#{id}, #{name},#{description},#{creationDate},true,#{modificationDate})
+    </insert>
+
 </mapper>
