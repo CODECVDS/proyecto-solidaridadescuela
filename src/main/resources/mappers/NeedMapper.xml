@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.NeedMapper">
+
+    <resultMap type="Need" id="NeedResult">
+        <id property="id" column="id"/>
+        <result property="category" column="category"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="urgency" column="urgency"/>
+        <result property="creationdate" column="creationdate"/>
+        <result property="status" column="status"/>
+        <result property="modificationdate" column="modificationdate"/>
+    </resultMap>
+    <insert id="agregarCliente">
+        INSERT INTO need (id,category,name,description,urgency,creationdate,status,modificationdate)
+        VALUES (#{id},#{category},#{name},#{description},#{urgency},#{creationdate},#{status},#{modificationdate})
+    </insert>
+</mapper>
