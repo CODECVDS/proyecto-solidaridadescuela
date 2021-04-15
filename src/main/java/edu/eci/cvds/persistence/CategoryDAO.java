@@ -5,7 +5,7 @@ import edu.eci.cvds.services.ServicesException;
 
 public interface CategoryDAO {
 
-    public void registerCategory(Category c) throws ServicesException;
-    public void updateCategory(String name, String description, String status) throws ServicesException;
+    public void registerCategory(Category c) throws PersistenceException;
+    public void updateCategory(String name, String description, boolean status) throws PersistenceException;
 
 }
