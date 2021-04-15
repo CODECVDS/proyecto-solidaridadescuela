@@ -18,7 +18,8 @@ public class MyBatisCategoryDAO implements CategoryDAO {
         try {
             categoryMapper.addCategory(c.getId(),c.getName(),c.getDescription(),c.getCreationDate(),c.getStatus(),c.getModificationDate());
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Error al registrar categoria",e);
+            e.printStackTrace();
+            //throw new PersistenceException("Error al registrar categoria",e);
         }
     }
 
