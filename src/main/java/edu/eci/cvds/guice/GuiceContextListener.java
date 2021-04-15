@@ -2,6 +2,10 @@ package edu.eci.cvds.guice;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import edu.eci.cvds.persistence.CategoryDAO;
+import edu.eci.cvds.persistence.mybatisimpl.MyBatisCategoryDAO;
+import edu.eci.cvds.services.SolidaridadServices;
+import edu.eci.cvds.services.impl.SolidaridadServicesImpl;
 import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
 
@@ -26,6 +30,11 @@ public class GuiceContextListener implements ServletContextListener {
                 setEnvironmentId("development");
 
                 setClassPathResource("mybatis-config.xml");
+
+                //Servicios
+                bind(SolidaridadServices.class).to(SolidaridadServicesImpl.class);
+                //Categoria
+                bind(CategoryDAO.class).to(MyBatisCategoryDAO.class);
 
             }
         });
