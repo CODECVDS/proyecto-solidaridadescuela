@@ -4,7 +4,6 @@ import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.persistence.CategoryDAO;
 import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.CategoryMapper;
-import edu.eci.cvds.services.ServicesException;
 
 import javax.inject.Inject;
 
@@ -18,7 +17,8 @@ public class MyBatisCategoryDAO implements CategoryDAO {
         try {
             categoryMapper.addCategory(c.getId(),c.getName(),c.getDescription(),c.getCreationDate(),c.getStatus(),c.getModificationDate());
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Error al registrar categoria",e);
+            e.printStackTrace();
+            //throw new PersistenceException("Error al registrar categoria",e);
         }
     }
 
