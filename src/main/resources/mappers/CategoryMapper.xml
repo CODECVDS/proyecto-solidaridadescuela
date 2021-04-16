@@ -20,4 +20,10 @@
         VALUES (#{id}, #{name},#{description},#{creationDate},true,#{modificationDate})
     </insert>
 
+    <!--updateCategory-->
+    <update parameterType="map" id="modifyCategory">
+        UPDATE category
+        SET name = #{name},description = #{description}, status = #{status}
+    </update>
+
 </mapper>

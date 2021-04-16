@@ -4,7 +4,6 @@ import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.persistence.CategoryDAO;
 import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.CategoryMapper;
-import edu.eci.cvds.services.ServicesException;
 
 import javax.inject.Inject;
 
