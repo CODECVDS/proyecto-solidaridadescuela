@@ -6,6 +6,7 @@ import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.CategoryMapper;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class MyBatisCategoryDAO implements CategoryDAO {
 
@@ -37,6 +38,15 @@ public class MyBatisCategoryDAO implements CategoryDAO {
             return categoryMapper.loadC(categoryId);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al consultar la categoria",e);
+        }
+    }
+
+    @Override
+    public List<Category> loadAll() throws PersistenceException {
+        try {
+            return categoryMapper.loadAllC();
+        } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar categorias",e);
         }
     }
 
