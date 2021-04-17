@@ -28,9 +28,9 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
-    public void updateCategory(int id,String name, String description, boolean status) throws ServicesException {
+    public void updateCategory(Category category) throws ServicesException {
         try {
-            categoryDAO.updateCategory(id,name,description,status);
+            categoryDAO.updateCategory(category);
         }catch (PersistenceException ex){
             throw new ServicesException("Error al actualizar la categoria",ex);
         }
@@ -42,6 +42,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             needDAO.save(need);
         }catch(PersistenceException ex){
             throw new ServicesException("Error al crear la necesidad",ex);
+        }
+    }
+
+    @Override
+    public Category loadCategory(int categoryId) throws ServicesException {
+        try {
+            return categoryDAO.load(categoryId);
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar categoria",ex);
         }
     }
 
