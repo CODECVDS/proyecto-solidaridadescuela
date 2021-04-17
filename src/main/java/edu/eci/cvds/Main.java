@@ -1,16 +1,20 @@
 package edu.eci.cvds;
 
 
+import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
 import edu.eci.cvds.services.SolidaridadServicesFactory;
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.jdbc.Null;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Main {
 
@@ -35,7 +39,7 @@ public class Main {
         SolidaridadServicesFactory factory = SolidaridadServicesFactory.getInstance();
         SolidaridadServices services = factory.getSolidaridadServicios();
 
-        //Category c =  new Category(1,"Category1", "Description1", new Date(04/15/2021), true, null);
+        //Category c =  new Category(2,"Category2", "Description2", null, true, null);
         //services.registerCategory(c);
 
 

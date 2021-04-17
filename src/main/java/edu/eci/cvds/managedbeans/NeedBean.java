@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import java.sql.Date;
 import java.time.LocalDate;
 
-@ManagedBean(name = "needbean")
+@ManagedBean(name = "needBean")
 @RequestScoped
 public class NeedBean extends BasePageBean{
     @Inject

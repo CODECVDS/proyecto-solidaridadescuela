@@ -5,29 +5,21 @@ import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import java.util.Date;
 
 @ManagedBean(name = "categoryBean")
-@RequestScoped
-public class CategoryBean {
-
-    private Category category;
-    private String name;
-    private String description;
+@SessionScoped
+public class CategoryBean extends BasePageBean {
 
     @Inject
     private SolidaridadServices solidaridadServices;
-
-    @ManagedProperty(value = "#{param.categoria}")
     private Integer categoriaId;
-
-    private String nombre;
-    private String descripcion;
-
-    //Metodos registrar y actualizar
+    private Category category;
+    private String name;
+    private String description;
 
     public void loadCategory() {
         try {
@@ -35,13 +27,22 @@ public class CategoryBean {
                 category = solidaridadServices.loadCategory(categoriaId);
             }
         } catch (ServicesException ex){
-
+            throw ex;
         }
     }
 
     public void update() throws Exception{
         try {
             solidaridadServices.updateCategory(category);
+        } catch (ServicesException ex){
+            throw ex;
+        }
+    }
+
+    public void register() throws Exception{
+        try {
+            category = new Category(name, description);
+            solidaridadServices.registerCategory(category);
         } catch (ServicesException ex){
             throw ex;
         }
@@ -55,20 +56,15 @@ public class CategoryBean {
         this.categoriaId = categoriaId;
     }
 
-    public Category getCategory() {
+    public Category getCategory() throws Exception{
+        if (category == null && categoriaId != null){
+            category = solidaridadServices.loadCategory(categoriaId);
+        }
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-    public void register() throws Exception{
-        try {
-            category = new Category(2,name,descripcion,new Date(04/15/2021), true, new Date(04/15/2021));
-            solidaridadServices.registerCategory(category);
-        } catch (ServicesException ex){
-            throw ex;
-        }
     }
 
     public String getName() {

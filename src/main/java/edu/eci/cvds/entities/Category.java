@@ -14,6 +14,12 @@ public class Category {
         super();
     }
 
+    public Category(String name, String description) {
+        this.name = name;
+        this.description = description;
+
+    }
+
     public Category(int id, String name, String description, Date creationDate, boolean status, Date modificationDate) {
         this.id = id;
         this.name = name;

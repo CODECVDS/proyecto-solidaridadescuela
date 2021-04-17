@@ -7,12 +7,7 @@ import java.util.Date;
 
 public interface CategoryMapper {
 
-    public void addCategory(@Param("id") int id,
-                            @Param("name") String name,
-                            @Param("description") String description,
-                            @Param("creationDate")Date creationDate,
-                            @Param("status") boolean status,
-                            @Param("modificationDate")Date modificationDate);
+    public void addCategory(@Param("category") Category category);
 
     public void modifyCategory(@Param("category") Category category);
 
