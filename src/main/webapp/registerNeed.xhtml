@@ -6,12 +6,11 @@
 
 <h:head>
     <link rel="stylesheet" href="registronecesidad.css"/>
-    <title>registro de necesidad</title>
+    <title>Registro de necesidad</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </h:head>
 <h:body>
     <h2>Registrar necesidad</h2>
-    <p:inputText value="Registrar" actionListener="#{NeedBean.need}"/>
     <h:form id="register">
         <h:panelGrid id="grid" cellpadding="7" columns="2" styleClass="p-mb-3">
             <p:outputLabel for="id" value="Id:"/>
@@ -29,14 +28,14 @@
             <p:outputLabel for="urgency" value="Urgencia:"/>
             <p:inputText id="urgency" value="#{NeedBean.urgency}"/>
 
-            <p:outputLabel for="creationdate" value="Fecha de creacion:"/>
-            <p:inputText id="creationdate" value="#{NeedBean.creationdate}"/>
-
-            <p:outputLabel for="status" value="Estado:"/>
-            <p:inputText id="status" value="#{NeedBean.status}"/>
-
-            <p:outputLabel for="modificationdate" value="Fecha de modificacion:"/>
-            <p:inputText id="modificationdate" value="#{NeedBean.modificationdate}"/>
+            <label for="status">Estado</label> <br/>
+            <select id="status" name="Estado">
+                <option value="" selected="selected">- selecciona -</option>
+                <option value="NeedBean.status.Active">Active</option>
+                <option value="NeedBean.status.InProcess">InProcess</option>
+                <option value="NeedBean.status.Solved">Solved</option>
+                <option value="NeedBean.status.Closed">Closed</option>
+            </select>
 
         </h:panelGrid>
 
