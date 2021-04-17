@@ -2,6 +2,7 @@ package edu.eci.cvds.services;
 
 import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.entities.Need;
+import edu.eci.cvds.entities.User;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface SolidaridadServices {
     public Category loadCategory(int categoryId) throws ServicesException;
 
     public List<Category> loadCategories() throws ServicesException;
+
+    public User getUser(String username) throws ServicesException;
 }

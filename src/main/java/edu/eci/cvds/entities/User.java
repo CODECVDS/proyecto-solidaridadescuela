@@ -1,35 +1,24 @@
 package edu.eci.cvds.entities;
 
 public class User {
-    private String nickname;
-    private String name;
-    private boolean status;
     private String username;
-    private String user_password;
-    private String user_type;
+    private String fullname;
+    private boolean status;
+    private String mail;
+    private String userpassword;
+    private String usertype;
 
-    public String getNickname() {
-        return nickname;
+    public User() {
+        super();
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
+    public User(String username, String fullname, boolean status, String mail, String userpassword, String usertype) {
+        this.username = username;
+        this.fullname = fullname;
         this.status = status;
+        this.mail = mail;
+        this.userpassword = userpassword;
+        this.usertype = usertype;
     }
 
     public String getUsername() {
@@ -40,19 +29,43 @@ public class User {
         this.username = username;
     }
 
-    public String getUser_password() {
-        return user_password;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setUser_password(String user_password) {
-        this.user_password = user_password;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
-    public String getUser_type() {
-        return user_type;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getUserpassword() {
+        return userpassword;
+    }
+
+    public void setUserpassword(String userpassword) {
+        this.userpassword = userpassword;
+    }
+
+    public String getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
     }
 }

@@ -46,6 +46,8 @@ public class Main {
         //Category c =  new Category(2,"Category2", "Description2", null, true, null);
         //services.registerCategory(c);
 
+        //System.out.println(services.getUser("Daniela").getFullname());
+
 
         sqlss.commit();
         sqlss.close();
