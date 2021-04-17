@@ -29,9 +29,19 @@ public class CategoryBean {
 
     //Metodos registrar y actualizar
 
+    public void loadCategory() {
+        try {
+            if(categoriaId != null){
+                category = solidaridadServices.loadCategory(categoriaId);
+            }
+        } catch (ServicesException ex){
+
+        }
+    }
+
     public void update() throws Exception{
         try {
-            solidaridadServices.updateCategory(category.getId(), category.getName(),category.getDescription(),category.getStatus());
+            solidaridadServices.updateCategory(category);
         } catch (ServicesException ex){
             throw ex;
         }
