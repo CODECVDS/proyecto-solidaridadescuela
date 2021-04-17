@@ -10,14 +10,14 @@ public class Need {
     private String description;
     private String urgency;
     private Date creationDate;
-    private String status;
+    private Status status;
     private Date modificationDate;
 
     public Need(){
         super();
     }
 
-    public Need(int id, int category, String name, String description, String urgency, Date creationDate, String status, Date modificationDate){
+    public Need(int id, int category, String name, String description, String urgency, Date creationDate, Status status, Date modificationDate){
         this.id=id;
         this.category=category;
         this.name=name;
@@ -76,11 +76,11 @@ public class Need {
         this.creationDate = creationDate;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
