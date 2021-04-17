@@ -9,6 +9,7 @@ import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class SolidaridadServicesImpl implements SolidaridadServices {
 
@@ -51,6 +52,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             return categoryDAO.load(categoryId);
         } catch (PersistenceException ex) {
             throw new ServicesException("Error al cargar categoria",ex);
+        }
+    }
+
+    @Override
+    public List<Category> loadCategories() throws ServicesException {
+        try {
+            return categoryDAO.loadAll();
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar las categorias",ex);
         }
     }
 
