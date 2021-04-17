@@ -2,7 +2,9 @@ package edu.eci.cvds.services;
 
 import com.google.inject.Injector;
 import edu.eci.cvds.persistence.CategoryDAO;
+import edu.eci.cvds.persistence.NeedDAO;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisCategoryDAO;
+import edu.eci.cvds.persistence.mybatisimpl.MyBatisNeedDAO;
 import edu.eci.cvds.services.impl.SolidaridadServicesImpl;
 import org.mybatis.guice.XMLMyBatisModule;
 
@@ -26,6 +28,7 @@ public class SolidaridadServicesFactory {
                 setEnvironmentId(env);
                 setClassPathResource(pathResource);
                 bind(CategoryDAO.class).to(MyBatisCategoryDAO.class);
+                bind(NeedDAO.class).to(MyBatisNeedDAO.class);
                 bind(SolidaridadServices.class).to(SolidaridadServicesImpl.class);
             }
         });
