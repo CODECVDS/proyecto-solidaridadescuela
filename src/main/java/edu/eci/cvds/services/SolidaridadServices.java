@@ -7,7 +7,7 @@ public interface SolidaridadServices {
 
     public void registerCategory(Category c) throws ServicesException;
 
-    public void updateCategory(String name, String description, boolean status) throws ServicesException;
+    public void updateCategory(int id, String name, String description, boolean status) throws ServicesException;
 
     public void registerNeed(Need need) throws ServicesException;
 }

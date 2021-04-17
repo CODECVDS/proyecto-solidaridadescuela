@@ -28,9 +28,9 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
-    public void updateCategory(String name, String description, boolean status) throws ServicesException {
+    public void updateCategory(int id,String name, String description, boolean status) throws ServicesException {
         try {
-            categoryDAO.updateCategory(name,description,status);
+            categoryDAO.updateCategory(id,name,description,status);
         }catch (PersistenceException ex){
             throw new ServicesException("Error al actualizar la categoria",ex);
         }

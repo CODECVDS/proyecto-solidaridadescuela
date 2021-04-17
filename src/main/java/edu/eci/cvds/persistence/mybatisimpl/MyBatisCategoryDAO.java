@@ -23,9 +23,9 @@ public class MyBatisCategoryDAO implements CategoryDAO {
     }
 
     @Override
-    public void updateCategory(String name, String description, boolean status) throws PersistenceException {
+    public void updateCategory(int id, String name, String description, boolean status) throws PersistenceException {
         try {
-            categoryMapper.modifyCategory(name,description,status);
+            categoryMapper.modifyCategory(id,name,description,status);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al actualizar la categoria",e);
         }

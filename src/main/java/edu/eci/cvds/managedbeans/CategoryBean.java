@@ -17,16 +17,36 @@ public class CategoryBean extends BasePageBean {
     private SolidaridadServices solidaridadServices;
 
     @ManagedProperty(value = "#{param.categoria}")
+    private Integer categoriaId;
+
     private Category category;
+
+    private String nombre;
+    private String descripcion;
 
     //Metodos registrar y actualizar
 
     public void update() throws Exception{
         try {
-            solidaridadServices.updateCategory(category.getName(),category.getDescription(),category.getStatus());
+            solidaridadServices.updateCategory(category.getId(), category.getName(),category.getDescription(),category.getStatus());
         } catch (ServicesException ex){
             throw ex;
         }
     }
 
+    public Integer getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(Integer categoriaId) {
+        this.categoriaId = categoriaId;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }
