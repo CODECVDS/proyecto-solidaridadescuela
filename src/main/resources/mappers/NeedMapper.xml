@@ -15,8 +15,8 @@
         <result property="status" column="status"/>
         <result property="modificationdate" column="modificationdate"/>
     </resultMap>
-    <insert id="agregarCliente">
-        INSERT INTO need (id,category,name,description,urgency,creationdate,status,modificationdate)
-        VALUES (#{id},#{category},#{name},#{description},#{urgency},#{creationdate},#{status},#{modificationdate})
+    <insert id="addNeed">
+        INSERT INTO need (category,name,description,urgency,creationdate,status,modificationdate)
+        VALUES (#{need.category},#{need.name},#{need.description},#{need.urgency},CURRENT_DATE,#{need.status},CURRENT_DATE)
     </insert>
 </mapper>

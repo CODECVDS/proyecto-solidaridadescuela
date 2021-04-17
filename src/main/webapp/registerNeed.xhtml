@@ -13,20 +13,18 @@
     <h2>Registrar necesidad</h2>
     <h:form id="register">
         <h:panelGrid id="grid" cellpadding="7" columns="2" styleClass="p-mb-3">
-            <p:outputLabel for="id" value="Id:"/>
-            <p:inputText id="id" value="#{NeedBean.id}"/>
 
             <p:outputLabel for="category" value="Categoria:"/>
-            <p:inputText id="category" value="#{NeedBean.category}"/>
+            <p:inputText id="category" value="#{needBean.category}"/>
 
             <p:outputLabel for="name" value="Nombre:"/>
-            <p:inputText id="name" value="#{NeedBean.name}"/>
+            <p:inputText id="name" value="#{needBean.name}"/>
 
             <p:outputLabel for="description" value="Descripcion:"/>
-            <p:inputText id="description" value="#{NeedBean.description}"/>
+            <p:inputText id="description" value="#{needBean.description}"/>
 
             <p:outputLabel for="urgency" value="Urgencia:"/>
-            <p:inputText id="urgency" value="#{NeedBean.urgency}"/>
+            <p:inputText id="urgency" value="#{needBean.urgency}"/>
 
             <label for="status">Estado</label> <br/>
             <select id="status" name="Estado">
@@ -39,7 +37,7 @@
 
         </h:panelGrid>
 
-        <p:commandButton value="Registrar" actionListener="#{NeedBean.register()}"/>
+        <p:commandButton value="Registrar" actionListener="#{needBean.register()}"/>
     </h:form>
 </h:body>
 </html>

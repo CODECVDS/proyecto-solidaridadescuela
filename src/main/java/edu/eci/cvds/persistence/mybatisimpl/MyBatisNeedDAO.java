@@ -5,7 +5,6 @@ import edu.eci.cvds.entities.Need;
 import edu.eci.cvds.persistence.NeedDAO;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.NeedMapper;
 import org.apache.ibatis.exceptions.PersistenceException;
-import org.mybatis.guice.transactional.Transactional;
 
 public class MyBatisNeedDAO implements NeedDAO {
 
@@ -13,12 +12,12 @@ public class MyBatisNeedDAO implements NeedDAO {
     private NeedMapper needMapper;
 
     @Override
-    @Transactional
     public void save(Need necesidad) throws PersistenceException {
         try{
-            needMapper.insertarNecesidad(necesidad);
+            needMapper.addNeed(necesidad);
         }catch(org.apache.ibatis.exceptions.PersistenceException ex){
-            throw new PersistenceException("Error al registrar la necesidad "+necesidad.toString(),ex);
+            ex.printStackTrace();
+            //throw new PersistenceException("Error al registrar la necesidad "+necesidad.toString(),ex);
         }
     }
 }
