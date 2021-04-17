@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <link rel="stylesheet" href="registronecesidad.css"/>
+    <title>registro de necesidad</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</h:head>
+<h:body>
+    <h2>Registrar necesidad</h2>
+    <p:inputText value="Registrar" actionListener="#{NeedBean.need}"/>
+    <h:form id="register">
+        <h:panelGrid id="grid" cellpadding="7" columns="2" styleClass="p-mb-3">
+            <p:outputLabel for="id" value="Id:"/>
+            <p:inputText id="id" value="#{NeedBean.id}"/>
+
+            <p:outputLabel for="category" value="Categoria:"/>
+            <p:inputText id="category" value="#{NeedBean.category}"/>
+
+            <p:outputLabel for="name" value="Nombre:"/>
+            <p:inputText id="name" value="#{NeedBean.name}"/>
+
+            <p:outputLabel for="description" value="Descripcion:"/>
+            <p:inputText id="description" value="#{NeedBean.description}"/>
+
+            <p:outputLabel for="urgency" value="Urgencia:"/>
+            <p:inputText id="urgency" value="#{NeedBean.urgency}"/>
+
+            <p:outputLabel for="creationdate" value="Fecha de creacion:"/>
+            <p:inputText id="creationdate" value="#{NeedBean.creationdate}"/>
+
+            <p:outputLabel for="status" value="Estado:"/>
+            <p:inputText id="status" value="#{NeedBean.status}"/>
+
+            <p:outputLabel for="modificationdate" value="Fecha de modificacion:"/>
+            <p:inputText id="modificationdate" value="#{NeedBean.modificationdate}"/>
+
+        </h:panelGrid>
+
+        <p:commandButton value="Registrar" actionListener="#{NeedBean.register()}"/>
+    </h:form>
+</h:body>
+</html>
