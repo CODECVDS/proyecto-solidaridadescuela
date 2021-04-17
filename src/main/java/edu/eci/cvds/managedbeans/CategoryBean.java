@@ -29,13 +29,13 @@ public class CategoryBean {
 
     //Metodos registrar y actualizar
 
-    public void loadCategory() {
+    public void loadCategory() throws Exception{
         try {
             if(categoriaId != null){
                 category = solidaridadServices.loadCategory(categoriaId);
             }
         } catch (ServicesException ex){
-
+            throw ex;
         }
     }
 
@@ -55,13 +55,17 @@ public class CategoryBean {
         this.categoriaId = categoriaId;
     }
 
-    public Category getCategory() {
+    public Category getCategory() throws Exception{
+        if (category == null && categoriaId != null){
+            category = solidaridadServices.loadCategory(categoriaId);
+        }
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
     }
+
     public void register() throws Exception{
         try {
             category = new Category(2,name,descripcion,new Date(04/15/2021), true, new Date(04/15/2021));
