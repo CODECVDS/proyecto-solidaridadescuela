@@ -8,7 +8,7 @@ public class Need {
     private int category;
     private String name;
     private String description;
-    private String urgency;
+    private int urgency;
     private Date creationDate;
     private Status status;
     private Date modificationDate;
@@ -17,7 +17,7 @@ public class Need {
         super();
     }
 
-    public Need(int id, int category, String name, String description, String urgency, Date creationDate, Status status, Date modificationDate){
+    public Need(int id, int category, String name, String description, int urgency, Date creationDate, Status status, Date modificationDate){
         this.id=id;
         this.category=category;
         this.name=name;
@@ -26,6 +26,14 @@ public class Need {
         this.creationDate=creationDate;
         this.status=status;
         this.modificationDate=modificationDate;
+    }
+
+    public Need(int category, String name, String description, int urgency, Status status){
+        this.category=category;
+        this.name=name;
+        this.description=description;
+        this.urgency=urgency;
+        this.status=status;
     }
 
     public int getId() {
@@ -60,11 +68,11 @@ public class Need {
         this.description = description;
     }
 
-    public String getUrgency() {
+    public int getUrgency() {
         return urgency;
     }
 
-    public void setUrgency(String urgency) {
+    public void setUrgency(int urgency) {
         this.urgency = urgency;
     }
 

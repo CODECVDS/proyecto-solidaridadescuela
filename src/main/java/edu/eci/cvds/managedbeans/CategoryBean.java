@@ -21,7 +21,7 @@ public class CategoryBean extends BasePageBean {
     private String name;
     private String description;
 
-    public void loadCategory() {
+    public void loadCategory() throws Exception{
         try {
             if(categoriaId != null){
                 category = solidaridadServices.loadCategory(categoriaId);
