@@ -20,59 +20,38 @@ public class NeedBean extends BasePageBean{
     @Inject
     private SolidaridadServices solidaridadServices;
 
-    @ManagedProperty(value = "#{param.need}")
     private Need need;
 
-    @ManagedProperty(value = "#{param.id}")
-    private int id;
+    private Integer category;
 
-    @ManagedProperty(value = "#{param.category}")
-    private int category;
-
-    @ManagedProperty(value = "#{param.name}")
     private String name;
 
-    @ManagedProperty(value = "#{param.description}")
     private String description;
 
-    @ManagedProperty(value = "#{param.urgency}")
-    private String urgency;
+    private Integer urgency;
 
-    @ManagedProperty(value = "#{param.status}")
     private Status status;
 
     public void register() throws Exception{
         try{
-            LocalDate conver = LocalDate.now();
-            Date intento = Date.valueOf(conver);
-            need = new Need(id, category, name, description, urgency, intento, status, null);
+            need = new Need(category, name, description, urgency, status);
             solidaridadServices.registerNeed(need);
         }catch(ServicesException ex){
             throw ex;
         }
     }
 
-    public Need getNeed() {
-        return need;
-    }
+    public Need getNeed() { return need; }
 
     public void setNeed(Need need) {
         this.need = need;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getCategory() {
+    public Integer getCategory() {
         return category;
     }
 
-    public void setCategory(int category) {
+    public void setCategory(Integer category) {
         this.category = category;
     }
 
@@ -92,11 +71,11 @@ public class NeedBean extends BasePageBean{
         this.description = description;
     }
 
-    public String getUrgency() {
+    public Integer getUrgency() {
         return urgency;
     }
 
-    public void setUrgency(String urgency) {
+    public void setUrgency(Integer urgency) {
         this.urgency = urgency;
     }
 

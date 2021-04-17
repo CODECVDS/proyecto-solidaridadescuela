@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Param;
 
 public interface NeedMapper {
 
-    public void insertarNecesidad(@Param("necesidad") Need ned);
+    public void addNeed(@Param("need") Need need);
 }
