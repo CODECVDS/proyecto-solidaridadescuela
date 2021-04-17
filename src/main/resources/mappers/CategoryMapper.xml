@@ -29,8 +29,8 @@
     
     <!--addCategory-->
     <insert parameterType="map" id="addCategory">
-        INSERT INTO category (id,name,description,creationdate,status,modificationdate)
-        VALUES (#{id}, #{name},#{description},#{creationDate},true,#{modificationDate})
+        INSERT INTO category (name,description,creationdate,status,modificationdate)
+        VALUES (#{category.name},#{category.description},CURRENT_DATE,true,CURRENT_DATE)
     </insert>
 
     <!--updateCategory-->

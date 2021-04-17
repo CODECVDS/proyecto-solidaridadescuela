@@ -27,7 +27,7 @@ public class GuiceContextListener implements ServletContextListener {
             @Override
             protected void initialize(){
 
-                install(JdbcHelper.MySQL);
+                install(JdbcHelper.PostgreSQL);
 
                 setEnvironmentId("development");
 
@@ -42,5 +42,8 @@ public class GuiceContextListener implements ServletContextListener {
 
             }
         });
+
+        ServletContext servletContext = servletContextEvent.getServletContext();
+        servletContext.setAttribute(Injector.class.getName(), injector);
     }
 }

@@ -4,12 +4,15 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head></h:head>
     <h:body>
+        <h2>Registrar Categoria</h2>
         <h:form id="registerCategory_form">
-            <h2>Ingrese nombre</h2>
-            <p:inputText value="#{categoryBean.name}"/><br/>
-            <h2>Ingrese la descripción</h2>
-            <p:inputText value="#{categoryBean.description}"/><br/>
+            <h:panelGrid id="grid" cellpadding="10" columns="2">
+                <p:outputLabel for="id" value="Name:"/>
+                <p:inputText id="id" value="#{categoryBean.name}"/>
+                <p:outputLabel for="description" value="Description:"/>
+                <p:inputText id="description" value="#{categoryBean.description}"/>
+            </h:panelGrid>
         </h:form>
-        <p:commandButton value="Registrar" actionListener="#{categoryBean.register}"/>
+        <p:commandButton value="Registrar" action="#{categoryBean.register()}"/>
     </h:body>
 </html>

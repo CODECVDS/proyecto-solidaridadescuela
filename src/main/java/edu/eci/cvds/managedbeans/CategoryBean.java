@@ -5,31 +5,23 @@ import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import java.util.Date;
 
 @ManagedBean(name = "categoryBean")
-@RequestScoped
-public class CategoryBean {
+@SessionScoped
+public class CategoryBean extends BasePageBean {
 
+    @Inject
+    private SolidaridadServices solidaridadServices;
+    private Integer categoriaId;
     private Category category;
     private String name;
     private String description;
 
-    @Inject
-    private SolidaridadServices solidaridadServices;
-
-    @ManagedProperty(value = "#{param.categoria}")
-    private Integer categoriaId;
-
-    private String nombre;
-    private String descripcion;
-
-    //Metodos registrar y actualizar
-
-    public void loadCategory() throws Exception{
+    public void loadCategory() {
         try {
             if(categoriaId != null){
                 category = solidaridadServices.loadCategory(categoriaId);
@@ -42,6 +34,15 @@ public class CategoryBean {
     public void update() throws Exception{
         try {
             solidaridadServices.updateCategory(category);
+        } catch (ServicesException ex){
+            throw ex;
+        }
+    }
+
+    public void register() throws Exception{
+        try {
+            category = new Category(name, description);
+            solidaridadServices.registerCategory(category);
         } catch (ServicesException ex){
             throw ex;
         }
@@ -64,15 +65,6 @@ public class CategoryBean {
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public void register() throws Exception{
-        try {
-            category = new Category(2,name,descripcion,new Date(04/15/2021), true, new Date(04/15/2021));
-            solidaridadServices.registerCategory(category);
-        } catch (ServicesException ex){
-            throw ex;
-        }
     }
 
     public String getName() {

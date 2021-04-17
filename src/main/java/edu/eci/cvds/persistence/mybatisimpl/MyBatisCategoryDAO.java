@@ -13,9 +13,9 @@ public class MyBatisCategoryDAO implements CategoryDAO {
     private CategoryMapper categoryMapper;
 
     @Override
-    public void registerCategory(Category c) throws PersistenceException{
+    public void registerCategory(Category category) throws PersistenceException{
         try {
-            categoryMapper.addCategory(c.getId(),c.getName(),c.getDescription(),c.getCreationDate(),c.getStatus(),c.getModificationDate());
+            categoryMapper.addCategory(category);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
             e.printStackTrace();
             //throw new PersistenceException("Error al registrar categoria",e);
