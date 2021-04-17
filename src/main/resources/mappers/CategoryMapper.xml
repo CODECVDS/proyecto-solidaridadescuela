@@ -14,6 +14,11 @@
         <result property='modificationDate' column='modificationDate' />
     </resultMap>
 
+    <!--loadCategorys-->
+    <select parameterType="map" id="loadAllC" resultMap="CategoryResult">
+        SELECT * FROM category
+    </select>
+
     <!--loadCategory-->
     <select parameterType="map" id="loadC" resultMap="CategoryResult">
         SELECT
