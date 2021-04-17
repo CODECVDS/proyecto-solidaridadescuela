@@ -2,10 +2,11 @@ package edu.eci.cvds.persistence.mybatisimpl;
 
 import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.persistence.CategoryDAO;
+import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.CategoryMapper;
-import edu.eci.cvds.services.ServicesException;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class MyBatisCategoryDAO implements CategoryDAO {
 
@@ -13,13 +14,40 @@ public class MyBatisCategoryDAO implements CategoryDAO {
     private CategoryMapper categoryMapper;
 
     @Override
-    public void registerCategory(Category c){
-        
+    public void registerCategory(Category category) throws PersistenceException{
+        try {
+            categoryMapper.addCategory(category);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            e.printStackTrace();
+            //throw new PersistenceException("Error al registrar categoria",e);
+        }
     }
 
     @Override
-    public void updateCategory(String name, String description, String status) throws ServicesException {
+    public void updateCategory(Category category) throws PersistenceException {
+        try {
+            categoryMapper.modifyCategory(category);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al actualizar la categoria",e);
+        }
+    }
 
+    @Override
+    public Category load(int categoryId) throws PersistenceException {
+        try {
+            return categoryMapper.loadC(categoryId);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar la categoria",e);
+        }
+    }
+
+    @Override
+    public List<Category> loadAll() throws PersistenceException {
+        try {
+            return categoryMapper.loadAllC();
+        } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar categorias",e);
+        }
     }
 
 }
