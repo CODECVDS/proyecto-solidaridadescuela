@@ -7,9 +7,9 @@
 	</properties>
 
 	<typeAliases>
-		<typeAlias type='edu.eci.cvds.entities.Category' alias='Decanatura' />
-		<typeAlias type='edu.eci.cvds.entities.Need' alias='Programa' />
-		<typeAlias type='edu.eci.cvds.entities.User' alias='Estudiante' />
+		<typeAlias type='edu.eci.cvds.entities.Category' alias='Category' />
+		<typeAlias type='edu.eci.cvds.entities.Need' alias='Need' />
+		<typeAlias type='edu.eci.cvds.entities.User' alias='User' />
 	</typeAliases>
 
 	<environments default="test">

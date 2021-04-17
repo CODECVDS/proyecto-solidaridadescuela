@@ -14,6 +14,19 @@
         <result property='modificationDate' column='modificationDate' />
     </resultMap>
 
+    <!--loadCategory-->
+    <select parameterType="map" id="loadC">
+        SELECT
+            c.id ,
+            c.name ,
+            c.description,
+            c.creationDate,
+            c.status,
+            c.modificationDate
+        FROM category c
+        WHERE c.id = #{id}
+    </select>
+    
     <!--addCategory-->
     <insert parameterType="map" id="addCategory">
         INSERT INTO category (id,name,description,creationdate,status,modificationdate)
@@ -23,8 +36,8 @@
     <!--updateCategory-->
     <update parameterType="map" id="modifyCategory">
         UPDATE category
-        SET name = #{name},description = #{description}, status = #{status}
-        WHERE id = #{id}
+        SET name = #{category.name},description = #{category.description}, status = #{category.status}
+        WHERE id = #{category.id}
     </update>
 
 </mapper>
