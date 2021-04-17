@@ -13,7 +13,8 @@ public interface CategoryMapper {
                             @Param("status") boolean status,
                             @Param("modificationDate")Date modificationDate);
 
-    public void modifyCategory(@Param("name") String name,
+    public void modifyCategory(@Param("id") int id,
+                               @Param("name") String name,
                                @Param("description") String description,
                                @Param("status") boolean status);
 }

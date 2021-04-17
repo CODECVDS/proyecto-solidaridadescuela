@@ -24,6 +24,7 @@
     <update parameterType="map" id="modifyCategory">
         UPDATE category
         SET name = #{name},description = #{description}, status = #{status}
+        WHERE id = #{id}
     </update>
 
 </mapper>
