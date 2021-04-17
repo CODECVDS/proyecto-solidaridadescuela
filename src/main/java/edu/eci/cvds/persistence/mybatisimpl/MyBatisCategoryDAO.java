@@ -23,11 +23,20 @@ public class MyBatisCategoryDAO implements CategoryDAO {
     }
 
     @Override
-    public void updateCategory(int id, String name, String description, boolean status) throws PersistenceException {
+    public void updateCategory(Category category) throws PersistenceException {
         try {
-            categoryMapper.modifyCategory(id,name,description,status);
+            categoryMapper.modifyCategory(category);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al actualizar la categoria",e);
+        }
+    }
+
+    @Override
+    public Category load(int categoryId) throws PersistenceException {
+        try {
+            return categoryMapper.loadC(categoryId);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar la categoria",e);
         }
     }
 
