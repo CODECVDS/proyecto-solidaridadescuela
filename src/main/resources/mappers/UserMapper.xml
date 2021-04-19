@@ -6,12 +6,24 @@
 <mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.UserMapper">
 
     <resultMap type='User' id='UserResult'>
-        <id property='nickname' column='nickname' />
-        <result property='name' column='name' />
+        <id property='username' column='username' />
+        <result property='fullname' column='fullname' />
         <result property='status' column='status' />
-        <result property='username' column='username' />
-        <result property='user_password' column='user_password' />
-        <result property='user_type' column='user_type' />
+        <result property='mail' column='mail' />
+        <result property='userpassword' column='userpassword' />
+        <result property='usertype' column='usertype' />
     </resultMap>
+
+    <select parameterType="map" id="loadUser" resultMap="UserResult">
+        SELECT
+        u.username ,
+        u.fullname ,
+        u.status,
+        u.mail,
+        u.userpassword,
+        u.usertype
+        FROM users u
+        WHERE u.username = #{username}
+    </select>
 
 </mapper>

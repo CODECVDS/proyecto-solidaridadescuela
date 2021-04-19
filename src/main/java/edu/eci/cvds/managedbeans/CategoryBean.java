@@ -3,10 +3,14 @@ package edu.eci.cvds.managedbeans;
 import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
+import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
@@ -59,6 +63,35 @@ public class CategoryBean extends BasePageBean {
             throw ex;
         }
     }
+
+    public void onRowEdit(RowEditEvent event) throws Exception {
+        update();
+        FacesMessage msg = new FacesMessage("Product Edited");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+
+        if (newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+
+    public void onAddNew() throws Exception {
+        // Add one new product to the table:
+        register();
+        FacesMessage msg = new FacesMessage("New Product added");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
 
     public Integer getCategoriaId() {
         return categoriaId;
