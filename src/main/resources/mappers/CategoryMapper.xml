@@ -48,5 +48,4 @@
         modificationDate = CURRENT_DATE
         WHERE id = #{category.id}
     </update>
-
 </mapper>
