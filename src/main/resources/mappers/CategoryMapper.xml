@@ -44,9 +44,8 @@
         SET
         name = #{category.name},
         description = #{category.description},
-        status = #{category.status}
-        modificationDate = CURRENT_DATE;
+        status = #{category.status},
+        modificationDate = CURRENT_DATE
         WHERE id = #{category.id}
     </update>
-
 </mapper>

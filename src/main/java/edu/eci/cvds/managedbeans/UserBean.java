@@ -32,7 +32,7 @@ public class UserBean implements Serializable {
         UsernamePasswordToken token = new UsernamePasswordToken(getUsername(),new Sha256Hash(getUserpassword()).toHex());
         try {
             subject.login(token);
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/registerCategory.xhtml");
+            //FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/registerCategory.xhtml");
 
         } catch ( UnknownAccountException e ) {
             //username wasn't in the system, show them an error message?
@@ -46,8 +46,6 @@ public class UserBean implements Serializable {
         } catch ( AuthenticationException e ) {
             //unexpected condition - error?
             logger.error(e.getMessage(),e);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
