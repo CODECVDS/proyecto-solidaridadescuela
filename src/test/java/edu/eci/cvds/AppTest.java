@@ -40,7 +40,7 @@ public class AppTest
     public void DeberiaRegistrarCategoria(){
 
     }
-
+    /*
     @Test
     public void DeberiaActualizarCategoria(){
         try {
@@ -61,6 +61,7 @@ public class AppTest
             ex.printStackTrace();
         }
     }
+    */
 
     @Test
     public void DeberiaRegistrarNecesidad(){}
