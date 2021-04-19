@@ -9,28 +9,68 @@
     <title></title>
 </h:head>
 <h:body>
-    <p:button outcome="menu" value="Volver a Menu"/>
-    <p:dataTable id="category_table" var="category" value="#{categoryBean.categories}">
-        <p:column headerText="Id">
-            <h:outputText value="#{category.id}" />
-        </p:column>
-        <p:column headerText="Name">
-            <h:outputText value="#{category.name}" />
-        </p:column>
-        <p:column headerText="Description">
-            <h:outputText value="#{category.description}" />
-        </p:column>
-        <p:column headerText="Creation Date">
-            <h:outputText value="#{category.creationDate}" />
-        </p:column>
-        <p:column headerText="Status">
-            <h:outputText value="#{category.status}" />
-        </p:column>
-        <p:column headerText="Modification Date">
-            <h:outputText value="#{category.modificationDate}" />
-        </p:column>
-    </p:dataTable>
-    <p:button outcome="registerCategory" value="Registrar Categoria"/>
-    <p:button outcome="updateCategory" value="Editar Categoria"/>
+    <div class="card">
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true"/>
+
+            <p:dataTable id="category_table" var="category" value="#{categoryBean.categories}" editable="true">
+                <f:facet name="header">
+                    Row Editing with add functionality
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{categoryBean.onRowEdit}" update=":form:msgs"/>
+                <p:ajax event="rowEditCancel" listener="#{categoryBean.onRowCancel}" update=":form:msgs"/>
+
+                <p:column headerText="Id">
+                    <h:outputText value="#{category.id}"/>
+                </p:column>
+
+                <p:column headerText="Name">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{category.name}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{category.name}"
+                                                           style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Description">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{category.description}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{category.description}"
+                                                           style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Creation Date">
+                    <h:outputText value="#{category.creationDate}"/>
+                </p:column>
+
+                <p:column headerText="Status">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{category.status}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{category.status}"
+                                                               style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Modification Date">
+                    <h:outputText value="#{category.modificationDate}"/>
+                </p:column>
+
+                <p:column style="width:6rem">
+                    <p:rowEditor/>
+                </p:column>
+            </p:dataTable>
+
+            <div class="p-grid p-mt-3">
+                <div class="p-col-12">
+                    <p:commandButton value="Add Category" process="@this" update=":form:msgs"
+                                     action="#{categoryBean.onAddNew()}"/>
+                </div>
+            </div>
+
+        </h:form>
+    </div>
+
 </h:body>
 </html>
