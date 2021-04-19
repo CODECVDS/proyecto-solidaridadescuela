@@ -2,9 +2,11 @@ package edu.eci.cvds.services.impl;
 
 import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.entities.Need;
+import edu.eci.cvds.entities.User;
 import edu.eci.cvds.persistence.NeedDAO;
 import edu.eci.cvds.persistence.CategoryDAO;
 import edu.eci.cvds.persistence.PersistenceException;
+import edu.eci.cvds.persistence.UserDAO;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
 
@@ -18,6 +20,9 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
 
     @Inject
     private CategoryDAO categoryDAO;
+
+    @Inject
+    private UserDAO userDAO;
 
     @Override
     public void registerCategory(Category c) throws ServicesException {
@@ -61,6 +66,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             return categoryDAO.loadAll();
         } catch (PersistenceException ex) {
             throw new ServicesException("Error al cargar las categorias",ex);
+        }
+    }
+
+    @Override
+    public User getUser(String username) throws ServicesException {
+        try {
+            return userDAO.getUser(username);
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar el usuario",ex);
         }
     }
 
