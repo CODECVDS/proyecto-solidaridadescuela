@@ -9,6 +9,7 @@
     <title></title>
 </h:head>
 <h:body>
+    <p:button outcome="menu" value="Volver a Menu"/>
     <p:dataTable id="category_table" var="category" value="#{categoryBean.categories}">
         <p:column headerText="Id">
             <h:outputText value="#{category.id}" />
@@ -29,5 +30,7 @@
             <h:outputText value="#{category.modificationDate}" />
         </p:column>
     </p:dataTable>
+    <p:button outcome="registerCategory" value="Registrar Categoria"/>
+    <p:button outcome="updateCategory" value="Editar Categoria"/>
 </h:body>
 </html>

@@ -9,6 +9,7 @@
     <title></title>
 </h:head>
 <h:body>
+    <p:button outcome="categories" value="Volver a Categorias"/>
     <p:dataTable id="category_table" var="category" value="#{categoryBean.category}">
         <p:column headerText="Id">
             <h:outputText value="#{category.id}" />
