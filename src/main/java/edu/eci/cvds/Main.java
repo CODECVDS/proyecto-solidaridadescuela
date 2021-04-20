@@ -41,11 +41,8 @@ public class Main {
         SolidaridadServicesFactory factory = SolidaridadServicesFactory.getInstance();
         SolidaridadServices services = factory.getSolidaridadServicios();
 
-        //Need  prueba = new Need(1,"amor","todas mienten",5, Status.Active);
-        //services.registerNeed(prueba);
-
-        //System.out.println(services.getUser("Daniela").getFullname());
-
+        //Category c = new Category("Category1", "Description");
+        //services.registerCategory(c);
 
         sqlss.commit();
         sqlss.close();
