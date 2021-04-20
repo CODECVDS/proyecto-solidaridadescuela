@@ -9,25 +9,111 @@
     <title></title>
 </h:head>
 <h:body>
-    <p:dataTable id="category_table" var="category" value="#{categoryBean.categories}">
-        <p:column headerText="Id">
-            <h:outputText value="#{category.id}" />
-        </p:column>
-        <p:column headerText="Name">
-            <h:outputText value="#{category.name}" />
-        </p:column>
-        <p:column headerText="Description">
-            <h:outputText value="#{category.description}" />
-        </p:column>
-        <p:column headerText="Creation Date">
-            <h:outputText value="#{category.creationDate}" />
-        </p:column>
-        <p:column headerText="Status">
-            <h:outputText value="#{category.status}" />
-        </p:column>
-        <p:column headerText="Modification Date">
-            <h:outputText value="#{category.modificationDate}" />
-        </p:column>
-    </p:dataTable>
+    <div class="card">
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true"/>
+
+            <p:dataTable id="category_table" var="category" value="#{categoryBean.categories}" editable="true">
+                <f:facet name="header">
+                    Row Editing with add functionality
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{categoryBean.onRowEdit}" update=":form:msgs"/>
+                <p:ajax event="rowEditCancel" listener="#{categoryBean.onRowCancel}" update=":form:msgs"/>
+
+                <p:column headerText="Id">
+                    <h:outputText value="#{category.id}"/>
+                </p:column>
+
+                <p:column headerText="Name">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{category.name}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{category.name}"
+                                                           style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Description">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{category.description}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{category.description}"
+                                                           style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Creation Date">
+                    <h:outputText value="#{category.creationDate}"/>
+                </p:column>
+
+                <p:column headerText="Status">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{category.status}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{category.status}"
+                                                               style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Modification Date">
+                    <h:outputText value="#{category.modificationDate}"/>
+                </p:column>
+
+                <p:column style="width:6rem">
+                    <p:rowEditor/>
+                </p:column>
+            </p:dataTable>
+
+            <div class="p-grid p-mt-3">
+                <div class="p-col-12">
+                    <p:commandButton value="Add Category" process="@this" update=":form:msgs"
+                                     action="#{categoryBean.onAddNew()}"/>
+                </div>
+            </div>
+
+            <p:commandButton value="New" icon="pi pi-plus" actionListener="#{categoryBean.openNew}"
+                             update=":form:manage-category-content" oncomplete="PF('manageCategoryDialog').show()"
+                             styleClass="ui-button-success" style="margin-right: .5rem">
+                <p:resetInput target=":form:manage-category-content"/>
+            </p:commandButton>
+
+            <p:dialog header="Category Details" showEffect="fade" modal="true"
+                      widgetVar="manageCategoryDialog" responsive="true">
+                <p:outputPanel id="manage-category-content" class="ui-fluid">
+                    <p:outputPanel rendered="#{not empty crudView.category}">
+                        <div class="p-field">
+                            <p:outputLabel for="name2">Name</p:outputLabel>
+                            <p:inputText id="name2" value="#{categoryBean.name}" required="true"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="description2">Description</p:outputLabel>
+                            <p:inputTextarea id="description2" value="#{categoryBean.description}"/>
+                        </div>
+
+                <f:facet name="footer">
+                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{categoryBean.register()}"
+                                     update="manage-category-content" process="manage-category-content @this"/>
+                    <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageCategoryDialog').hide()"
+                                     class="ui-button-secondary"/>
+                </f:facet>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </p:dialog>
+
+            <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300"
+                             message="Delete the product?" header="Confirm" severity="warn">
+                <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{crudView.deleteProduct}"
+                                 process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
+                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                 onclick="PF('deleteProductDialog').hide()"/>
+            </p:confirmDialog>
+
+            <p:confirmDialog global="true" showEffect="fade" width="300">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                 icon="pi pi-times"/>
+            </p:confirmDialog>
+
+        </h:form>
+    </div>
+
 </h:body>
 </html>
