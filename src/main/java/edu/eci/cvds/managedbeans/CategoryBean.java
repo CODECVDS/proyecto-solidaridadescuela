@@ -3,6 +3,7 @@ package edu.eci.cvds.managedbeans;
 import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
@@ -21,7 +22,7 @@ public class CategoryBean extends BasePageBean {
 
     @Inject
     private SolidaridadServices solidaridadServices;
-    private Integer categoriaId;
+    private Integer categoryId;
     private Category category;
     private String name;
     private String description;
@@ -31,8 +32,8 @@ public class CategoryBean extends BasePageBean {
 
     public void loadCategory() throws Exception{
         try {
-            if(categoriaId != null){
-                category = solidaridadServices.loadCategory(categoriaId);
+            if(categoryId != null){
+                category = solidaridadServices.loadCategory(categoryId);
             }
         } catch (ServicesException ex){
             throw ex;
@@ -55,55 +56,47 @@ public class CategoryBean extends BasePageBean {
         }
     }
 
-    public void register() throws Exception{
+    public  void register() throws ServicesException {
         try {
-            category = new Category(name, description);
             solidaridadServices.registerCategory(category);
         } catch (ServicesException ex){
             throw ex;
         }
     }
 
-    public void onRowEdit(RowEditEvent event) throws Exception {
-        update();
-        FacesMessage msg = new FacesMessage("Product Edited");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-
-    public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edit Cancelled");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-
-        if (newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
+    public void save() throws Exception {
+        if (this.category.getId() == 0) {
+            register();
+            System.out.println("Registrando");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Category Added"));
         }
+        else {
+            update();
+            System.out.println("Actualizando");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Category Updated"));
+        }
+
+        PrimeFaces.current().executeScript("PF('manageCategoryDialog').hide()");
+        PrimeFaces.current().ajax().update("form:messages", "form:dt-categories");
     }
 
-    public void onAddNew() throws Exception {
-        // Add one new product to the table:
-        register();
-        FacesMessage msg = new FacesMessage("New Product added");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+    public void openNew() {
+        this.category = new Category();
+        category.setId(0);
     }
 
 
     public Integer getCategoriaId() {
-        return categoriaId;
+        return categoryId;
     }
 
     public void setCategoriaId(Integer categoriaId) {
-        this.categoriaId = categoriaId;
+        this.categoryId = categoriaId;
     }
 
     public Category getCategory() throws Exception{
-        if (category == null && categoriaId != null){
-            category = solidaridadServices.loadCategory(categoriaId);
+        if (category == null && categoryId != null){
+            category = solidaridadServices.loadCategory(categoryId);
         }
         return category;
     }

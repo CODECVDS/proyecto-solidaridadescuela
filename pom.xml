@@ -111,7 +111,7 @@
 		<artifactId>primefaces</artifactId>
 		<version>6.2</version>
 	</dependency>
-
+	  <!-- Shiro dependencies -->
 	  <dependency>
 		  <groupId>org.apache.shiro</groupId>
 		  <artifactId>shiro-core</artifactId>
