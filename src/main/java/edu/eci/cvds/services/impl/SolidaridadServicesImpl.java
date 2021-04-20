@@ -52,6 +52,24 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
+    public void updateNeed(Need need) throws ServicesException {
+        try{
+            needDAO.updateNeed(need);
+        }catch(PersistenceException ex){
+            throw new ServicesException("Error al actualizar la necesidad",ex);
+        }
+    }
+
+    @Override
+    public List<Need> loadNeeds() throws ServicesException{
+        try{
+            return needDAO.needs();
+        }catch(PersistenceException ex){
+            throw new ServicesException("Error al cargar las necesidades",ex);
+        }
+    }
+
+    @Override
     public Category loadCategory(int categoryId) throws ServicesException {
         try {
             return categoryDAO.load(categoryId);
