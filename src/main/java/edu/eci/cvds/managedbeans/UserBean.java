@@ -49,6 +49,8 @@ public class UserBean implements Serializable {
         } catch ( AuthenticationException e ) {
             //unexpected condition - error?
             logger.error(e.getMessage(),e);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     public void logOut() {
