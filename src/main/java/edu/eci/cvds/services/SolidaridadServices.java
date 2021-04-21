@@ -14,9 +14,13 @@ public interface SolidaridadServices {
 
     public void registerNeed(Need need) throws ServicesException;
 
+    public void updateNeed(Need need) throws ServicesException;
+
     public Category loadCategory(int categoryId) throws ServicesException;
 
     public List<Category> loadCategories() throws ServicesException;
 
     public User getUser(String username) throws ServicesException;
+
+    public List<Need> loadNeeds() throws ServicesException;
 }

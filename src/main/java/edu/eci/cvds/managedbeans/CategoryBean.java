@@ -48,7 +48,7 @@ public class CategoryBean extends BasePageBean {
         }
     }
 
-    public void update() throws Exception{
+    public void update() throws ServicesException{
         try {
             solidaridadServices.updateCategory(category);
         } catch (ServicesException ex){
@@ -64,7 +64,7 @@ public class CategoryBean extends BasePageBean {
         }
     }
 
-    public void save() throws Exception {
+    public void save() throws ServicesException {
         if (this.category.getId() == 0) {
             register();
             System.out.println("Registrando");
@@ -83,6 +83,7 @@ public class CategoryBean extends BasePageBean {
     public void openNew() {
         this.category = new Category();
         category.setId(0);
+        category.setStatus(true);
     }
 
 
