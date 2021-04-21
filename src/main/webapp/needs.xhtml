@@ -10,7 +10,22 @@
 </h:head>
 <h:body>
   <h:form id="form">
-    <p:button outcome="menuAdmin" value="Volver a Menu"/>
+    <div class="card-tabmenu">
+      <p:tabMenu activeIndex="#{param.i}">
+        <p:menuitem value="Home" outcome="menuAdmin" icon="pi pi-fw pi-home">
+          <f:param name="i" value="0"/>
+        </p:menuitem>
+        <p:menuitem value="Categories" outcome="categoriesAdmin" icon="pi pi-fw pi-pencil">
+          <f:param name="i" value="1"/>
+        </p:menuitem>
+        <p:menuitem value="Needs" outcome="needs" icon="pi pi-fw pi-pencil">
+          <f:param name="i" value="2"/>
+        </p:menuitem>
+        <p:menuitem value="Quit" outcome="signin" icon="pi pi-fw pi-power-off">
+          <f:param name="i" value="3"/>
+        </p:menuitem>
+      </p:tabMenu>
+    </div>
     <div class="card need">
       <p:growl id="messages" showDetail="true"/>
 
