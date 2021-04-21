@@ -79,6 +79,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
+    public List<Category> loadActiveCategories(boolean status) throws ServicesException {
+        try {
+            return categoryDAO.loadAllActive(status);
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar categorias activas",ex);
+        }
+    }
+
+    @Override
     public Category loadCategory(int categoryId) throws ServicesException {
         try {
             return categoryDAO.load(categoryId);

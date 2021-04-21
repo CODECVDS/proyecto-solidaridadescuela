@@ -17,7 +17,7 @@
     </resultMap>
     <insert parameterType="map" id="addNeed">
         INSERT INTO need (category,name,description,urgency,creationdate,status,modificationdate)
-        VALUES (#{need.category},#{need.name},#{need.description},#{need.urgency},CURRENT_DATE,#{need.status},CURRENT_DATE)
+        VALUES (#{need.category},#{need.name},#{need.description},#{need.urgency},CURRENT_TIMESTAMP,#{need.status},CURRENT_TIMESTAMP)
     </insert>
 
     <!--loadNeeds-->
