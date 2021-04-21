@@ -25,4 +25,6 @@ public interface SolidaridadServices {
     public List<Need> loadNeeds() throws ServicesException;
 
     public Need loadNeed(int needId) throws ServicesException;
+
+    public List<Category> loadActiveCategories(boolean status) throws ServicesException;
 }
