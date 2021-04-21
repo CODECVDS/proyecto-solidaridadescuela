@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title></title>
+</h:head>
+<h:body>
+    <p:button outcome="menuUser" value="Volver a Menu"/>
+    <h:form id="form">
+        <div class="card category">
+            <p:growl id="messages" showDetail="true"/>
+
+
+            <p:dataTable id="dt-categories" widgetVar="dtCategory" var="category" value="#{categoryBean.categories}"
+                         reflow="true" styleClass="categories-table" rowKey="#{category.id}" paginator="true"
+                         rows="10" paginatorPosition="bottom">
+                <f:facet name="header">
+                    <div class="products-table-header">
+                        <span style="font-weight: bold">CATEGORIES</span>
+                    </div>
+                </f:facet>
+
+                <p:column headerText="Id" sortBy="#{category.id}">
+                    <h:outputText value="#{category.id}"/>
+                </p:column>
+                <p:column headerText="Name" sortBy="#{category.name}">
+                    <h:outputText value="#{category.name}"/>
+                </p:column>
+
+                <p:column headerText="Description" sortBy="#{category.description}">
+                    <h:outputText value="#{category.description}"/>
+                </p:column>
+
+                <p:column headerText="Creation Date" sortBy="#{category.creationDate}">
+                    <h:outputText value="#{category.creationDate}"/>
+                </p:column>
+
+                <p:column headerText="Status" sortBy="#{category.status}">
+                    <h:outputText value="#{category.status}"/>
+                </p:column>
+
+                <p:column headerText="Modification Date" sortBy="#{category.modificationDate}">
+                    <h:outputText value="#{category.modificationDate}"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </div>
+    </h:form>
+</h:body>
+</html>
