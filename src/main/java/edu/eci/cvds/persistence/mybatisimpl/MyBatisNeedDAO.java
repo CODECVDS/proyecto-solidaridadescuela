@@ -6,6 +6,8 @@ import edu.eci.cvds.persistence.NeedDAO;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.NeedMapper;
 import org.apache.ibatis.exceptions.PersistenceException;
 
+import java.util.List;
+
 public class MyBatisNeedDAO implements NeedDAO {
 
     @Inject
@@ -20,4 +22,23 @@ public class MyBatisNeedDAO implements NeedDAO {
             //throw new PersistenceException("Error al registrar la necesidad "+necesidad.toString(),ex);
         }
     }
+
+    @Override
+    public void updateNeed(Need necesidad) throws PersistenceException{
+        try{
+            needMapper.modify(necesidad);
+        }catch(org.apache.ibatis.exceptions.PersistenceException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Need> needs() throws  PersistenceException{
+        try{
+            return needMapper.loadNeeds();
+        }catch(org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar necesidades",e);
+        }
+    }
+
 }
