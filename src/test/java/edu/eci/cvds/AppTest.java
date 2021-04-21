@@ -72,17 +72,16 @@ public class AppTest
     }
      */
 
-    /*
+
     @Test
     public void DeberiaRegistrarNecesidad(){
         try {
             Need necesidadtest = new Need(1,"Necesidad Test","Esta es la prueba de creacion de la necesidad",1, Status.Active);
             solidaridadServices.registerNeed(necesidadtest);
-            Need necesidadresult = solidaridadServices."metodo para consultar la necesidad";
+            Need necesidadresult = solidaridadServices.loadNeed(1);
             Assert.assertTrue(necesidadresult != null);
         } catch (ServicesException ex){
             ex.printStackTrace();
         }
     }
-     */
 }
