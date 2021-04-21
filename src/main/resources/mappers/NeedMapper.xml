@@ -11,9 +11,9 @@
         <result property="name" column="name"/>
         <result property="description" column="description"/>
         <result property="urgency" column="urgency"/>
-        <result property="creationdate" column="creationdate"/>
+        <result property="creationDate" column="creationdate"/>
         <result property="status" column="status"/>
-        <result property="modificationdate" column="modificationdate"/>
+        <result property="modificationDate" column="modificationdate"/>
     </resultMap>
     <insert id="addNeed">
         INSERT INTO need (category,name,description,urgency,creationdate,status,modificationdate)
@@ -21,7 +21,22 @@
     </insert>
 
     <!--loadNeeds-->
-    <select parameterType="map" id="loadAllN" resultMap="NeedResult">
+    <select parameterType="map" id="loadNeeds" resultMap="NeedResult">
         SELECT * FROM need
+    </select>
+
+    <!--loadNeed-->
+    <select parameterType="map" id="load" resultMap="NeedResult">
+        SELECT
+        n.id,
+        n.category,
+        n.name,
+        n.description,
+        n.urgency,
+        n.creationDate,
+        n.status,
+        n.modificationDate
+        FROM need n
+        WHERE n.id = #{id}
     </select>
 </mapper>

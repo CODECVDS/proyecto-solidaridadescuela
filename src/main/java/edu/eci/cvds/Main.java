@@ -44,6 +44,10 @@ public class Main {
         //Category c = new Category("Category1", "Description");
         //services.registerCategory(c);
 
+        //Need n = new Need(3,"prueba","lo que sea", 4, Status.Closed);
+        //services.registerNeed(n);
+        System.out.println(services.loadNeed(5).getDescription());
+
         sqlss.commit();
         sqlss.close();
     }

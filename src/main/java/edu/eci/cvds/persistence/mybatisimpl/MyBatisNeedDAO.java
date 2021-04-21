@@ -41,4 +41,13 @@ public class MyBatisNeedDAO implements NeedDAO {
         }
     }
 
+    @Override
+    public Need load(int needId) throws  PersistenceException{
+        try {
+            return needMapper.load(needId);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar la necesidad",e);
+        }
+    }
+
 }

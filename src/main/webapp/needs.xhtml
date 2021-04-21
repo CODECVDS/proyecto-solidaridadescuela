@@ -13,39 +13,22 @@
         <h:form id="form">
             <p:growl id="msgs" showDetail="true"/>
 
-            <p:dataTable id="need_table" var="need" value="#{needBean.getNeeds}" editable="true">
-                <f:facet name="header">
-                    Row Editing with add functionality
-                </f:facet>
-
-                <p:ajax event="rowEdit" listener="#{needBean.onRowEdit}" update=":form:msgs"/>
-                <p:ajax event="rowEditCancel" listener="#{needBean.onRowCancel}" update=":form:msgs"/>
+            <p:dataTable id="need_table" var="need" value="#{needBean.needs}">
 
                 <p:column headerText="Id">
                     <h:outputText value="#{need.id}"/>
                 </p:column>
 
                 <p:column headerText="Category">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{need.category}"/></f:facet>
-                        <f:facet name="input"><h:outputText value="#{need.category}" style="width:100%"/></f:facet>
-                    </p:cellEditor>
+                    <h:outputText value="#{need.category}" style="width:100%"/>
                 </p:column>
 
                 <p:column headerText="Name">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{need.name}"/></f:facet>
-                        <f:facet name="input"><p:inputText value="#{need.name}"
-                                                           style="width:100%"/></f:facet>
-                    </p:cellEditor>
+                    <h:outputText value="#{need.name}"/>
                 </p:column>
 
                 <p:column headerText="Description">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{need.description}"/></f:facet>
-                        <f:facet name="input"><p:inputText value="#{need.description}"
-                                                           style="width:100%"/></f:facet>
-                    </p:cellEditor>
+                    <h:outputText value="#{need.description}"/>
                 </p:column>
 
                 <p:column headerText="Creation Date">
@@ -53,28 +36,16 @@
                 </p:column>
 
                 <p:column headerText="Status">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{need.status}"/></f:facet>
-                        <f:facet name="input"><p:inputText value="#{need.status}"
-                                                           style="width:100%"/></f:facet>
-                    </p:cellEditor>
+                    <h:outputText value="#{need.status}"/>
                 </p:column>
 
                 <p:column headerText="Modification Date">
                     <h:outputText value="#{need.modificationDate}"/>
                 </p:column>
 
-                <p:column style="width:6rem">
-                    <p:rowEditor/>
-                </p:column>
             </p:dataTable>
 
-            <div class="p-grid p-mt-3">
-                <div class="p-col-12">
-                    <p:commandButton value="Add Need" process="@this" update=":form:msgs"
-                                     action="#{needBean.onAddNew()}"/>
-                </div>
-            </div>
+            <p:button outcome="registerNeed" value="Agregar Necesidades"/>
 
         </h:form>
     </div>
