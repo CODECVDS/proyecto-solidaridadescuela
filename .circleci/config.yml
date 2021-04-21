@@ -7,3 +7,13 @@ workflows:
   maven_test:
     jobs:
       - maven/test
+
+machine:
+  java:
+    version: oraclejdk8
+
+deployment:
+  staging:
+    branch: master
+    heroku: 
+      appname: proyecto-solidaridadescuela
