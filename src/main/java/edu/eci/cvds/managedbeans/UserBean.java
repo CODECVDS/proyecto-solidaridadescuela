@@ -24,7 +24,7 @@ public class UserBean implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(UserBean.class);
     private String username;
     private String userpassword;
-    private String redirectURL="/faces/menu.xhtml";
+    private String redirectURL="/faces/menuAdmin.xhtml";
     Subject subject;
 
     public void signin(){
