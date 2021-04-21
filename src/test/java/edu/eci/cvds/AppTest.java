@@ -38,6 +38,7 @@ public class AppTest
     @Test
     public void DeberiaIniciarSesion(){}
 
+    /*
     @Test
     public void DeberiaRegistrarCategoria(){
         try {
@@ -48,7 +49,7 @@ public class AppTest
         } catch (ServicesException ex){
             ex.printStackTrace();
         }
-    }
+    }*/
     /*
     @Test
     public void DeberiaActualizarCategoria(){

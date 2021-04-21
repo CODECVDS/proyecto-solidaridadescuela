@@ -46,8 +46,7 @@ public class Main {
 
         //Need n = new Need(3,"prueba","lo que sea", 4, Status.Closed);
         //services.registerNeed(n);
-        System.out.println(services.loadNeed(5).getDescription());
-
+        //System.out.println(services.loadNeeds().get(0).getDescription());
         sqlss.commit();
         sqlss.close();
     }
