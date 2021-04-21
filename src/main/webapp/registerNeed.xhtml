@@ -5,40 +5,30 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <link rel="stylesheet" href="registronecesidad.css"/>
     <title>Registro de necesidad</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </h:head>
 <h:body>
-    <p:button outcome="menu" value="Volver a Menu"/>
+    <p:button outcome="needs" value="Volver a Necesidades"/>
     <h2>Registrar necesidad</h2>
-    <h:form id="register">
-        <h:panelGrid id="grid" cellpadding="7" columns="2" styleClass="p-mb-3">
-
+        <h:form id="form">
+            <div>
             <p:outputLabel for="category" value="Categoria:"/>
             <p:inputText id="category" value="#{needBean.category}"/>
-
+            </div>
             <p:outputLabel for="name" value="Nombre:"/>
             <p:inputText id="name" value="#{needBean.name}"/>
-
+            <div>
             <p:outputLabel for="description" value="Descripcion:"/>
-            <p:inputText id="description" value="#{needBean.description}"/>
-
+            <p:inputTextarea rows="6" cols="33" id="description" value="#{needBean.description}"/>
+            </div>
             <p:outputLabel for="urgency" value="Urgencia:"/>
             <p:inputText id="urgency" value="#{needBean.urgency}"/>
-
-            <label for="status">Estado</label> <br/>
-            <select id="status" name="Estado">
-                <option value="" selected="selected">- selecciona -</option>
-                <option value="NeedBean.status.Active">NeedBean.status.Active</option>
-                <option value="NeedBean.status.InProcess">InProcess</option>
-                <option value="NeedBean.status.Solved">Solved</option>
-                <option value="NeedBean.status.Closed">Closed</option>
-            </select>
-
-        </h:panelGrid>
-
-        <p:commandButton value="Registrar" actionListener="#{needBean.register()}"/>
-    </h:form>
+            <div>
+            <p:outputLabel for="status" value="Estado:"/>
+            <p:inputText id="status" value="#{needBean.status}"/>
+            </div>
+        </h:form>
+    <p:commandButton value="Registrar" action="#{needBean.register()}"/>
 </h:body>
 </html>

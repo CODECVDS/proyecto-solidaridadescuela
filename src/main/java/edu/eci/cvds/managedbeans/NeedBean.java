@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import java.sql.Date;
@@ -21,7 +22,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @ManagedBean(name = "needBean")
-@RequestScoped
+@SessionScoped
 public class NeedBean extends BasePageBean{
     @Inject
     private SolidaridadServices solidaridadServices;
@@ -38,13 +39,26 @@ public class NeedBean extends BasePageBean{
 
     private Status status;
 
-    public void register() throws Exception{
+    private Integer needId;
+
+    public void register() throws ServicesException{
+        System.out.println("intento");
         try{
-            need = new Need(category, name, description, urgency, status);
+            this.need=new Need();
+            System.out.println("ya no se puede cancelar");
             solidaridadServices.registerNeed(need);
         }catch(ServicesException ex){
-            throw ex;
+            //throw ex;
+            ex.printStackTrace();
         }
+    }
+
+    public Integer getNeedId() {
+        return needId;
+    }
+
+    public void setNeedId(Integer needId) {
+        this.needId = needId;
     }
 
     public void update() throws Exception{
@@ -55,35 +69,7 @@ public class NeedBean extends BasePageBean{
         }
     }
 
-    public void onRowEdit(RowEditEvent event) throws Exception {
-        update();
-        FacesMessage msg = new FacesMessage("Product Edited");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-
-    public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edit Cancelled");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-
-        if (newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-    }
-
-    public void onAddNew() throws Exception {
-        // Add one new product to the table:
-        register();
-        FacesMessage msg = new FacesMessage("New Product added");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-
-    public List<Need> getNeeds() throws Exception{
+    public List<Need> getNeeds() throws ServicesException{
         try {
             return solidaridadServices.loadNeeds();
         } catch (ServicesException ex){
@@ -91,7 +77,21 @@ public class NeedBean extends BasePageBean{
         }
     }
 
-    public Need getNeed() { return need; }
+    public void loadNeed() throws ServicesException{
+        try {
+            if(needId != null){
+                need = solidaridadServices.loadNeed(needId);
+            }
+        } catch (ServicesException ex){
+            throw ex;
+        }
+    }
+
+    public Need getNeed() throws ServicesException{
+        System.out.println(needId);
+        need = solidaridadServices.loadNeed(needId);
+        return need;
+    }
 
     public void setNeed(Need need) {
         this.need = need;

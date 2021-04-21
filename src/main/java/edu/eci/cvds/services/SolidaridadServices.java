@@ -23,4 +23,6 @@ public interface SolidaridadServices {
     public User getUser(String username) throws ServicesException;
 
     public List<Need> loadNeeds() throws ServicesException;
+
+    public Need loadNeed(int needId) throws ServicesException;
 }
