@@ -1,95 +1,86 @@
 package edu.eci.cvds.managedbeans;
 
-
-
 import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.entities.Need;
 import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
-import org.primefaces.event.CellEditEvent;
-import org.primefaces.event.RowEditEvent;
+import org.primefaces.PrimeFaces;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import java.sql.Date;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ManagedBean(name = "needBean")
 @SessionScoped
 public class NeedBean extends BasePageBean{
     @Inject
     private SolidaridadServices solidaridadServices;
-
     private Need need;
-
-    private Integer category;
-
+    private int id;
+    private int category;
     private String name;
-
     private String description;
-
-    private Integer urgency;
-
+    private int urgency;
+    private Date creationDate;
     private Status status;
+    private Date modificationDate;
+    private List<Status> allStatus;
+    private List<Integer> categories;
 
-    private Integer needId;
-
-    public void register() throws ServicesException{
-        System.out.println("intento");
-        try{
-            this.need=new Need();
-            System.out.println("ya no se puede cancelar");
-            solidaridadServices.registerNeed(need);
-        }catch(ServicesException ex){
-            //throw ex;
-            ex.printStackTrace();
-        }
-    }
-
-    public Integer getNeedId() {
-        return needId;
-    }
-
-    public void setNeedId(Integer needId) {
-        this.needId = needId;
-    }
-
-    public void update() throws Exception{
+    public List<Integer> getCategories() throws ServicesException {
+        List<Category> list = new ArrayList<Category>();
         try {
-            solidaridadServices.updateNeed(need);
-        } catch (ServicesException ex){
-            throw ex;
+            list = solidaridadServices.loadCategories();
+            categories = list.stream().map(Category::getId).collect(Collectors.toList());
+        } catch (ServicesException e) {
+            throw e;
         }
+        return categories;
     }
 
-    public List<Need> getNeeds() throws ServicesException{
+    public List<Status> getAllStatus() {
+        return Arrays.asList(status.values());
+    }
+
+
+    public List<Need> getNeeds() throws ServicesException {
         try {
             return solidaridadServices.loadNeeds();
         } catch (ServicesException ex){
+            ex.printStackTrace();
             throw ex;
         }
     }
 
-    public void loadNeed() throws ServicesException{
-        try {
-            if(needId != null){
-                need = solidaridadServices.loadNeed(needId);
-            }
+    public  void register(){
+        try{
+            solidaridadServices.registerNeed(need);
         } catch (ServicesException ex){
-            throw ex;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Error"));
         }
+
     }
 
-    public Need getNeed() throws ServicesException{
-        System.out.println(needId);
-        need = solidaridadServices.loadNeed(needId);
+    public void save() throws ServicesException {
+        register();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Added"));
+        PrimeFaces.current().executeScript("PF('manageNeedDialog').hide()");
+        PrimeFaces.current().ajax().update("form:messages", "form:dt-needs");
+    }
+
+    public void openNew() {
+        this.need = new Need();
+    }
+
+    public Need getNeed() {
         return need;
     }
 
@@ -97,11 +88,19 @@ public class NeedBean extends BasePageBean{
         this.need = need;
     }
 
-    public Integer getCategory() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(Integer category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
@@ -121,12 +120,20 @@ public class NeedBean extends BasePageBean{
         this.description = description;
     }
 
-    public Integer getUrgency() {
+    public int getUrgency() {
         return urgency;
     }
 
-    public void setUrgency(Integer urgency) {
+    public void setUrgency(int urgency) {
         this.urgency = urgency;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public Status getStatus() {
@@ -137,4 +144,11 @@ public class NeedBean extends BasePageBean{
         this.status = status;
     }
 
+    public Date getModificationDate() {
+        return modificationDate;
+    }
+
+    public void setModificationDate(Date modificationDate) {
+        this.modificationDate = modificationDate;
+    }
 }
