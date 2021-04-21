@@ -12,7 +12,8 @@
             <p:outputLabel for="userpassword" value="Password:"/>
             <p:inputText id="userpassword" value="#{userBean.userpassword}"/>
         </h:panelGrid>
+        <p:commandButton outcome="menuAdmin" value="Iniciar Sesion "/>
     </h:form>
-    <p:commandButton value="Iniciar Sesion " action="#{userBean.signin()}"/>
+
 </h:body>
 </html>
