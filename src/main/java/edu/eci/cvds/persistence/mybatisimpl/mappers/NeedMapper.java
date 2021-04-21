@@ -12,4 +12,6 @@ public interface NeedMapper {
     public void modify(@Param("need") Need need);
 
     public List<Need> loadNeeds();
+
+    public Need load(@Param("id") int needId);
 }
