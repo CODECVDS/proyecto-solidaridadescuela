@@ -24,7 +24,7 @@ public class UserBean implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(UserBean.class);
     private String username;
     private String userpassword;
-    private String redirectURL="/faces/menu.xhtml";
+    private String redirectURL="/faces/menuAdmin.xhtml";
     Subject subject;
 
     public void signin(){
@@ -34,9 +34,12 @@ public class UserBean implements Serializable {
         subject= SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(getUsername(),new Sha256Hash(getUserpassword()).toHex());
         try {
-            subject.login(token);
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/menu.xhtml");
-
+            //subject.login(token);
+            if(subject.hasRole("Administrator")){
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/admin.xhtml");
+            }else if(subject.hasRole("Student")){
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/user.xhtml");
+            }
         } catch ( UnknownAccountException e ) {
             //username wasn't in the system, show them an error message?
             logger.error(e.getMessage(),e);
@@ -52,6 +55,7 @@ public class UserBean implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        finally { token.clear();}
     }
     public void logOut() {
 
