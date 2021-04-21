@@ -70,6 +70,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
+    public Need loadNeed(int needId) throws ServicesException{
+        try {
+            return needDAO.load(needId);
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar categoria",ex);
+        }
+    }
+
+    @Override
     public Category loadCategory(int categoryId) throws ServicesException {
         try {
             return categoryDAO.load(categoryId);

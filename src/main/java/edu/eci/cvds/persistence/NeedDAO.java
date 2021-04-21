@@ -10,4 +10,6 @@ public interface NeedDAO {
     public void updateNeed(Need necesidad) throws PersistenceException;
 
     public List<Need> needs() throws PersistenceException;
+
+    public Need load(int needId) throws PersistenceException;
 }
