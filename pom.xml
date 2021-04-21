@@ -26,6 +26,7 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+
 	<dependency>
 		<groupId>org.quicktheories</groupId>
 		<artifactId>quicktheories</artifactId>
@@ -109,7 +110,7 @@
 	<dependency>
 		<groupId>org.primefaces</groupId>
 		<artifactId>primefaces</artifactId>
-		<version>6.2</version>
+		<version>10.0.0</version>
 	</dependency>
 	  <!-- Shiro dependencies -->
 	  <dependency>
@@ -134,38 +135,53 @@
 		  <version>1.7.26</version>
 		  <scope>test</scope>
 	  </dependency>
-		
   </dependencies>
 
   <build>
     <finalName>solidaridadescuela</finalName>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
 
-        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.6.0</version>
+
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
 
         <plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-			<version>3.1</version>
-			<configuration>
-				<source>1.8</source>
-				<target>1.8</target>
-				<compilerArguments>
-<!--                         <endorseddirs>${endorsed.dir}</endorseddirs> -->
-				</compilerArguments>
-			</configuration>
-		</plugin>
-
-        <plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-war-plugin</artifactId>
-			<version>2.3</version>
-			<configuration>
-				<failOnMissingWebXml>false</failOnMissingWebXml>
-			</configuration>
-		</plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.3</version>
+            <configuration>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+        </plugin>
 		
+		<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals><goal>copy</goal></goals>
+                    <configuration>
+                        <artifactItems>
+                            <artifactItem>
+                                <groupId>com.heroku</groupId>
+                                <artifactId>webapp-runner</artifactId>
+                                <version>9.0.41.0</version>
+                                <destFileName>webapp-runner.jar</destFileName>
+                            </artifactItem>
+                        </artifactItems>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+
 		<!-- create local H2 database -->
 		<plugin>
 			<groupId>org.codehaus.mojo</groupId>
@@ -180,7 +196,7 @@
 			</dependencies>
 			<configuration>
 				<driver>org.h2.Driver</driver>
-				<url>jdbc:h2:file:./target/db/testdb;MODE=PostgresSQL</url>
+				<url>jdbc:h2:file:./target/db/testdb;MODE=MYSQL</url>
 				<username>anonymous</username>
 				<password>anonymous</password>
 				<autocommit>false</autocommit>
@@ -201,33 +217,6 @@
 				</execution>
 			</executions>
 		</plugin>
-
-		
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-dependency-plugin</artifactId>
-			<version>2.6</version>
-			<executions>
-				<execution>
-					<phase>validate</phase>
-					<goals>
-						<goal>copy</goal>
-					</goals>
-					<configuration>
-<!--                             <outputDirectory>${endorsed.dir}</outputDirectory> -->
-						<silent>true</silent>
-						<artifactItems>
-							<artifactItem>
-								<groupId>javax</groupId>
-								<artifactId>javaee-endorsed-api</artifactId>
-								<version>7.0</version>
-								<type>jar</type>
-							</artifactItem>
-						</artifactItems>
-					</configuration>
-				</execution>
-			</executions>
-		</plugin>
 		
 		 <!-- Tomcat embedded plugin. -->
 		<plugin>
@@ -240,6 +229,5 @@
 			</configuration>
 		</plugin>
       </plugins>
-    </pluginManagement>
   </build>
 </project>

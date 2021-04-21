@@ -6,20 +6,38 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title></title>
+    <title>Menu</title>
 </h:head>
 <h:body>
     <h:form id="form">
-        <p:button outcome="menuAdmin" value="Volver a Menu"/>
+
+        <div class="card-tabmenu">
+            <p:tabMenu activeIndex="#{param.i}">
+                <p:menuitem value="Home" outcome="menuAdmin" icon="pi pi-fw pi-home">
+                    <f:param name="i" value="0"/>
+                </p:menuitem>
+                <p:menuitem value="Categories" outcome="categoriesAdmin" icon="pi pi-fw pi-pencil">
+                    <f:param name="i" value="1"/>
+                </p:menuitem>
+                <p:menuitem value="Needs" outcome="needs" icon="pi pi-fw pi-pencil">
+                    <f:param name="i" value="2"/>
+                </p:menuitem>
+                <p:menuitem value="Quit" outcome="signin" icon="pi pi-fw pi-power-off">
+                    <f:param name="i" value="3"/>
+                </p:menuitem>
+            </p:tabMenu>
+        </div>
+
         <div class="card category">
             <p:growl id="messages" showDetail="true"/>
 
             <p:toolbar>
                 <p:toolbarGroup>
-                    <p:commandButton value="New" icon="pi pi-plus" actionListener="#{categoryBean.openNew}"
+                    <p:commandButton id="newButton" value="New" icon="pi pi-plus" actionListener="#{categoryBean.openNew}"
                                      update=":form:manage-category-content" oncomplete="PF('manageCategoryDialog').show()"
                                      styleClass="ui-button-success" style="margin-right: .5rem">
                         <p:resetInput target=":form:manage-category-content"/>
+                        <f:setPropertyActionListener value="false" target="#{categoryBean.button}"/>
                     </p:commandButton>
                 </p:toolbarGroup>
             </p:toolbar>
@@ -49,7 +67,8 @@
                 </p:column>
 
                 <p:column headerText="Status" sortBy="#{category.status}">
-                    <h:outputText value="#{category.status}"/>
+                    <h:outputText value="Active" rendered="#{category.status}" />
+                    <h:outputText value="Inactive" rendered="#{!category.status}" />
                 </p:column>
 
                 <p:column headerText="Modification Date" sortBy="#{category.modificationDate}">
@@ -61,6 +80,7 @@
                                      oncomplete="PF('manageCategoryDialog').show()"
                                      styleClass="edit-button rounded-button ui-button-success" process="@this">
                         <f:setPropertyActionListener value="#{category}" target="#{categoryBean.category}"/>
+                        <f:setPropertyActionListener value="true" target="#{categoryBean.button}"/>
                         <p:resetInput target=":form:manage-category-content"/>
                     </p:commandButton>
                 </p:column>
@@ -73,15 +93,15 @@
                     <p:outputPanel rendered="#{not empty categoryBean.category}">
                         <div class="p-field">
                             <p:outputLabel for="name">Name</p:outputLabel>
-                            <p:inputText id="name" value="#{categoryBean.category.name}" required="true"/>
+                            <p:inputText id="name" value="#{categoryBean.category.name}"/>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="description">Description</p:outputLabel>
                             <p:inputTextarea id="description" value="#{categoryBean.category.description}"/>
                         </div>
-                        <div class="p-field">
-                            <p:outputLabel for="status">Status</p:outputLabel>
-                            <p:inputTextarea id="status" value="#{categoryBean.category.status}"/>
+                        <div id="div-status" class="p-field">
+                            <p:outputLabel for="status" rendered="#{categoryBean.button}">Status</p:outputLabel>
+                            <p:selectBooleanButton id="status" onLabel="Active" offLabel="Inactive" value="#{categoryBean.category.status}" rendered="#{categoryBean.button}"/>
                         </div>
                     </p:outputPanel>
                 </p:outputPanel>

@@ -14,4 +14,6 @@ public interface CategoryMapper {
     public Category loadC(@Param("id") int categoryId);
 
     public List<Category> loadAllC();
+
+    public List<Category> loadAllActive(@Param("status") boolean status);
 }

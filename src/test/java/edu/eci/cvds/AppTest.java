@@ -31,6 +31,9 @@ public class AppTest
         solidaridadServices = SolidaridadServicesFactory.getInstance().getSolidaridadServicios();
     }
 
+    private Date dateTest;
+
+    /*
     @Before
     public void setUp(){
     }
@@ -38,19 +41,19 @@ public class AppTest
     @Test
     public void DeberiaIniciarSesion(){}
 
-    /*
     @Test
     public void DeberiaRegistrarCategoria(){
         try {
             Category categorytest = new Category("CategoryTest","Esta es la categoria de prueba");
             solidaridadServices.registerCategory(categorytest);
             Category categoryresult = solidaridadServices.loadCategory(1);
+            dateTest = categoryresult.getCreationDate();
             Assert.assertTrue(categoryresult != null);
         } catch (ServicesException ex){
-            ex.printStackTrace();
+            assertTrue(false);
         }
-    }*/
-    /*
+    }
+
     @Test
     public void DeberiaActualizarCategoria(){
         try {
@@ -59,8 +62,8 @@ public class AppTest
             category.setDescription("Test modificacion");
             category.setStatus(true);
             solidaridadServices.updateCategory(category);
-            Date creationDate = new Date(2021,4,19);
-            Category categoryTestUpdate = new Category(1,"Categoria1Test1","Test modificacion",creationDate,true,java.sql.Date.valueOf(LocalDate.now()));
+            Date creationDate = dateTest;
+            Category categoryTestUpdate = new Category(1,"Categoria1Test1","Test modificacion",creationDate,true, new Date());
             Assert.assertEquals(category.getName(),categoryTestUpdate.getName());
             Assert.assertEquals(category.getDescription(),categoryTestUpdate.getDescription());
             Assert.assertEquals(category.getCreationDate(),categoryTestUpdate.getCreationDate());
@@ -68,11 +71,9 @@ public class AppTest
             Assert.assertEquals(category.getModificationDate(),categoryTestUpdate.getModificationDate());
             Assert.assertEquals(category,categoryTestUpdate);
         } catch (ServicesException ex){
-            ex.printStackTrace();
+            assertTrue(false);
         }
     }
-     */
-
 
     @Test
     public void DeberiaRegistrarNecesidad(){
@@ -82,7 +83,7 @@ public class AppTest
             Need necesidadresult = solidaridadServices.loadNeed(1);
             Assert.assertTrue(necesidadresult != null);
         } catch (ServicesException ex){
-            ex.printStackTrace();
+            assertTrue(false);
         }
-    }
+    }*/
 }
