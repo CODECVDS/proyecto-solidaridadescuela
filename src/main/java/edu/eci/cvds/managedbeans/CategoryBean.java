@@ -4,8 +4,7 @@ import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
 import org.primefaces.PrimeFaces;
-import org.primefaces.event.CellEditEvent;
-import org.primefaces.event.RowEditEvent;
+
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -30,7 +29,7 @@ public class CategoryBean extends BasePageBean {
     private Date creationDate;
     private Date modificationDate;
 
-    public void loadCategory() throws Exception{
+    public void loadCategory() throws ServicesException{
         try {
             if(categoryId != null){
                 category = solidaridadServices.loadCategory(categoryId);
@@ -40,7 +39,7 @@ public class CategoryBean extends BasePageBean {
         }
     }
 
-    public List<Category> getCategories() throws Exception{
+    public List<Category> getCategories() throws ServicesException{
         try {
             return solidaridadServices.loadCategories();
         } catch (ServicesException ex){
@@ -67,12 +66,10 @@ public class CategoryBean extends BasePageBean {
     public void save() throws ServicesException {
         if (this.category.getId() == 0) {
             register();
-            System.out.println("Registrando");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Category Added"));
         }
         else {
             update();
-            System.out.println("Actualizando");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Category Updated"));
         }
 
