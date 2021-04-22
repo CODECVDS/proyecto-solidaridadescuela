@@ -34,11 +34,11 @@ public class UserBean implements Serializable {
         subject= SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(getUsername(),new Sha256Hash(getUserpassword()).toHex());
         try {
-            //subject.login(token);
+            subject.login(token);
             if(subject.hasRole("Administrator")){
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/admin.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/menuAdmin.xhtml");
             }else if(subject.hasRole("Student")){
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/user.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/menuUser.xhtml");
             }
         } catch ( UnknownAccountException e ) {
             //username wasn't in the system, show them an error message?
