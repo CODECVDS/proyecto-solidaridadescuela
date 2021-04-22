@@ -4,8 +4,7 @@
 
 [Heroku App](proyecto-solidaridadescuela.herokuapp.com)
 
-Usuarios;
-admin
-admin
-
-estudiante invitado
+### Usuarios:
+**username, password, rol**
+admin,admin, Administrator
+estudiante, invitado, Student
