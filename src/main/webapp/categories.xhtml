@@ -3,34 +3,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 <h:head>
     <title>Menu</title>
 </h:head>
 <h:body>
+    <ui:include src="MenuA.xhtml"></ui:include>
     <h:form id="form">
-
-        <div class="card-tabmenu">
-            <p:tabMenu activeIndex="#{param.i}">
-                <p:menuitem value="Home" outcome="menuAdmin" icon="pi pi-fw pi-home">
-                    <f:param name="i" value="0"/>
-                </p:menuitem>
-                <p:menuitem value="Categories" outcome="categoriesAdmin" icon="pi pi-fw pi-pencil">
-                    <f:param name="i" value="1"/>
-                </p:menuitem>
-                <p:menuitem value="Needs" outcome="needs" icon="pi pi-fw pi-pencil">
-                    <f:param name="i" value="2"/>
-                </p:menuitem>
-                <p:menuitem value="Quit" action="#{userBean.signOut}" icon="pi pi-fw pi-power-off">
-                    <f:param name="i" value="3"/>
-                </p:menuitem>
-            </p:tabMenu>
-        </div>
-
         <div class="card category">
             <p:growl id="messages" showDetail="true"/>
-
             <p:toolbar>
                 <p:toolbarGroup>
                     <p:commandButton id="newButton" value="New" icon="pi pi-plus" actionListener="#{categoryBean.openNew}"
@@ -41,7 +25,6 @@
                     </p:commandButton>
                 </p:toolbarGroup>
             </p:toolbar>
-
             <p:dataTable id="dt-categories" widgetVar="dtCategory" var="category" value="#{categoryBean.categories}"
                          reflow="true" styleClass="categories-table" rowKey="#{category.id}" paginator="true"
                          rows="10" paginatorPosition="bottom">
@@ -50,31 +33,25 @@
                         <span style="font-weight: bold">CATEGORIES</span>
                     </div>
                 </f:facet>
-
                 <p:column headerText="Id" sortBy="#{category.id}">
                     <h:outputText value="#{category.id}"/>
                 </p:column>
                 <p:column headerText="Name" sortBy="#{category.name}">
                     <h:outputText value="#{category.name}"/>
                 </p:column>
-
                 <p:column headerText="Description" sortBy="#{category.description}">
                     <h:outputText value="#{category.description}"/>
                 </p:column>
-
                 <p:column headerText="Creation Date" sortBy="#{category.creationDate}">
                     <h:outputText value="#{category.creationDate}"/>
                 </p:column>
-
                 <p:column headerText="Status" sortBy="#{category.status}">
                     <h:outputText value="Active" rendered="#{category.status}" />
                     <h:outputText value="Inactive" rendered="#{!category.status}" />
                 </p:column>
-
                 <p:column headerText="Modification Date" sortBy="#{category.modificationDate}">
                     <h:outputText value="#{category.modificationDate}"/>
                 </p:column>
-
                 <p:column exportable="false">
                     <p:commandButton icon="pi pi-pencil" update=":form:manage-category-content"
                                      oncomplete="PF('manageCategoryDialog').show()"
@@ -84,9 +61,7 @@
                         <p:resetInput target=":form:manage-category-content"/>
                     </p:commandButton>
                 </p:column>
-
             </p:dataTable>
-
             <p:dialog header="Category Details" showEffect="fade" modal="true"
                       widgetVar="manageCategoryDialog" responsive="true">
                 <p:outputPanel id="manage-category-content" class="ui-fluid">
@@ -105,7 +80,6 @@
                         </div>
                     </p:outputPanel>
                 </p:outputPanel>
-
                 <f:facet name="footer">
                     <p:commandButton value="Save" icon="pi pi-check" actionListener="#{categoryBean.save}"
                                      update="manage-category-content" process="manage-category-content @this"/>
