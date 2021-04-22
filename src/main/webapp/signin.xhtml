@@ -8,15 +8,23 @@
 
 <h:head>
     <title>Sign In</title>
+    <style>
+        .panel{
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 25%;
+        }
+  </style>
 </h:head>
-
 
 
 <h:body>
     <div class="card">
         <h:form id="signin_form">
             <p:growl id="growl" showDetail="true" />
-            <p:panel header="SIGN IN" footer="by CODE®" style="margin: auto; width: 30%; margin-top: 10%;">
+            <p:panel header="SIGN IN" footer="by CODE®" class="panel">
 
                 <div class="p-field p-grid">
                     <p:outputLabel for="user1" styleClass="p-col-fixed" style="width:100px" value="Username"/>
