@@ -2,11 +2,9 @@ package edu.eci.cvds.managedbeans;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.config.IniSecurityManagerFactory;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.crypto.hash.Sha256Hash;
-import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.Factory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,46 +17,52 @@ import java.io.Serializable;
 import java.util.logging.Level;
 
 @SessionScoped
-@ManagedBean(name="userBean",eager = true)
+@ManagedBean(name="userBean")
 public class UserBean implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(UserBean.class);
     private String username;
     private String userpassword;
-    private String redirectURL="/faces/menuAdmin.xhtml";
-    Subject subject;
+    private String redirectURL="/faces/signin.xhtml";
+    private Subject currentUser;
+    private String path;
 
     public void signin(){
-        //Factory<SecurityManager> factory=new IniSecurityManagerFactory("classpath:shiro.ini");
-        //SecurityManager securityManager=factory.getInstance();
-        //SecurityUtils.setSecurityManager(securityManager);
-        subject= SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(getUsername(),new Sha256Hash(getUserpassword()).toHex());
+        //token.setRememberMe(true);
+        currentUser = SecurityUtils.getSubject();
+
         try {
-            subject.login(token);
-            if(subject.hasRole("Administrator")){
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/menuAdmin.xhtml");
-            }else if(subject.hasRole("Student")){
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/menuUser.xhtml");
+            currentUser.login(token);
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            if(currentUser.hasRole("Administrator")){
+                setPath("homeA");
+                facesContext.getExternalContext().redirect("/faces/homeA.xhtml");
+            }else if(currentUser.hasRole("Student")){
+                setPath("homeB");
+                facesContext.getExternalContext().redirect("/faces/homeB.xhtml");
             }
         } catch ( UnknownAccountException e ) {
             //username wasn't in the system, show them an error message?
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Sign in Error", "Incorrect Credentials"));
             logger.error(e.getMessage(),e);
         } catch ( IncorrectCredentialsException e ) {
             //password didn't match, try again?
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Sign in Error", "Incorrect Credentials"));
             logger.error(e.getMessage(),e);
         } catch ( LockedAccountException e ) {
             //account for that username is locked - can't login.  Show them a message?
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Sign in Error", "Sign in Error"));
             logger.error(e.getMessage(),e);
         } catch ( AuthenticationException e ) {
             //unexpected condition - error?
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Sign in Error", "Sign in Error"));
             logger.error(e.getMessage(),e);
         } catch (IOException e) {
-            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Sign in Error", "Sign in Error"));
         }
-        finally { token.clear();}
     }
-    public void logOut() {
 
+    public void signOut() {
         SecurityUtils.getSubject().logout();
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(redirectURL);
@@ -66,11 +70,14 @@ public class UserBean implements Serializable {
             java.util.logging.Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private void facesError(String message) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+
+    public String getPath() {
+        return path;
     }
 
-
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     public String getUsername() {
         return username;
@@ -95,4 +102,13 @@ public class UserBean implements Serializable {
     public void setRedirectURL(String redirectURL) {
         this.redirectURL = redirectURL;
     }
+
+    public Subject getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(Subject currentUser) {
+        this.currentUser = currentUser;
+    }
 }
+
