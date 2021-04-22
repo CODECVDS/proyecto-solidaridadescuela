@@ -9,9 +9,22 @@
 
 <h:head>
     <title></title>
+    <style>
+    .text{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-style: italic;
+        font-size: 70px;
+    }
+  </style>
 </h:head>
 <h:body>
     <ui:include src="MenuA.xhtml"></ui:include>
-    <h1>Welcome User</h1>
+    <div class="text">
+        <p>Bienvenido Usuario</p>
+    </div>
 </h:body>
 </html>
