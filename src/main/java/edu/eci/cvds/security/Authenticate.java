@@ -20,15 +20,15 @@ public class Authenticate extends AccessControlFilter {
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
         if (SecurityUtils.getSubject().hasRole("Administrator")) {
-            welcomeurl="/faces/admin.xhtml";
+            welcomeurl="/faces/menuAdmin.xhtml";
         } else if(SecurityUtils.getSubject().hasRole("Student")){
-            welcomeurl="/faces/user.xhtml";
+            welcomeurl="/faces/menuUser.xhtml";
         } else if(SecurityUtils.getSubject().hasRole("Teacher")){
-            welcomeurl="/faces/user.xhtml";
+            welcomeurl="/faces/menuUser.xhtml";
         }else if(SecurityUtils.getSubject().hasRole("Graduate")){
-            welcomeurl="/faces/user.xhtml";
+            welcomeurl="/faces/menuUser.xhtml";
         }else if(SecurityUtils.getSubject().hasRole("Administrative")){
-            welcomeurl="/faces/admin.xhtml";
+            welcomeurl="/faces/menuAdmin.xhtml";
         }
 
         WebUtils.issueRedirect(servletRequest, servletResponse, welcomeurl);
