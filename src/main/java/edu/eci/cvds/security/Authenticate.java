@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 
 public class Authenticate extends AccessControlFilter {
     String welcomeurl;
+
     @Override
     protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) throws Exception {
         Subject subject = getSubject(servletRequest, servletResponse);
@@ -20,15 +21,15 @@ public class Authenticate extends AccessControlFilter {
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
         if (SecurityUtils.getSubject().hasRole("Administrator")) {
-            welcomeurl="/faces/menuAdmin.xhtml";
+            welcomeurl="/faces/homeA.xhtml";
         } else if(SecurityUtils.getSubject().hasRole("Student")){
-            welcomeurl="/faces/menuUser.xhtml";
+            welcomeurl="/faces/homeB.xhtml";
         } else if(SecurityUtils.getSubject().hasRole("Teacher")){
-            welcomeurl="/faces/menuUser.xhtml";
+            welcomeurl="/faces/homeB.xhtml";
         }else if(SecurityUtils.getSubject().hasRole("Graduate")){
-            welcomeurl="/faces/menuUser.xhtml";
+            welcomeurl="/faces/homeB.xhtml";
         }else if(SecurityUtils.getSubject().hasRole("Administrative")){
-            welcomeurl="/faces/menuAdmin.xhtml";
+            welcomeurl="/faces/homeA.xhtml";
         }
 
         WebUtils.issueRedirect(servletRequest, servletResponse, welcomeurl);

@@ -3,6 +3,7 @@ package edu.eci.cvds.managedbeans;
 import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.primefaces.PrimeFaces;
 
 import javax.faces.application.FacesMessage;
@@ -28,6 +29,7 @@ public class CategoryBean extends BasePageBean {
     private Date modificationDate;
     private boolean button;
 
+    @RequiresRoles("Administrator")
     public void loadCategory() throws ServicesException{
         try {
             if(categoryId != null){
@@ -46,12 +48,13 @@ public class CategoryBean extends BasePageBean {
         }
     }
 
+
     public void update(){
         try {
             solidaridadServices.updateCategory(category);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Category Updated"));
         } catch (ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Update Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Update Error"));
         }
     }
 
@@ -60,10 +63,12 @@ public class CategoryBean extends BasePageBean {
             solidaridadServices.registerCategory(category);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Category Added"));
         } catch (ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Add Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error","Add Error"));
         }
     }
 
+
+    @RequiresRoles("Administrator")
     public void save() throws ServicesException {
         if (this.category.getId() == 0) {
             register();
@@ -75,6 +80,7 @@ public class CategoryBean extends BasePageBean {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-categories");
     }
 
+    @RequiresRoles("Administrator")
     public void openNew() {
         this.category = new Category();
         category.setId(0);

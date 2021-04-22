@@ -5,6 +5,8 @@ import edu.eci.cvds.entities.Need;
 import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.primefaces.PrimeFaces;
 
 import javax.faces.application.FacesMessage;
@@ -52,25 +54,29 @@ public class NeedBean extends BasePageBean{
         }
     }
 
+    @RequiresRoles(logical = Logical.OR, value = {"Administrator", "Student"})
     public  void register(){
         try{
             solidaridadServices.registerNeed(need);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Added"));
         } catch (ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Add Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error","Add Error"));
         }
 
     }
 
+    @RequiresRoles(logical = Logical.OR, value = {"Administrator", "Student"})
     public void save(){
         register();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Added"));
         PrimeFaces.current().executeScript("PF('manageNeedDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-needs");
     }
 
+    @RequiresRoles(logical = Logical.OR, value = {"Administrator", "Student"})
     public void openNew() {
         this.need = new Need();
     }
+
 
     public List<Integer> getUrgencies() {
         urgencies = Arrays.asList(new Integer[]{1, 2, 3, 4, 5});
