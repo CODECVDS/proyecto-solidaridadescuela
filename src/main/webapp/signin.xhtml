@@ -3,17 +3,32 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 <h:head></h:head>
+
+
+
 <h:body>
-    <h2>Iniciar Sesion </h2>
-    <h:form id="signin_form">
-        <h:panelGrid id="grid" cellpadding="10" columns="2">
-            <p:outputLabel for="username" value="Username:"/>
-            <p:inputText id="username" value="#{userBean.username}"/>
-            <p:outputLabel for="userpassword" value="Password:"/>
-            <p:inputText id="userpassword" value="#{userBean.userpassword}"/>
-        </h:panelGrid>
-        <p:commandButton outcome="menuAdmin" value="Iniciar Sesion "/>
-    </h:form>
+    <p:panel header="SIGN IN" footer="by CODE®" style="margin: auto; width: 30%; margin-top: 10%;">
+        <h:form id="signin_form">
+
+            <div class="p-field p-grid">
+                <p:outputLabel for="user1" styleClass="p-col-fixed" style="width:100px" value="Username"/>
+                <div class="p-col">
+                    <p:password id="user1" value="#{userBean.username}" match="pwd2"/>
+                </div>
+            </div>
+
+            <div class="p-field p-grid">
+                <p:outputLabel for="pwd2" styleClass="p-col-fixed" style="width:100px" value="Password"/>
+                <div class="p-col">
+                    <p:password id="pwd2" value="#{userBean.userpassword}" toggleMask="true" redisplay="true"/>
+                </div>
+            </div>
+
+            <div class="p-field p-grid" style="margin-top: 10px;">
+                <p:commandButton outcome="menuAdmin" value="Iniciar Sesion "/>
+            </div>
+        </h:form>
+    </p:panel>
 
 </h:body>
 </html>
