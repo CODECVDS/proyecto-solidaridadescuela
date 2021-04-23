@@ -29,7 +29,6 @@ public class CategoryBean extends BasePageBean {
     private Date modificationDate;
     private boolean button;
 
-    @RequiresRoles("Administrator")
     public void loadCategory() throws ServicesException{
         try {
             if(categoryId != null){
@@ -67,8 +66,6 @@ public class CategoryBean extends BasePageBean {
         }
     }
 
-
-    @RequiresRoles("Administrator")
     public void save() throws ServicesException {
         if (this.category.getId() == 0) {
             register();
@@ -80,7 +77,6 @@ public class CategoryBean extends BasePageBean {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-categories");
     }
 
-    @RequiresRoles("Administrator")
     public void openNew() {
         this.category = new Category();
         category.setId(0);

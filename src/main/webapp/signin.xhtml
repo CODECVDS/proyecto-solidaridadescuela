@@ -8,15 +8,7 @@
 
 <h:head>
     <title>Sign In</title>
-    <style>
-        .panel{
-            position: absolute;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 25%;
-        }
-  </style>
+    <link rel="stylesheet" href="/resources/style.css"/>
 </h:head>
 
 
@@ -26,20 +18,25 @@
             <p:growl id="growl" showDetail="true" />
             <p:panel header="SIGN IN" footer="by CODE®" class="panel">
 
-                <div class="p-field p-grid">
-                    <p:outputLabel for="user1" styleClass="p-col-fixed" style="width:100px" value="Username"/>
+                <div class="p-field">
+                    <p:outputLabel for="user" styleClass="p-col-fixed" value="Username"/>
                     <div class="p-col">
-                        <p:inputText id="user1" value="#{userBean.username}"/>
+                        <p:inputText  class="input" id="user" value="#{userBean.username}"/>
                     </div>
                 </div>
-                <div class="p-field p-grid">
-                    <p:outputLabel for="pwd1" styleClass="p-col-fixed" style="width:100px" value="Password"/>
+                <div class="p-field">
+                    <p:outputLabel for="pwd" styleClass="p-col-fixed" value="Password"/>
                     <div class="p-col">
-                        <p:password id="pwd1" value="#{userBean.userpassword}" toggleMask="true" redisplay="true"/>
+                        <p:password class="input" id="pwd" value="#{userBean.userpassword}" redisplay="true"/>
                     </div>
                 </div>
-                <div class="p-field p-grid" style="margin-top: 10px;">
-                    <p:commandButton action="#{userBean.signin}" value="Iniciar Sesion" update="growl"/>
+                <div class="p-field">
+                    <p:outputLabel for="rm" value="Remember Me"/>
+                    <p:selectBooleanButton style="margin-left: 10px;" id="rm" onIcon="pi pi-check" offIcon="pi pi-times" value="#{userBean.rememberMe}"/>
+                </div>
+                <div class="p-field">
+
+                    <p:commandButton class="button" action="#{userBean.signin}" value="Iniciar Sesion" update="growl"/>
                 </div>
             </p:panel>
         </h:form>

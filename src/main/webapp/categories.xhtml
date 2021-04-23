@@ -9,9 +9,10 @@
 
 <h:head>
     <title>Menu</title>
+    <link rel="stylesheet" href="/resources/style.css"/>
 </h:head>
 <h:body>
-    <ui:include src="MenuA.xhtml"></ui:include>
+    <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
         <div class="card category">
             <p:growl id="messages" showDetail="true"/>
@@ -33,23 +34,23 @@
                         <span style="font-weight: bold">CATEGORIES</span>
                     </div>
                 </f:facet>
-                <p:column headerText="Id" sortBy="#{category.id}">
+                <p:column headerText="Id">
                     <h:outputText value="#{category.id}"/>
                 </p:column>
-                <p:column headerText="Name" sortBy="#{category.name}">
+                <p:column headerText="Name">
                     <h:outputText value="#{category.name}"/>
                 </p:column>
-                <p:column headerText="Description" sortBy="#{category.description}">
+                <p:column headerText="Description">
                     <h:outputText value="#{category.description}"/>
                 </p:column>
-                <p:column headerText="Creation Date" sortBy="#{category.creationDate}">
+                <p:column headerText="Creation Date">
                     <h:outputText value="#{category.creationDate}"/>
                 </p:column>
-                <p:column headerText="Status" sortBy="#{category.status}">
+                <p:column headerText="Status">
                     <h:outputText value="Active" rendered="#{category.status}" />
                     <h:outputText value="Inactive" rendered="#{!category.status}" />
                 </p:column>
-                <p:column headerText="Modification Date" sortBy="#{category.modificationDate}">
+                <p:column headerText="Modification Date">
                     <h:outputText value="#{category.modificationDate}"/>
                 </p:column>
                 <p:column exportable="false">

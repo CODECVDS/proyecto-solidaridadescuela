@@ -2,8 +2,10 @@ package edu.eci.cvds.managedbeans;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,15 +27,17 @@ public class UserBean implements Serializable {
     private String redirectURL="/faces/signin.xhtml";
     private Subject currentUser;
     private String path;
-
+    private boolean rememberMe=false;
     public void signin(){
         UsernamePasswordToken token = new UsernamePasswordToken(getUsername(),new Sha256Hash(getUserpassword()).toHex());
-        //token.setRememberMe(true);
         currentUser = SecurityUtils.getSubject();
 
         try {
             currentUser.login(token);
             FacesContext facesContext = FacesContext.getCurrentInstance();
+            Session session = currentUser.getSession();
+            session.setAttribute("username",username);
+            session.setAttribute("currentUser",currentUser);
             if(currentUser.hasRole("Administrator")){
                 setPath("homeA");
                 facesContext.getExternalContext().redirect("/faces/homeA.xhtml");
@@ -109,6 +113,14 @@ public class UserBean implements Serializable {
 
     public void setCurrentUser(Subject currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public boolean isRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(boolean rememberMe) {
+        this.rememberMe = rememberMe;
     }
 }
 

@@ -9,7 +9,7 @@ import org.apache.shiro.web.util.WebUtils;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-public class Authenticate extends AccessControlFilter {
+public class OnlyNot extends AccessControlFilter {
     String welcomeurl;
 
     @Override
