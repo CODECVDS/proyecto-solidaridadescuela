@@ -9,9 +9,10 @@
 
 <h:head>
     <title>Menu</title>
+    <link rel="stylesheet" href="/resources/style.css"/>
 </h:head>
 <h:body>
-    <ui:include src="MenuA.xhtml"></ui:include>
+    <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
         <div class="card need">
             <p:growl id="messages" showDetail="true"/>
@@ -34,35 +35,35 @@
                     </div>
                 </f:facet>
 
-                <p:column headerText="Id" sortBy="#{need.id}">
+                <p:column headerText="Id">
                     <h:outputText value="#{need.id}"/>
                 </p:column>
 
-                <p:column headerText="Category" sortBy="#{need.category}">
+                <p:column headerText="Category">
                     <h:outputText value="#{need.category}"/>
                 </p:column>
 
-                <p:column headerText="Name" sortBy="#{need.name}">
+                <p:column headerText="Name">
                     <h:outputText value="#{need.name}"/>
                 </p:column>
 
-                <p:column headerText="Description" sortBy="#{need.description}">
+                <p:column headerText="Description">
                     <h:outputText value="#{need.description}"/>
                 </p:column>
 
-                <p:column headerText="Urgency" sortBy="#{need.urgency}">
+                <p:column headerText="Urgency" >
                     <h:outputText value="#{need.urgency}"/>
                 </p:column>
 
-                <p:column headerText="Creation Date" sortBy="#{need.creationDate}">
+                <p:column headerText="Creation Date">
                     <h:outputText value="#{need.creationDate}"/>
                 </p:column>
 
-                <p:column headerText="Status" sortBy="#{need.status}">
+                <p:column headerText="Status">
                     <h:outputText value="#{need.status}"/>
                 </p:column>
 
-                <p:column headerText="Modification Date" sortBy="#{need.modificationDate}">
+                <p:column headerText="Modification Date">
                     <h:outputText value="#{need.modificationDate}"/>
                 </p:column>
 
