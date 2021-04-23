@@ -8,6 +8,6 @@
 ### Usuarios:
 **username, password, rol**
 
-admin, admin, Administrator
+admin, admineci, Administrator
 
-estudiante, invitado, Student
+user, invitado, Student
