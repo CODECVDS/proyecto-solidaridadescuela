@@ -18,8 +18,7 @@ public class MyBatisCategoryDAO implements CategoryDAO {
         try {
             categoryMapper.addCategory(category);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
-            e.printStackTrace();
-            //throw new PersistenceException("Error al registrar categoria",e);
+            throw new PersistenceException("Error al registrar categoria",e);
         }
     }
 
@@ -49,5 +48,15 @@ public class MyBatisCategoryDAO implements CategoryDAO {
             throw new PersistenceException("Error al consultar categorias",e);
         }
     }
+
+    @Override
+    public List<Category> loadAllActive(boolean status) throws PersistenceException {
+        try {
+            return categoryMapper.loadAllActive(true);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar categorias activas",e);
+        }
+    }
+
 
 }

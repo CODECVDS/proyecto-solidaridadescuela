@@ -9,8 +9,9 @@ import org.apache.shiro.web.util.WebUtils;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-public class Authenticate extends AccessControlFilter {
+public class OnlyNot extends AccessControlFilter {
     String welcomeurl;
+
     @Override
     protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) throws Exception {
         Subject subject = getSubject(servletRequest, servletResponse);
@@ -20,15 +21,15 @@ public class Authenticate extends AccessControlFilter {
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
         if (SecurityUtils.getSubject().hasRole("Administrator")) {
-            welcomeurl="/faces/admin.xhtml";
+            welcomeurl="/faces/homeA.xhtml";
         } else if(SecurityUtils.getSubject().hasRole("Student")){
-            welcomeurl="/faces/user.xhtml";
+            welcomeurl="/faces/homeB.xhtml";
         } else if(SecurityUtils.getSubject().hasRole("Teacher")){
-            welcomeurl="/faces/user.xhtml";
+            welcomeurl="/faces/homeB.xhtml";
         }else if(SecurityUtils.getSubject().hasRole("Graduate")){
-            welcomeurl="/faces/user.xhtml";
+            welcomeurl="/faces/homeB.xhtml";
         }else if(SecurityUtils.getSubject().hasRole("Administrative")){
-            welcomeurl="/faces/admin.xhtml";
+            welcomeurl="/faces/homeA.xhtml";
         }
 
         WebUtils.issueRedirect(servletRequest, servletResponse, welcomeurl);

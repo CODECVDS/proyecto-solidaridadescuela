@@ -12,14 +12,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@ManagedBean(name = "needBean")
 @SessionScoped
+@ManagedBean(name = "needBean")
 public class NeedBean extends BasePageBean{
     @Inject
     private SolidaridadServices solidaridadServices;
@@ -33,23 +31,17 @@ public class NeedBean extends BasePageBean{
     private Status status;
     private Date modificationDate;
     private List<Status> allStatus;
-    private List<Integer> categories;
+    private List<Category> categories;
+    private List<Integer> urgencies;
 
-    public List<Integer> getCategories() throws ServicesException {
-        List<Category> list = new ArrayList<Category>();
+    public List<Category> getCategories() throws ServicesException {
         try {
-            list = solidaridadServices.loadCategories();
-            categories = list.stream().map(Category::getId).collect(Collectors.toList());
+            categories = solidaridadServices.loadActiveCategories(true);
         } catch (ServicesException e) {
             throw e;
         }
         return categories;
     }
-
-    public List<Status> getAllStatus() {
-        return Arrays.asList(status.values());
-    }
-
 
     public List<Need> getNeeds() throws ServicesException {
         try {
@@ -63,21 +55,32 @@ public class NeedBean extends BasePageBean{
     public  void register(){
         try{
             solidaridadServices.registerNeed(need);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Added"));
         } catch (ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error","Add Error"));
         }
 
     }
 
-    public void save() throws ServicesException {
+
+    public void save(){
         register();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Added"));
         PrimeFaces.current().executeScript("PF('manageNeedDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-needs");
     }
 
     public void openNew() {
         this.need = new Need();
+    }
+
+
+    public List<Integer> getUrgencies() {
+        urgencies = Arrays.asList(new Integer[]{1, 2, 3, 4, 5});
+        return urgencies;
+    }
+
+    public List<Status> getAllStatus() {
+        return Arrays.asList(status.values());
     }
 
     public Need getNeed() {
