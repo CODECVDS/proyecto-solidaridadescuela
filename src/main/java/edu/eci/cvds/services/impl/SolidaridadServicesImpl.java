@@ -2,11 +2,9 @@ package edu.eci.cvds.services.impl;
 
 import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.entities.Need;
+import edu.eci.cvds.entities.Offer;
 import edu.eci.cvds.entities.User;
-import edu.eci.cvds.persistence.NeedDAO;
-import edu.eci.cvds.persistence.CategoryDAO;
-import edu.eci.cvds.persistence.PersistenceException;
-import edu.eci.cvds.persistence.UserDAO;
+import edu.eci.cvds.persistence.*;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
 
@@ -23,6 +21,9 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
 
     @Inject
     private UserDAO userDAO;
+
+    @Inject
+    private OfferDAO offerDAO;
 
     @Override
     public void registerCategory(Category c) throws ServicesException {
@@ -57,6 +58,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             needDAO.updateNeed(need);
         }catch(PersistenceException ex){
             throw new ServicesException("Error al actualizar la necesidad",ex);
+        }
+    }
+
+    @Override
+    public void registerOffer(Offer offer) throws ServicesException {
+        try {
+            offerDAO.registerOffer(offer);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al registrar oferta",ex);
         }
     }
 
