@@ -5,6 +5,9 @@ import edu.eci.cvds.entities.Need;
 import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.primefaces.PrimeFaces;
 
 import javax.faces.application.FacesMessage;
@@ -30,6 +33,7 @@ public class NeedBean extends BasePageBean{
     private Date creationDate;
     private Status status;
     private Date modificationDate;
+    private String username;
     private List<Status> allStatus;
     private List<Category> categories;
     private List<Integer> urgencies;
@@ -57,6 +61,7 @@ public class NeedBean extends BasePageBean{
             solidaridadServices.registerNeed(need);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Added"));
         } catch (ServicesException ex){
+            ex.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error","Add Error"));
         }
 
@@ -64,6 +69,9 @@ public class NeedBean extends BasePageBean{
 
 
     public void save(){
+        Subject currentUser = SecurityUtils.getSubject();
+        Session session = currentUser.getSession();
+        need.setUsername(session.getAttribute("username").toString());
         register();
         PrimeFaces.current().executeScript("PF('manageNeedDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-needs");
@@ -153,5 +161,13 @@ public class NeedBean extends BasePageBean{
 
     public void setModificationDate(Date modificationDate) {
         this.modificationDate = modificationDate;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
