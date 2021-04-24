@@ -1,4 +1,4 @@
-create table if not exists category(
+create table category(
 	id serial primary key,
 	name varchar(20) unique not null,
 	description varchar(100) not null,
@@ -7,7 +7,7 @@ create table if not exists category(
 	modificationdate timestamp not null
 );
 
-create table if not exists need(
+create table need(
 	id serial primary key,
 	category int,
 	name varchar(20) unique not null,
@@ -18,16 +18,31 @@ create table if not exists need(
 	modificationdate timestamp not null
 );
 
-create table if not exists users(
+create table users(
 	username varchar(20) primary key,
 	fullname varchar(50) not null,
 	status boolean not null,
-	mail varchar(30) not null,
-	userpassword varchar(20) not null,
+	mail varchar(50) not null,
+	userpassword varchar(70) not null,
 	usertype integer not null
 );
 
-create table if not exists rol(
+create table rol(
 	id serial primary key,
 	name varchar(20)
 );
+
+
+--Poblar
+
+insert into rol (name) values ('Administrator');
+insert into rol (name) values ('Student');
+insert into rol (name) values ('Teacher');
+insert into rol (name) values ('Graduate');
+insert into rol (name) values ('Administrative');
+
+--Delete
+drop table category;
+drop table need;
+drop table users;
+drop table rol;
