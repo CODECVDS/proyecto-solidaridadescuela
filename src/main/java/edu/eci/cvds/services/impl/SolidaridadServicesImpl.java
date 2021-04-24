@@ -71,6 +71,33 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
+    public void updateOffer(Offer offer) throws ServicesException {
+        try {
+            offerDAO.updateOffer(offer);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al actualizar oferta",ex);
+        }
+    }
+
+    @Override
+    public Offer loadOffer(int offerId) throws ServicesException {
+        try {
+            return offerDAO.loadOffer(offerId);
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar oferta",ex);
+        }
+    }
+
+    @Override
+    public List<Offer> loadOffers() throws ServicesException {
+        try {
+            return offerDAO.loadAllOffers();
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar ofertas",ex);
+        }
+    }
+
+    @Override
     public List<Need> loadNeeds() throws ServicesException{
         try{
             return needDAO.needs();
