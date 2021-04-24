@@ -1,114 +1,114 @@
 @import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
 
-    body {
-        background:  url("/resources/pattern.jpg");
+body {
+    background:  url("/resources/pattern.jpg");
+}
+
+.w-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Play', sans-serif;
+    font-style: Regular;
+    font-size: 80px;
+}
+
+.icon{
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 150px
     }
 
-    .w-text{
+.e-text{
         position: absolute;
-        top: 50%;
+        top: 65%;
         left: 50%;
         transform: translate(-50%, -50%);
         font-family: 'Play', sans-serif;
         font-style: Regular;
-        font-size: 80px;
+        font-size: 70px;
     }
 
-    .icon{
-            position: absolute;
-            top: 35%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 150px
-        }
+.parpadea {
+    animation-name: parpadeo;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
 
-    .e-text{
-            position: absolute;
-            top: 65%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Play', sans-serif;
-            font-style: Regular;
-            font-size: 70px;
-        }
+    -webkit-animation-name:parpadeo;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+}
 
-    .parpadea {
-        animation-name: parpadeo;
-        animation-duration: 2s;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
+@-moz-keyframes parpadeo{
+    0% { opacity: 1.0; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1.0; }
+}
 
-        -webkit-animation-name:parpadeo;
-        -webkit-animation-duration: 2s;
-        -webkit-animation-timing-function: linear;
-        -webkit-animation-iteration-count: infinite;
-    }
+@-webkit-keyframes parpadeo {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1.0; }
+}
 
-    @-moz-keyframes parpadeo{
-        0% { opacity: 1.0; }
-        50% { opacity: 0.2; }
-        100% { opacity: 1.0; }
-    }
+@keyframes parpadeo {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1.0; }
+}
 
-    @-webkit-keyframes parpadeo {
-        0% { opacity: 1.0; }
-        50% { opacity: 0.2; }
-        100% { opacity: 1.0; }
-   }
+.panel{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    display:inline-block;
+    overflow: auto;
+}
 
-    @keyframes parpadeo {
-        0% { opacity: 1.0; }
-        50% { opacity: 0.2; }
-        100% { opacity: 1.0; }
-    }
+.p-field{
+    margin: 5% 10%;
+}
 
-    .panel{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 30%;
-        display:inline-block;
-        overflow: auto;
-    }
+.input{
+    display:inline-block;
+    overflow: auto;
+    width: 100%;
 
-    .p-field{
-        margin: 5% 10%;
-    }
+}
 
-    .input{
-        display:inline-block;
-        overflow: auto;
-        width: 100%;
+.button{
+    display:inline-block;
+    overflow: auto;
+    width: 50%;
+}
 
-    }
-
-    .button{
-        display:inline-block;
-        overflow: auto;
-        width: 50%;
-    }
-
-    .ui-inputfield {
-        -webkit-writing-mode: horizontal-tb !important;
-        text-rendering: auto;
-        color: -internal-light-dark(black, white);
-        letter-spacing: normal;
-        word-spacing: normal;
-        text-transform: none;
-        text-indent: 0px;
-        text-shadow: none;
-        display: inline-block;
-        text-align: start;
-        appearance: auto;
-        background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
-        -webkit-rtl-ordering: logical;
-        cursor: text;
-        margin: 0em;
-        font: 400 13.3333px Arial;
-        padding: 1px 2px;
-        border-width: 2px;
-        border-style: inset;
-        border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-        border-image: initial;
-    }
+.ui-inputfield {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}

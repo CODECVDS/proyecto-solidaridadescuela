@@ -1,17 +1,20 @@
 package edu.eci.cvds;
 
+/*
 import static org.junit.Assert.assertTrue;
 
 import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.entities.Need;
 import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.ServicesException;
-import edu.eci.cvds.services.SolidaridadServices;
-import edu.eci.cvds.services.SolidaridadServicesFactory;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+ */
+
+import edu.eci.cvds.services.SolidaridadServices;
+import edu.eci.cvds.services.SolidaridadServicesFactory;
+import org.apache.ibatis.session.SqlSession;
 
 import javax.inject.Inject;
 import java.time.LocalDate;

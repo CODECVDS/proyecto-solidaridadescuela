@@ -1,22 +1,17 @@
 package edu.eci.cvds;
 
 
-import edu.eci.cvds.entities.Category;
-import edu.eci.cvds.entities.Need;
-import edu.eci.cvds.entities.Status;
+
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
 import edu.eci.cvds.services.SolidaridadServicesFactory;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.jdbc.Null;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Main {
 
