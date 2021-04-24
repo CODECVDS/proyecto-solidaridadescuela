@@ -46,7 +46,7 @@ create table offer(
 --foreign keys
 
 alter table need
-add constraint fk_category
+add constraint fk_need_category
 	foreign key(category)
 	references category(id);
 	
@@ -56,7 +56,7 @@ add constraint fk_usertype
 	references rol(id);
 	
 alter table offer
-add constraint fk_category
+add constraint fk_offer_category
 	foreign key(category)
 	references category(id);	
 
