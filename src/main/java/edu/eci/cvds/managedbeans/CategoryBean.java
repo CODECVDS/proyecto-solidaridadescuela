@@ -78,7 +78,6 @@ public class CategoryBean extends BasePageBean {
 
     public void openNew() {
         this.category = new Category();
-        category.setId(0);
         category.setStatus(true);
     }
 

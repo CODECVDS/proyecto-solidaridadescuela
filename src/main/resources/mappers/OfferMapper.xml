@@ -24,4 +24,24 @@
 
     </insert>
 
+    <!--updateOffer-->
+    <update parameterType="map" id="updateOffer">
+        UPDATE offer
+        SET
+        status = #{offer.status},
+        modificationDate = CURRENT_TIMESTAMP
+        WHERE id = #{offer.id}
+    </update>
+
+    <!--loadOffer-->
+    <select parameterType="map" id="loadOffer" resultMap="OfferResult">
+        SELECT id,category,name,description,creationdate,status,modificationdate,username
+        FROM offer
+        WHERE id = #{id}
+    </select>
+
+    <!--loadOffers-->
+    <select parameterType="map" id="loadAllOffers" resultMap="OfferResult">
+        SELECT * FROM offer
+    </select>
 </mapper>

@@ -19,6 +19,10 @@ public interface SolidaridadServices {
 
     public void registerOffer(Offer offer) throws ServicesException;
 
+    public void updateOffer(Offer offer) throws ServicesException;
+
+    public Offer loadOffer(int offerId) throws ServicesException;
+
     public Category loadCategory(int categoryId) throws ServicesException;
 
     public List<Category> loadCategories() throws ServicesException;
@@ -30,5 +34,7 @@ public interface SolidaridadServices {
     public Need loadNeed(int needId) throws ServicesException;
 
     public List<Category> loadActiveCategories(boolean status) throws ServicesException;
+
+    public List<Offer> loadOffers() throws ServicesException;
 
 }
