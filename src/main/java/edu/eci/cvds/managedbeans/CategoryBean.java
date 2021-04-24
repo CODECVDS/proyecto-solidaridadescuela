@@ -3,7 +3,6 @@ package edu.eci.cvds.managedbeans;
 import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.primefaces.PrimeFaces;
 
 import javax.faces.application.FacesMessage;
