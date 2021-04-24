@@ -17,8 +17,10 @@
 
     <!-- adicionar oferta -->
     <insert parameterType="map" id="addOffer">
+
         INSERT INTO offer (category,name,description,creationdate,status,modificationdate)
         VALUES (#{offer.category},#{offer.name},#{offer.description},CURRENT_TIMESTAMP,#{offer.status},CURRENT_TIMESTAMP)
+
     </insert>
 
 </mapper>
