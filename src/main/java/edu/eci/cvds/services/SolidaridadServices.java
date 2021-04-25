@@ -15,7 +15,7 @@ public interface SolidaridadServices {
 
     public void registerNeed(Need need) throws ServicesException;
 
-    public void updateNeed(Need need) throws ServicesException;
+    public void updateNeedStatus(Status status) throws ServicesException;
 
     public void registerOffer(Offer offer) throws ServicesException;
 
