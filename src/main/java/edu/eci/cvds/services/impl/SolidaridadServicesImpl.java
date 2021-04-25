@@ -1,9 +1,6 @@
 package edu.eci.cvds.services.impl;
 
-import edu.eci.cvds.entities.Category;
-import edu.eci.cvds.entities.Need;
-import edu.eci.cvds.entities.Offer;
-import edu.eci.cvds.entities.User;
+import edu.eci.cvds.entities.*;
 import edu.eci.cvds.persistence.*;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
