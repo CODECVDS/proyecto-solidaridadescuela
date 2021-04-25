@@ -10,10 +10,11 @@ public class Offer {
     private Date creationDate;
     private Status status;
     private Date modificationDate;
+    private String username;
 
     public Offer(){ super(); }
 
-    public Offer(int id, int category, String name, String description, Date creationDate, Status status, Date modificationDate) {
+    public Offer(int id, int category, String name, String description, Date creationDate, Status status, Date modificationDate, String username) {
         this.id = id;
         this.category = category;
         this.name = name;
@@ -21,6 +22,15 @@ public class Offer {
         this.creationDate = creationDate;
         this.status = status;
         this.modificationDate = modificationDate;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getId() {

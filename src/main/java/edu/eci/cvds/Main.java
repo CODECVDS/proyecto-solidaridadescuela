@@ -2,6 +2,8 @@ package edu.eci.cvds;
 
 
 
+import edu.eci.cvds.entities.Offer;
+import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
 import edu.eci.cvds.services.SolidaridadServicesFactory;
@@ -37,11 +39,8 @@ public class Main {
         SolidaridadServices services = factory.getSolidaridadServicios();
 
         //Category c = new Category("Category1", "Description");
-        //services.registerCategory(c);
+        System.out.println(services.loadOffers().size());
 
-        //Need n = new Need(3,"prueba","lo que sea", 4, Status.Closed);
-        //services.registerNeed(n);
-        //System.out.println(services.loadNeeds().get(0).getDescription());
         sqlss.commit();
         sqlss.close();
     }

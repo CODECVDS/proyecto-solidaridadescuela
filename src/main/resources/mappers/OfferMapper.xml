@@ -13,14 +13,35 @@
         <result property="creationDate" column="creationdate"/>
         <result property="status" column="status"/>
         <result property="modificationDate" column="modificationdate"/>
+        <result property="username" column="username"/>
     </resultMap>
 
     <!-- adicionar oferta -->
     <insert parameterType="map" id="addOffer">
 
-        INSERT INTO offer (category,name,description,creationdate,status,modificationdate)
-        VALUES (#{offer.category},#{offer.name},#{offer.description},CURRENT_TIMESTAMP,#{offer.status},CURRENT_TIMESTAMP)
+        INSERT INTO offer (category,name,description,creationdate,status,modificationdate,username)
+        VALUES (#{offer.category},#{offer.name},#{offer.description},CURRENT_TIMESTAMP,#{offer.status},CURRENT_TIMESTAMP,#{offer.username})
 
     </insert>
 
+    <!--updateOffer-->
+    <update parameterType="map" id="updateOffer">
+        UPDATE offer
+        SET
+        status = #{offer.status},
+        modificationDate = CURRENT_TIMESTAMP
+        WHERE id = #{offer.id}
+    </update>
+
+    <!--loadOffer-->
+    <select parameterType="map" id="loadOffer" resultMap="OfferResult">
+        SELECT id,category,name,description,creationdate,status,modificationdate,username
+        FROM offer
+        WHERE id = #{id}
+    </select>
+
+    <!--loadOffers-->
+    <select parameterType="map" id="loadAllOffers" resultMap="OfferResult">
+        SELECT * FROM offer
+    </select>
 </mapper>
