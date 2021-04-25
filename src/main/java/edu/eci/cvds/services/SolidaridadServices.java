@@ -1,9 +1,6 @@
 package edu.eci.cvds.services;
 
-import edu.eci.cvds.entities.Category;
-import edu.eci.cvds.entities.Need;
-import edu.eci.cvds.entities.Offer;
-import edu.eci.cvds.entities.User;
+import edu.eci.cvds.entities.*;
 
 import java.util.List;
 

@@ -87,6 +87,15 @@ public class NeedBean extends BasePageBean{
         return urgencies;
     }
 
+    public void updateNeedStatus(Status status) throws ServicesException{
+        try{
+            solidaridadServices.updateNeedStatus(status);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Status Updated"));
+        }catch(ServicesException ex){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Update Error"));
+        }
+    }
+
     public List<Status> getAllStatus() {
         return Arrays.asList(status.values());
     }
