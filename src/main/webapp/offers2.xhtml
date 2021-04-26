@@ -16,42 +16,34 @@
     <h:form id="form">
         <div class="card">
             <p:growl id="messages" showDetail="true"/>
-            <p:dataTable id="dt-offers" widgetVar="dtOffer" var="offer" value="#{offerBean.offers}"
-                         reflow="true" styleClass="offer-table" rowKey="#{offer.id}">
-                <p:column headerText="Id">
-                    <h:outputText value="#{offer.id}"/>
-                </p:column>
-                <p:column headerText="Category">
-                    <h:outputText value="#{offerBean.getC(offer.category).name}"/>
-                </p:column>
-                <p:column headerText="Name">
-                    <h:outputText value="#{offer.name}"/>
-                </p:column>
-                <p:column headerText="Description">
-                    <h:outputText value="#{offer.description}"/>
-                </p:column>
-                <p:column headerText="Creation Date">
-                    <h:outputText value="#{offer.creationDate}"/>
-                </p:column>
-                <p:column headerText="Status">
-                    <h:outputText value="#{offer.status}"/>
-                </p:column>
-                <p:column headerText="Modification Date">
-                    <h:outputText value="#{offer.modificationDate}"/>
-                </p:column>
-                <p:column headerText="User">
-                    <h:outputText value="#{offer.username}"/>
-                </p:column>
-                <p:column exportable="false">
-                    <p:commandButton icon="pi pi-pencil" update=":form:manage-offer-content"
-                                     oncomplete="PF('manageOfferDialog').show()"
-                                     styleClass="edit-button rounded-button ui-button-success" process="@this">
-                        <f:setPropertyActionListener value="#{offer}" target="#{offerBean.offer}"/>
-                        <f:setPropertyActionListener value="false" target="#{offerBean.hide}"/>
-                        <p:resetInput target=":form:manage-offer-content"/>
-                    </p:commandButton>
-                </p:column>
-            </p:dataTable>
+            <p:dataScroller id="dt-offers" widgetVar="dtOffer" var="offer" value="#{offerBean.offers}"
+                            reflow="true" rowKey="#{need.id}">
+
+                <p:card style="margin: 5px 0px; padding:0px; font-family: 'Raleway', sans-serif; font-weight: regular;">
+                    <table border="0">
+                        <tbody>
+                        <tr>
+                            <td style="padding-left:50px;" width="800px">
+                                <h3 style="margin-top:0px; text-transform: uppercase;color:#2196f3;">#{offer.name}</h3>
+                                <h:outputText value="#{offer.description}"/><br/><br/>
+                                <i class="pi pi-tag" style="font-size: 15px; margin-right: .5rem;"></i>
+                                <h:outputText style="color: #2196f3;" value="#{offerBean.getC(offer.category).name}"/><br/>
+                            </td>
+                            <td style="padding-left:200px;" width="400px">
+                                <p:rating readonly="true" value="1"/><br/>
+                                <h:outputText style="margin-right:30px; color: #689f38; text-transform: uppercase; font-weight: bold;" value=" #{offer.status}"/>
+                                <p:commandButton icon="pi pi-pencil" styleClass="edit-button rounded-button ui-button-success"
+                                                 update=":form:manage-offer-content" oncomplete="PF('manageOfferDialog').show()" process="@this">
+                                    <f:setPropertyActionListener value="#{offer}" target="#{offerBean.offer}"/>
+                                    <f:setPropertyActionListener value="false" target="#{offerBean.hide}"/>
+                                    <p:resetInput target=":form:manage-offer-content"/>
+                                </p:commandButton>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </p:card>
+            </p:dataScroller>
             <p:dialog header="Offer Details" showEffect="fade" modal="true"
                       widgetVar="manageOfferDialog" responsive="true">
                 <p:outputPanel id="manage-offer-content" class="ui-fluid">

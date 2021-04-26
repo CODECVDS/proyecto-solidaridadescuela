@@ -38,10 +38,13 @@ public class OfferBean  extends BasePageBean {
     private List<Category> categories;
     private List<Status> allStatus;
     private boolean hide;
+    private Category c;
+    private Subject currentUser;
+    private Session session;
 
     public void save(){
-        Subject currentUser = SecurityUtils.getSubject();
-        Session session = currentUser.getSession();
+        currentUser = SecurityUtils.getSubject();
+        session = currentUser.getSession();
         offer.setUsername(session.getAttribute("username").toString());
         if (this.offer.getId() == 0) {
 
@@ -57,9 +60,16 @@ public class OfferBean  extends BasePageBean {
     }
 
     public void update(){
+        currentUser = SecurityUtils.getSubject();
+        session = currentUser.getSession();
         try {
-            solidaridadServices.updateOffer(offer);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Updated"));
+            if (offer.getUsername().equals(session.getAttribute("username"))) {
+                solidaridadServices.updateOffer(offer);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Updated"));
+            }
+            else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Update Error"));
+            }
         } catch (ServicesException ex){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Update Error"));
         }
@@ -73,6 +83,12 @@ public class OfferBean  extends BasePageBean {
         }
     }
 
+    public Category getC(int cId) throws ServicesException {
+        System.out.println(cId);
+        System.out.println(solidaridadServices.loadCategory(cId));
+        System.out.println(solidaridadServices.loadCategory(cId).getName());
+        return solidaridadServices.loadCategory(cId);
+    }
 
     public void setOffer(Offer offer) {
         this.offer = offer;

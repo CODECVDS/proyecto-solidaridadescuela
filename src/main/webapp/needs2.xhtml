@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<h:head>
+    <title>Needs</title>
+    <link rel="stylesheet" href="/resources/style.css"/>
+</h:head>
+<h:body>
+    <ui:include src="menuA.xhtml"></ui:include>
+    <h:form id="form">
+        <div class="card need">
+            <p:growl id="messages" showDetail="true"/>
+            <p:dataScroller id="dt-needs" widgetVar="dtNeed" var="need" value="#{needBean.needs}"
+                         reflow="true" rowKey="#{need.id}">
+
+                <p:card style="margin: 5px 0px; padding:0px; font-family: 'Raleway', sans-serif; font-weight: regular;">
+                <table border="0">
+                    <tbody>
+                    <tr>
+                        <td style="padding-left:50px;" width="800px">
+                            <h3 style="margin-top:0px; text-transform: uppercase;color:#2196f3;">#{need.name}</h3>
+                            <h:outputText value="#{need.description}"/><br/><br/>
+                            <i class="pi pi-tag" style="font-size: 15px; margin-right: .5rem;"></i>
+                            <h:outputText style="color: #2196f3;" value="#{needBean.getC(need.category).name}"/><br/>
+                        </td>
+                        <td style="padding-left:200px" width="400px">
+                            <p:rating readonly="true" value="#{need.urgency}"/><br/>
+                            <h:outputText style="margin-right:30px; color: #689f38; text-transform: uppercase; font-weight: bold;" value=" #{need.status}"/>
+                            <p:commandButton icon="pi pi-pencil" styleClass="edit-button rounded-button ui-button-success">
+                            </p:commandButton>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                </p:card>
+
+            </p:dataScroller>
+            <p:dialog header="Need Details" showEffect="fade" modal="true"
+                      widgetVar="manageNeedDialog" responsive="true">
+                <p:outputPanel id="manage-need-content" class="ui-fluid">
+                    <p:outputPanel rendered="#{not empty needBean.need}">
+                        <div class="p-field">
+                            <p:outputLabel for="category" value="Category:"/>
+                            <p:selectOneMenu id="category" value="#{needBean.need.category}">
+                                <f:selectItems value="#{needBean.categories}" var="c"
+                                               itemValue="#{c.id}" itemLabel="#{c.name}"/>
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="name">Name</p:outputLabel>
+                            <p:inputText id="name" value="#{needBean.need.name}"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="description">Description</p:outputLabel>
+                            <p:inputTextarea id="description" value="#{needBean.need.description}"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="urgency" value="Urgency:"/>
+                            <p:selectOneMenu id="urgency" value="#{needBean.need.urgency}">
+                                <f:selectItems value="#{needBean.urgencies}"/>
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="status" value="Status:"/>
+                            <p:selectOneMenu id="status" value="#{needBean.need.status}">
+                                <f:selectItems value="#{needBean.allStatus}"/>
+                            </p:selectOneMenu>
+                        </div>
+                    </p:outputPanel>
+                </p:outputPanel>
+                <f:facet name="footer">
+                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{needBean.save}"
+                                     update="manage-need-content" process="manage-need-content @this"/>
+                    <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageNeedDialog').hide()"
+                                     class="ui-button-secondary"/>
+                </f:facet>
+            </p:dialog>
+        </div>
+        <p:commandButton class="rounded-button ui-button-success a-button" style="width: 50px;height: 50px;" icon="pi pi-plus" actionListener="#{needBean.openNew}"
+                         update=":form:manage-need-content" oncomplete="PF('manageNeedDialog').show()">
+            <p:resetInput target=":form:manage-need-content"/>
+        </p:commandButton>
+    </h:form>
+</h:body>
+</html>
