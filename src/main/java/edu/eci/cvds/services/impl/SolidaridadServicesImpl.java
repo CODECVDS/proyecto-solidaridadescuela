@@ -95,6 +95,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
+    public int loadParamNOffer() throws ServicesException {
+        try {
+            return offerDAO.loadParamNOffer();
+        } catch (PersistenceException ex){
+            throw new ServicesException("Error al cargar parametro NOffer",ex);
+        }
+    }
+
+    @Override
     public List<Need> loadNeeds() throws ServicesException{
         try{
             return needDAO.needs();

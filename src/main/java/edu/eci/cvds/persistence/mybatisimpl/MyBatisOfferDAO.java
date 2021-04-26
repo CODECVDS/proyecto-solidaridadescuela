@@ -50,4 +50,13 @@ public class MyBatisOfferDAO implements OfferDAO {
             throw new PersistenceException("Error al cargar las ofertas",exception);
         }
     }
+
+    @Override
+    public int loadParamNOffer() throws PersistenceException {
+        try {
+            return offerMapper.loadParamNOffer();
+        } catch (org.apache.ibatis.exceptions.PersistenceException exception){
+            throw new PersistenceException("Error al cargar parametro nOffer",exception);
+        }
+    }
 }
