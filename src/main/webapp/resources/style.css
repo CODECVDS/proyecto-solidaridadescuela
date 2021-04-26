@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap');
 
 body {
-    background:  url("/resources/pattern.jpg");
+    background: url("/resources/pattern.jpg");
 }
+
 
 .w-text{
     position: absolute;
@@ -80,7 +83,6 @@ body {
     display:inline-block;
     overflow: auto;
     width: 100%;
-
 }
 
 .button{
@@ -89,26 +91,71 @@ body {
     width: 50%;
 }
 
-.ui-inputfield {
-    -webkit-writing-mode: horizontal-tb !important;
-    text-rendering: auto;
-    color: -internal-light-dark(black, white);
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    appearance: auto;
-    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
-    -webkit-rtl-ordering: logical;
-    cursor: text;
-    margin: 0em;
-    font: 400 13.3333px Arial;
-    padding: 1px 2px;
-    border-width: 2px;
-    border-style: inset;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
+
+body .ui-dataview .ui-dataview-content {
+    position:absolute;
+    top:12%;
+    left: 17%;
+    border: 0 none;
+    background: transparent;
+    color: #495057;
+    padding: 0;
 }
+
+body .ui-dataview .ui-dataview-header {
+    display: none;
+}
+
+.ui-md-4{
+    width:40%;
+    margin: 0px 20px;
+}
+
+body .ui-card {
+    background: #ffffff;
+    border-radius: 20px;
+}
+
+.a-button{
+    position:fixed;
+    right: 30px;
+    bottom: 30px;
+}
+
+.topbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    min-height: 60px;
+    z-index: 9999;
+    background-color: #2196F3;
+    margin-left:0%;
+}
+
+body .ui-tabmenu .ui-tabmenu-nav {
+    margin: 10px 0px;
+    padding: 0px 25px;
+    background: #ffffff;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    position: relative;
+    height: 70px;
+    border-radius: 50px;
+}
+
+.ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
+        text-align: center;
+}
+
+.customPanelGrid .ui-panelgrid-content {
+    align-items: center;
+}
+
+body .ui-datascroller .ui-datascroller-content {
+  border: 0px;
+  background: transparent;
+  color: #495057;
+  padding: 1rem; }

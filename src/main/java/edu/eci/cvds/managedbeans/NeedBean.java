@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+
 @SessionScoped
 @ManagedBean(name = "needBean")
 public class NeedBean extends BasePageBean{
@@ -37,6 +38,7 @@ public class NeedBean extends BasePageBean{
     private List<Status> allStatus;
     private List<Category> categories;
     private List<Integer> urgencies;
+    private Category c;
 
     public List<Category> getCategories() throws ServicesException {
         try {
@@ -67,7 +69,6 @@ public class NeedBean extends BasePageBean{
 
     }
 
-
     public void save(){
         Subject currentUser = SecurityUtils.getSubject();
         Session session = currentUser.getSession();
@@ -81,6 +82,9 @@ public class NeedBean extends BasePageBean{
         this.need = new Need();
     }
 
+    public Category getC(int cId) throws ServicesException {
+        return solidaridadServices.loadCategory(cId);
+    }
 
     public List<Integer> getUrgencies() {
         urgencies = Arrays.asList(new Integer[]{1, 2, 3, 4, 5});
