@@ -1,9 +1,6 @@
 package edu.eci.cvds.services;
 
-import edu.eci.cvds.entities.Category;
-import edu.eci.cvds.entities.Need;
-import edu.eci.cvds.entities.Offer;
-import edu.eci.cvds.entities.User;
+import edu.eci.cvds.entities.*;
 
 import java.util.List;
 
@@ -15,7 +12,7 @@ public interface SolidaridadServices {
 
     public void registerNeed(Need need) throws ServicesException;
 
-    public void updateNeed(Need need) throws ServicesException;
+    public void updateNeedStatus(Status status) throws ServicesException;
 
     public void registerOffer(Offer offer) throws ServicesException;
 

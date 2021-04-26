@@ -41,4 +41,12 @@
         FROM need n
         WHERE n.id = #{id}
     </select>
+
+    <!--updateNeedStatus-->
+    <update parameterType="map" id="modify">
+        UPDATE need
+        SET
+        status = #{need.status}
+        WHERE id = #{need.id}
+    </update>
 </mapper>

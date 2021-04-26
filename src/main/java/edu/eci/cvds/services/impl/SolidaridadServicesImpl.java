@@ -1,9 +1,6 @@
 package edu.eci.cvds.services.impl;
 
-import edu.eci.cvds.entities.Category;
-import edu.eci.cvds.entities.Need;
-import edu.eci.cvds.entities.Offer;
-import edu.eci.cvds.entities.User;
+import edu.eci.cvds.entities.*;
 import edu.eci.cvds.persistence.*;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
@@ -53,9 +50,9 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
-    public void updateNeed(Need need) throws ServicesException {
+    public void updateNeedStatus(Status status) throws ServicesException {
         try{
-            needDAO.updateNeed(need);
+            needDAO.updateNeedStatus(status);
         }catch(PersistenceException ex){
             throw new ServicesException("Error al actualizar la necesidad",ex);
         }

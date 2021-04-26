@@ -103,6 +103,8 @@ drop table users;
 drop table rol;
 drop table offer;
 drop table nmax;
-*/ 
 
-            
+--Poblar necesidad
+insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'materiales','Se necesita materiales para EG1',3,'2021/04/24','Active','2021/04/24','user');
+insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'mantenimiento','Se hacer mantenimiento en los equipos del b0',5,'2021/04/24','Active','2021/04/24','user');
+*/
