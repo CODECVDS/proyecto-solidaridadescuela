@@ -34,4 +34,6 @@ public interface SolidaridadServices {
 
     public List<Offer> loadOffers() throws ServicesException;
 
+    public int loadParamNOffer() throws ServicesException;
+
 }

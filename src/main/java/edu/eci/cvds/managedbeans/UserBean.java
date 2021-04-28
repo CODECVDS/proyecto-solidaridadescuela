@@ -24,8 +24,8 @@ public class UserBean implements Serializable {
     private String userpassword;
     private String redirectURL="/faces/signin.xhtml";
     private Subject currentUser;
-    private String path;
     private boolean rememberMe=false;
+
     public void signin(){
         UsernamePasswordToken token = new UsernamePasswordToken(getUsername(),new Sha256Hash(getUserpassword()).toHex());
         currentUser = SecurityUtils.getSubject();
@@ -37,10 +37,8 @@ public class UserBean implements Serializable {
             session.setAttribute("username",username);
             session.setAttribute("currentUser",currentUser);
             if(currentUser.hasRole("Administrator")){
-                setPath("homeA");
                 facesContext.getExternalContext().redirect("/faces/homeA.xhtml");
             }else if(currentUser.hasRole("Student")){
-                setPath("homeB");
                 facesContext.getExternalContext().redirect("/faces/homeB.xhtml");
             }
         } catch ( UnknownAccountException e ) {
@@ -71,14 +69,6 @@ public class UserBean implements Serializable {
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 
     public String getUsername() {
