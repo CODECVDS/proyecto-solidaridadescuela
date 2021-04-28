@@ -15,6 +15,7 @@
     <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
         <div class="card need">
+            <p:button outcome="needs" value="Reporte Necesidades" icon="pi pi-external-link" iconPos="right" />
             <p:growl id="messages" showDetail="true"/>
             <p:dataScroller id="dt-needs" widgetVar="dtNeed" var="need" value="#{needBean.needs}"
                          reflow="true" rowKey="#{need.id}">
