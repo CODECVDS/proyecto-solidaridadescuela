@@ -47,7 +47,7 @@ public class OfferBean  extends BasePageBean {
         session = currentUser.getSession();
         offer.setUsername(session.getAttribute("username").toString());
         if (this.offer.getId() == 0) {
-
+            register();
         }
         else {
             update();
@@ -57,6 +57,16 @@ public class OfferBean  extends BasePageBean {
     }
     public void openNew() {
         this.offer = new Offer();
+    }
+
+    public  void register(){
+        try {
+            solidaridadServices.registerOffer(offer);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Added"));
+        } catch (ServicesException ex){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error","Add Error"));
+            ex.printStackTrace();
+        }
     }
 
     public void update(){
