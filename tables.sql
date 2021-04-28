@@ -104,7 +104,40 @@ drop table rol;
 drop table offer;
 drop table nmax;
 
+--Poblar offer
+
 --Poblar necesidad
 insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'materiales','Se necesita materiales para EG1',3,'2021/04/24','Active','2021/04/24','user');
 insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'mantenimiento','Se hacer mantenimiento en los equipos del b0',5,'2021/04/24','Active','2021/04/24','user');
+
+
+create or replace procedure confirm_noffers(cat int, n varchar, des varchar, st varchar, usname varchar)
+language plpgsql
+as $$
+
+	declare
+		noffers	integer;
+		ncount	integer;	
+	
+	begin
+		--noffers := 
+		select nconfigoffer into noffers from parameters;
+		--ncount := 
+		select count(*) into ncount from offer where username = 'admin';
+				
+	
+		if (noffers > ncount) then
+			INSERT INTO offer (category,name,description,creationdate,status,modificationdate,username)
+        	VALUES (cat,n,des,CURRENT_TIMESTAMP,st,CURRENT_TIMESTAMP,usname);			
+		
+		elsif (noffers <= ncount) then
+			raise exception 'numero maximo de offertas registradas';
+		
+		end if;
+		
+	end;
+
+$$
+
 */
+
