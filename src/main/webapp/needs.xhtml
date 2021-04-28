@@ -14,6 +14,7 @@
 <h:body>
     <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
+        <p:button outcome="needs2" value="Volver" icon="pi pi-arrow-left" iconPos="left" />
         <div class="card need">
             <p:growl id="messages" showDetail="true"/>
             <p:dataTable id="dt-needs" widgetVar="dtNeed" var="need" value="#{needBean.needs}"

@@ -84,9 +84,6 @@ public class OfferBean  extends BasePageBean {
     }
 
     public Category getC(int cId) throws ServicesException {
-        System.out.println(cId);
-        System.out.println(solidaridadServices.loadCategory(cId));
-        System.out.println(solidaridadServices.loadCategory(cId).getName());
         return solidaridadServices.loadCategory(cId);
     }
 
