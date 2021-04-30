@@ -1,14 +1,8 @@
 package edu.eci.cvds.services;
 
 import com.google.inject.Injector;
-import edu.eci.cvds.persistence.CategoryDAO;
-import edu.eci.cvds.persistence.NeedDAO;
-import edu.eci.cvds.persistence.OfferDAO;
-import edu.eci.cvds.persistence.UserDAO;
-import edu.eci.cvds.persistence.mybatisimpl.MyBatisCategoryDAO;
-import edu.eci.cvds.persistence.mybatisimpl.MyBatisNeedDAO;
-import edu.eci.cvds.persistence.mybatisimpl.MyBatisOfferDAO;
-import edu.eci.cvds.persistence.mybatisimpl.MyBatisUserDAO;
+import edu.eci.cvds.persistence.*;
+import edu.eci.cvds.persistence.mybatisimpl.*;
 import edu.eci.cvds.services.impl.SolidaridadServicesImpl;
 import org.mybatis.guice.XMLMyBatisModule;
 
@@ -35,6 +29,7 @@ public class SolidaridadServicesFactory {
                 bind(UserDAO.class).to(MyBatisUserDAO.class);
                 bind(NeedDAO.class).to(MyBatisNeedDAO.class);
                 bind(OfferDAO.class).to(MyBatisOfferDAO.class);
+                bind(AnswerDAO.class).to(MyBatisAnswerDAO.class);
                 bind(SolidaridadServices.class).to(SolidaridadServicesImpl.class);
             }
         });
