@@ -16,12 +16,11 @@ import java.util.List;
 
 @ManagedBean(name="answerBean")
 @SessionScoped
-public class AnswerBean {
+public class AnswerBean extends BasePageBean {
 
     @Inject
     private SolidaridadServices solidaridadServices;
     private Answer answer;
-
     private int id;
     private String name;
     private Date creationDate;
@@ -31,13 +30,12 @@ public class AnswerBean {
 
     public List<Answer> getAnswers() throws ServicesException{
         try{
-            System.out.println("get"+solidaridadServices.loadAnswers().size());
             return solidaridadServices.loadAnswers();
         }catch (ServicesException e){
             throw e;
         }
-
     }
+
     public void register(){
         try {
             solidaridadServices.registerAnswer(answer);
@@ -48,8 +46,18 @@ public class AnswerBean {
         PrimeFaces.current().executeScript("PF('manageAnswerDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-answers");
     }
+
+
     public void openNew(){
         this.answer = new Answer();
+    }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
 
     public int getId() {
