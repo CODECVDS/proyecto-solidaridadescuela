@@ -27,15 +27,11 @@
                                 <h3 style="margin-top:0px; text-transform: uppercase;color:#2196f3;">#{answer.name}</h3>
                                 <h:outputText value="#{answer.comments}"/><br/><br/>
                                 <i class="pi pi-tag" style="font-size: 15px; margin-right: .5rem;"></i>
-                                <h:outputText style="color: #2196f3;" value="#{answer.offer}" rendered="#{!answer.offer==0}"/><br/>
+                                <h:outputText style="color: #2196f3;" value="Offer: #{answer.offer}" rendered="#{answer.offer!=0}"/>
+                                <h:outputText style="color: #2196f3;" value="Need: #{answer.need}" rendered="#{answer.need!=0}"/>
                             </td>
                             <td style="padding-left:200px;" width="400px">
                                 <h:outputText style="margin-right:30px; color: #689f38; text-transform: uppercase; font-weight: bold;" value=" #{answer.creationDate}"/>
-                                <p:commandButton icon="pi pi-pencil" styleClass="edit-button rounded-button ui-button-success"
-                                                 update=":form:manage-answer-content" oncomplete="PF('manageAnswerDialog').show()" process="@this">
-                                    <f:setPropertyActionListener value="#{answer}" target="#{answerBean.answer}"/>
-                                    <p:resetInput target=":form:manage-answer-content"/>
-                                </p:commandButton>
                             </td>
                         </tr>
                         </tbody>
@@ -49,6 +45,10 @@
                         <div class="p-field">
                             <p:outputLabel for="offer" value="Offer:" />
                             <p:inputText id="offer" value="#{answerBean.answer.offer}"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="need" value="Need:" />
+                            <p:inputText id="need" value="#{answerBean.answer.need}"/>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="name" >Name</p:outputLabel>
