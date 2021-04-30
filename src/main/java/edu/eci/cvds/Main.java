@@ -43,7 +43,7 @@ public class Main {
         //System.out.println(services.loadOffers().size());
         //Answer a = new Answer(12,"Carlos",null,"los que sea manda decir kevin",0,5);
         //services.registerAnswer(a);
-        System.out.println(services.loadAnswers().size());
+        System.out.println(services.loadAnswers().get(0).getName());
         sqlss.commit();
         sqlss.close();
     }
