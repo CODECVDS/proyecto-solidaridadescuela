@@ -1,8 +1,7 @@
 package edu.eci.cvds;
 
-/*
 import static org.junit.Assert.assertTrue;
-
+import edu.eci.cvds.entities.Answer;
 import edu.eci.cvds.entities.Category;
 import edu.eci.cvds.entities.Need;
 import edu.eci.cvds.entities.Status;
@@ -10,19 +9,14 @@ import edu.eci.cvds.services.ServicesException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
- */
 
 import edu.eci.cvds.services.SolidaridadServices;
 import edu.eci.cvds.services.SolidaridadServicesFactory;
 import org.apache.ibatis.session.SqlSession;
-
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.Date;
 
-/**
- * Unit test for simple App.
- */
 public class AppTest 
 {
     @Inject
@@ -85,6 +79,17 @@ public class AppTest
             solidaridadServices.registerNeed(necesidadtest);
             Need necesidadresult = solidaridadServices.loadNeed(1);
             Assert.assertTrue(necesidadresult != null);
+        } catch (ServicesException ex){
+            assertTrue(false);
+        }
+    }
+
+    @Test
+    public void DeberiaRegistrarRespuestas(){
+        try {
+            Answer respuesta = new Answer(1,"RespuestaTest",null,"Comentario Prueba",1,0);
+            solidaridadServices.registerAnswer(respuesta);
+            assertTrue(true);
         } catch (ServicesException ex){
             assertTrue(false);
         }

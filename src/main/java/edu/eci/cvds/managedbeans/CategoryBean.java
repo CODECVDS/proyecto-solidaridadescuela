@@ -66,7 +66,7 @@ public class CategoryBean extends BasePageBean {
     }
 
     public void save() throws ServicesException {
-        if (this.category.getId() == 0) {
+        if (this.category.getId() ==    0) {
             register();
         }
         else {
