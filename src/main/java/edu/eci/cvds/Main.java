@@ -2,6 +2,7 @@ package edu.eci.cvds;
 
 
 
+import edu.eci.cvds.entities.Answer;
 import edu.eci.cvds.entities.Offer;
 import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.ServicesException;
@@ -39,8 +40,10 @@ public class Main {
         SolidaridadServices services = factory.getSolidaridadServicios();
 
         //Category c = new Category("Category1", "Description");
-        System.out.println(services.loadOffers().size());
-
+        //System.out.println(services.loadOffers().size());
+        //Answer a = new Answer(12,"Carlos",null,"los que sea manda decir kevin",0,5);
+        //services.registerAnswer(a);
+        System.out.println(services.loadAnswers().size());
         sqlss.commit();
         sqlss.close();
     }

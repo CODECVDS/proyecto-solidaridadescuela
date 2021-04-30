@@ -36,4 +36,7 @@ public interface SolidaridadServices {
 
     public int loadParamNOffer() throws ServicesException;
 
+    public List<Answer>  loadAnswers() throws ServicesException;
+
+    public void registerAnswer(Answer answer) throws ServicesException;
 }

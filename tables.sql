@@ -52,6 +52,17 @@ create table if not exists parameters(
 	nconfigoffer int not null
 );
 
+create table if not exists Answer(
+	id serial primary key,
+	name varchar(20) not null,
+	creationDate timestamp not null,
+	coments varchar(500) not null,
+	offer int not null,
+	need int not null
+	
+);
+
+
 
 --foreign keys
 

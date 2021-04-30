@@ -22,6 +22,9 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     @Inject
     private OfferDAO offerDAO;
 
+    @Inject
+    private AnswerDAO answerDAO;
+
     @Override
     public void registerCategory(Category c) throws ServicesException {
         try {
@@ -104,6 +107,26 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
+    public List<Answer> loadAnswers() throws ServicesException {
+        try {
+            return answerDAO.answers();
+        } catch (PersistenceException ex){
+            throw new ServicesException("Error al cargar las respuestas ",ex);
+        }
+    }
+
+    @Override
+    public void registerAnswer(Answer answer) throws ServicesException {
+        try {
+            answerDAO.save(answer);
+        } catch (PersistenceException ex){
+            ex.printStackTrace();
+            throw new ServicesException("Error al cargar las respuestas ",ex);
+        }
+
+    }
+
+    @Override
     public List<Need> loadNeeds() throws ServicesException{
         try{
             return needDAO.needs();
@@ -156,6 +179,8 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             throw new ServicesException("Error al cargar el usuario",ex);
         }
     }
+
+
 
 
 }
