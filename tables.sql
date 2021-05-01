@@ -52,15 +52,16 @@ create table if not exists parameters(
 	nconfigoffer int not null
 );
 
-create table if not exists Answer(
+create table if not exists answer(
 	id serial primary key,
 	name varchar(20) not null,
 	creationDate timestamp not null,
 	coments varchar(500) not null,
-	offer int not null,
-	need int not null
+	answerTo varchar(5) not null,
+	toId int not null
 	
 );
+
 
 
 
@@ -114,6 +115,7 @@ drop table users;
 drop table rol;
 drop table offer;
 drop table nmax;
+drop table answer;
 
 --Poblar offer
 
