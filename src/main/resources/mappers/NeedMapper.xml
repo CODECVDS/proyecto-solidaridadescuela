@@ -36,7 +36,7 @@
         n.urgency,
         n.creationDate,
         n.status,
-        n.modificationDate
+        n.modificationDate,
         n.username
         FROM need n
         WHERE n.id = #{id}

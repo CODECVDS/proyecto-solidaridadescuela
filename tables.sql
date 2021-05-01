@@ -150,5 +150,34 @@ as $$
 
 $$
 
-*/
 
+
+create or replace procedure confirm_nneeds(cat int, n varchar, des varchar, st varchar, usname varchar)
+language plpgsql
+as $$
+
+	declare
+		nneeds	integer;
+		ncount	integer;	
+	
+	begin
+		--nneeds := 
+		select nconfigneed into nneeds from parameters;
+		--ncount := 
+		select count(*) into ncount from need where username = 'admin';
+				
+	
+		if (nneeds > ncount) then
+			INSERT INTO need (category,name,description,creationdate,status,modificationdate,username)
+        	VALUES (cat,n,des,CURRENT_TIMESTAMP,st,CURRENT_TIMESTAMP,usname);			
+		
+		elsif (nneeds <= ncount) then
+			raise exception 'numero maximo de necesidades registradas';
+		
+		end if;
+		
+	end;
+
+$$
+
+*/
