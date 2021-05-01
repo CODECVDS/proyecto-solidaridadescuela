@@ -10,7 +10,7 @@ public interface NeedMapper {
 
     public void addNeed(@Param("need") Need need);
 
-    public void modify(@Param("status") Status status);
+    public void modify(@Param("need") Need need);
 
     public List<Need> loadNeeds();
 
