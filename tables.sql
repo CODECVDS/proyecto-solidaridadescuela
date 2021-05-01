@@ -52,15 +52,16 @@ create table if not exists parameters(
 	nconfigoffer int not null
 );
 
-create table if not exists Answer(
+create table if not exists answer(
 	id serial primary key,
 	name varchar(20) not null,
 	creationDate timestamp not null,
 	coments varchar(500) not null,
-	offer int not null,
-	need int not null
+	answerTo varchar(5) not null,
+	toId int not null
 	
 );
+
 
 
 
@@ -114,13 +115,13 @@ drop table users;
 drop table rol;
 drop table offer;
 drop table nmax;
+drop table answer;
 
 --Poblar offer
 
 --Poblar necesidad
 insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'materiales','Se necesita materiales para EG1',3,'2021/04/24','Active','2021/04/24','user');
 insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'mantenimiento','Se hacer mantenimiento en los equipos del b0',5,'2021/04/24','Active','2021/04/24','user');
-
 
 create or replace procedure confirm_noffers(cat int, n varchar, des varchar, st varchar, usname varchar)
 language plpgsql
@@ -134,7 +135,7 @@ as $$
 		--noffers := 
 		select nconfigoffer into noffers from parameters;
 		--ncount := 
-		select count(*) into ncount from offer where username = 'admin';
+		select count(*) into ncount from offer where username = usname;
 				
 	
 		if (noffers > ncount) then
@@ -150,5 +151,33 @@ as $$
 
 $$
 
-*/
 
+create or replace procedure confirm_nneeds(cat int, n varchar, des varchar,urg int, st varchar, usname varchar)
+language plpgsql
+as $$
+
+	declare
+		nneeds	integer;
+		ncount	integer;	
+	
+	begin
+		--nneeds := 
+		select nconfigneed into nneeds from parameters;
+		--ncount := 
+		select count(*) into ncount from need where username = usname;
+				
+	
+		if (nneeds > ncount) then
+			INSERT INTO need (category,name,description,urgency,creationdate,status,modificationdate,username)
+        	VALUES (cat,n,des,urg,CURRENT_TIMESTAMP,st,CURRENT_TIMESTAMP,usname);			
+		
+		elsif (nneeds <= ncount) then
+			raise exception 'numero maximo de necesidades registradas';
+		
+		end if;
+		
+	end;
+
+$$
+
+*/

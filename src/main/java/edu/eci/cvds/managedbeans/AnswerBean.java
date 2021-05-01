@@ -24,8 +24,8 @@ public class AnswerBean extends BasePageBean {
     private String name;
     private Date creationDate;
     private String comments;
-    private int offer;
-    private int need;
+    private int answerTo;
+    private int toId;
 
     public List<Answer> getAnswers() throws ServicesException{
         try{
@@ -35,15 +35,28 @@ public class AnswerBean extends BasePageBean {
         }
     }
 
-    public void register(){
+    public void registerNeed(int needId){
         try {
+            answer.setAnswerTo("Need");
+            answer.setToId(needId);
             solidaridadServices.registerAnswer(answer);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Answer Added"));
         }catch (ServicesException e){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error","Add Error"));
         }
         PrimeFaces.current().executeScript("PF('manageAnswerDialog').hide()");
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-answers");
+    }
+
+    public void registerOffer(int offerId){
+        try {
+            answer.setAnswerTo("Offer");
+            answer.setToId(offerId);
+            solidaridadServices.registerAnswer(answer);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Answer Added"));
+        }catch (ServicesException e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error","Add Error"));
+        }
+        PrimeFaces.current().executeScript("PF('manageAnswerDialog').hide()");
     }
 
 
@@ -91,19 +104,19 @@ public class AnswerBean extends BasePageBean {
         this.comments = comments;
     }
 
-    public int getOffer() {
-        return offer;
+    public int getAnswerTo() {
+        return answerTo;
     }
 
-    public void setOffer(int offer) {
-        this.offer = offer;
+    public void setAnswerTo(int answerTo) {
+        this.answerTo = answerTo;
     }
 
-    public int getNeed() {
-        return need;
+    public int getToId() {
+        return toId;
     }
 
-    public void setNeed(int need) {
-        this.need = need;
+    public void setToId(int toId) {
+        this.toId = toId;
     }
 }
