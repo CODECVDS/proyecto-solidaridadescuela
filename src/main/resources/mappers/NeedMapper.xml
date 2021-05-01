@@ -16,9 +16,10 @@
         <result property="modificationDate" column="modificationDate"/>
         <result property="username" column="username"/>
     </resultMap>
+
+    <!--addNeed-->
     <insert parameterType="map" id="addNeed">
-        INSERT INTO need (category,name,description,urgency,creationdate,status,modificationdate, username)
-        VALUES (#{need.category},#{need.name},#{need.description},#{need.urgency},CURRENT_TIMESTAMP,#{need.status},CURRENT_TIMESTAMP,#{need.username})
+        call confirm_nneeds(#{need.category},#{need.name},#{need.description},#{need.urgency},#{need.status},#{need.username})
     </insert>
 
     <!--loadNeeds-->
@@ -46,7 +47,8 @@
     <update parameterType="map" id="modify">
         UPDATE need
         SET
-        status = #{need.status}
+        status = #{need.status},
+        modificationDate = CURRENT_TIMESTAMP
         WHERE id = #{need.id}
     </update>
 </mapper>

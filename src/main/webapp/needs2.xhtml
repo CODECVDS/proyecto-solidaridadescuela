@@ -31,7 +31,6 @@
                             <h:outputText style="color: #2196f3;" value="#{needBean.getC(need.category).name}"/><br/>
                         </td>
                         <td style="padding-left:200px" width="400px">
-                            <p:rating readonly="true" value="#{need.urgency}"/><br/>
                             <h:outputText style="margin-right:30px; color: #689f38; text-transform: uppercase; font-weight: bold;" value=" #{need.status}"/>
                             <p:commandButton icon="pi pi-pencil" styleClass="edit-button rounded-button ui-button-success"
                                              update=":form:manage-need-content" oncomplete="PF('manageNeedDialog').show()" process="@this">
