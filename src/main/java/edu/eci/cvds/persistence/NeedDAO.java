@@ -8,7 +8,7 @@ import java.util.List;
 public interface NeedDAO {
     public void save(Need necesidad) throws PersistenceException;
 
-    public void updateNeedStatus(Status status) throws PersistenceException;
+    public void updateNeedStatus(Need need) throws PersistenceException;
 
     public List<Need> needs() throws PersistenceException;
 

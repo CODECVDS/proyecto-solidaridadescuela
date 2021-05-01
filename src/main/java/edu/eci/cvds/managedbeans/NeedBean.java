@@ -27,6 +27,7 @@ public class NeedBean extends BasePageBean{
     private SolidaridadServices solidaridadServices;
     private Need need;
     private int id;
+    private Integer needId;
     private int category;
     private String name;
     private String description;
@@ -39,6 +40,9 @@ public class NeedBean extends BasePageBean{
     private List<Category> categories;
     private List<Integer> urgencies;
     private Category c;
+    private Subject currentUser;
+    private Session session;
+    private boolean hide;
 
     public List<Category> getCategories() throws ServicesException {
         try {
@@ -47,6 +51,14 @@ public class NeedBean extends BasePageBean{
             throw e;
         }
         return categories;
+    }
+
+    public Integer getNeedId() {
+        return needId;
+    }
+
+    public void setNeedId(Integer needId) {
+        this.needId = needId;
     }
 
     public List<Need> getNeeds() throws ServicesException {
@@ -70,10 +82,14 @@ public class NeedBean extends BasePageBean{
     }
 
     public void save(){
-        Subject currentUser = SecurityUtils.getSubject();
-        Session session = currentUser.getSession();
+        currentUser = SecurityUtils.getSubject();
+        session = currentUser.getSession();
         need.setUsername(session.getAttribute("username").toString());
-        register();
+        if(this.need.getId() == 0){
+            register();
+        }else{
+            updateNeedStatus();
+        }
         PrimeFaces.current().executeScript("PF('manageNeedDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-needs");
     }
@@ -91,10 +107,15 @@ public class NeedBean extends BasePageBean{
         return urgencies;
     }
 
-    public void updateNeedStatus(Status status) throws ServicesException{
+    public void updateNeedStatus(){
         try{
-            solidaridadServices.updateNeedStatus(status);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Status Updated"));
+            if (need.getUsername().equals(session.getAttribute("username")) | currentUser.hasRole("Administrator")) {
+                solidaridadServices.updateNeedStatus(need);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Updated"));
+            }
+            else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Not allowed"));
+            }
         }catch(ServicesException ex){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Update Error"));
         }
@@ -104,7 +125,10 @@ public class NeedBean extends BasePageBean{
         return Arrays.asList(status.values());
     }
 
-    public Need getNeed() {
+    public Need getNeed() throws ServicesException{
+        if (need == null && needId != null){
+            need = solidaridadServices.loadNeed(needId);
+        }
         return need;
     }
 
@@ -182,5 +206,13 @@ public class NeedBean extends BasePageBean{
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public boolean isHide() {
+        return hide;
+    }
+
+    public void setHide(boolean hide) {
+        this.hide = hide;
     }
 }
