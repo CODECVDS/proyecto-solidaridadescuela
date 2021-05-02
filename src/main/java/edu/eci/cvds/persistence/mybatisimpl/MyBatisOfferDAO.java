@@ -5,7 +5,6 @@ import edu.eci.cvds.entities.Offer;
 import edu.eci.cvds.persistence.OfferDAO;
 import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.OfferMapper;
-import edu.eci.cvds.services.ServicesException;
 
 import java.util.List;
 
