@@ -7,20 +7,20 @@ public class Answer {
     private String name;
     private Date creationDate;
     private String comments;
-    private int offer;
-    private int need;
+    private String answerTo;
+    private int toId;
 
     public Answer() {
         super();
     }
 
-    public Answer(int id, String name, Date creationDate, String comments, int offer, int need) {
+    public Answer(int id, String name, Date creationDate, String comments, String answerTo, int toId) {
         this.id = id;
         this.name = name;
         this.creationDate = creationDate;
         this.comments = comments;
-        this.offer = offer;
-        this.need = need;
+        this.answerTo = answerTo;
+        this.toId = toId;
     }
 
     public int getId() {
@@ -55,20 +55,20 @@ public class Answer {
         this.comments = comments;
     }
 
-    public int getOffer() {
-        return offer;
+    public String getAnswerTo() {
+        return answerTo;
     }
 
-    public void setOffer(int offer) {
-        this.offer = offer;
+    public void setAnswerTo(String answerTo) {
+        this.answerTo = answerTo;
     }
 
-    public int getNeed() {
-        return need;
+    public int getToId() {
+        return toId;
     }
 
-    public void setNeed(int need) {
-        this.need = need;
+    public void setToId(int toId) {
+        this.toId = toId;
     }
 }
 

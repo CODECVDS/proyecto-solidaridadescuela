@@ -15,10 +15,10 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
 
     @Inject
     private CategoryDAO categoryDAO;
-
+    /*
     @Inject
     private UserDAO userDAO;
-
+    */
     @Inject
     private OfferDAO offerDAO;
 
@@ -53,9 +53,9 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
-    public void updateNeedStatus(Status status) throws ServicesException {
+    public void updateNeedStatus(Need need) throws ServicesException {
         try{
-            needDAO.updateNeedStatus(status);
+            needDAO.updateNeedStatus(need);
         }catch(PersistenceException ex){
             throw new ServicesException("Error al actualizar la necesidad",ex);
         }
@@ -179,7 +179,7 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             throw new ServicesException("Error al cargar las categorias",ex);
         }
     }
-
+    /*
     @Override
     public User getUser(String username) throws ServicesException {
         try {
@@ -188,7 +188,7 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             throw new ServicesException("Error al cargar el usuario",ex);
         }
     }
-
+    */
 
 
 

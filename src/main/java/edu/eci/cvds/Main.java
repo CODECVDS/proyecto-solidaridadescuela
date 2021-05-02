@@ -3,6 +3,7 @@ package edu.eci.cvds;
 
 /*
 import edu.eci.cvds.entities.Answer;
+import edu.eci.cvds.entities.Need;
 import edu.eci.cvds.entities.Offer;
 import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.ServicesException;
@@ -43,7 +44,10 @@ public class Main {
         //System.out.println(services.loadOffers().size());
         //Answer a = new Answer(12,"Carlos",null,"los que sea manda decir kevin",0,5);
         //services.registerAnswer(a);
-        System.out.println(services.loadAnswers().get(0).getName());
+        //System.out.println(services.loadAnswers().get(0).getName());
+        Need n = services.loadNeed(5);
+        n.setStatus(Status.Closed);
+        services.updateNeedStatus(n);
         sqlss.commit();
         sqlss.close();
     }

@@ -10,14 +10,14 @@
         <result property='name' column='name' />
         <result property='creationDate' column='creationDate' />
         <result property='comments' column='coments' />
-        <result property='offer' column='offer' />
-        <result property='need' column='need' />
+        <result property='answerTo' column='answerto' />
+        <result property='toId' column='toId' />
     </resultMap>
 
     <!--addAnswer-->
     <insert parameterType="map" id="addAnswer">
-        INSERT INTO Answer (name,creationDate,coments,offer,need)
-        VALUES (#{answer.name},CURRENT_TIMESTAMP,#{answer.comments},#{answer.offer},#{answer.need})
+        INSERT INTO Answer (name,creationDate,coments,answerto,toId)
+        VALUES (#{answer.name},CURRENT_TIMESTAMP,#{answer.comments},#{answer.answerTo},#{answer.toId})
     </insert>
 
     <!--loadAnswers-->

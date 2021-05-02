@@ -24,9 +24,9 @@ public class MyBatisNeedDAO implements NeedDAO {
     }
 
     @Override
-    public void updateNeedStatus(Status status) throws PersistenceException{
+    public void updateNeedStatus(Need need) throws PersistenceException{
         try{
-            needMapper.modify(status);
+            needMapper.modify(need);
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al consultar necesidades",e);
         }
