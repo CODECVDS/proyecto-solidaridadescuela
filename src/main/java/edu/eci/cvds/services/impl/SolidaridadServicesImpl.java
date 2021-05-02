@@ -127,6 +127,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
+    public List<Need> loadNeedsbyStatus() throws ServicesException {
+        try {
+            return needDAO.needsbyStatus();
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al cargar necesidades por status",ex);
+        }
+    }
+
+    @Override
     public List<Need> loadNeeds() throws ServicesException{
         try{
             return needDAO.needs();

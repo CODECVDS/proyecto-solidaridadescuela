@@ -50,4 +50,13 @@ public class MyBatisNeedDAO implements NeedDAO {
         }
     }
 
+    @Override
+    public List<Need> needsbyStatus() throws PersistenceException {
+        try {
+            return needMapper.loadNeedsbyStatus();
+        } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar la necesidad por status",e);
+        }
+    }
+
 }

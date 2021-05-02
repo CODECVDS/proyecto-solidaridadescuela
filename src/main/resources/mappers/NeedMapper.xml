@@ -27,6 +27,11 @@
         SELECT * FROM need
     </select>
 
+    <!--loadNeedsbyStatus-->
+    <select parameterType="map" id="loadNeedsbyStatus" resultMap="NeedResult">
+        SELECT status, count(status) FROM need group by status order by status
+    </select>
+
     <!--loadNeed-->
     <select parameterType="map" id="load" resultMap="NeedResult">
         SELECT

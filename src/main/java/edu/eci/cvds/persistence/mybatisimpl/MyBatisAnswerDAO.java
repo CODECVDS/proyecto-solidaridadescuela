@@ -5,7 +5,6 @@ import edu.eci.cvds.entities.Answer;
 import edu.eci.cvds.persistence.AnswerDAO;
 import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.AnswerMapper;
-import edu.eci.cvds.persistence.mybatisimpl.mappers.NeedMapper;
 
 import java.util.List;
 
