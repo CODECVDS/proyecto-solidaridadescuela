@@ -1,7 +1,7 @@
 package edu.eci.cvds;
 
 
-
+/*
 import edu.eci.cvds.entities.Answer;
 import edu.eci.cvds.entities.Offer;
 import edu.eci.cvds.entities.Status;
@@ -48,3 +48,4 @@ public class Main {
         sqlss.close();
     }
 }
+*/

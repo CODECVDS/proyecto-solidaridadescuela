@@ -13,4 +13,6 @@ public interface NeedDAO {
     public List<Need> needs() throws PersistenceException;
 
     public Need load(int needId) throws PersistenceException;
+
+    public List<Need> needsbyStatus() throws PersistenceException;
 }

@@ -39,4 +39,6 @@ public interface SolidaridadServices {
     public List<Answer>  loadAnswers() throws ServicesException;
 
     public void registerAnswer(Answer answer) throws ServicesException;
+
+    public List<Need> loadNeedsbyStatus() throws ServicesException;
 }
