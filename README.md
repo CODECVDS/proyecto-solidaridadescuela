@@ -11,3 +11,9 @@
 admin, admineci, Administrator
 
 user, invitado, Student
+
+teach,teacher,Teacher
+
+gradu,graduate,Graduate
+
+adminis,administrative,Administrative
