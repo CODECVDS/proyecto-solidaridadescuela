@@ -19,7 +19,7 @@
 
     <!--addNeed-->
     <insert parameterType="map" id="addNeed">
-        call confirm_nneeds(#{need.category},#{need.name},#{need.description},#{need.urgency},#{need.status},#{need.username})
+        call confirm_nneeds(#{need.category},#{need.name},#{need.description},#{need.urgency},#{need.username})
     </insert>
 
     <!--loadNeeds-->
