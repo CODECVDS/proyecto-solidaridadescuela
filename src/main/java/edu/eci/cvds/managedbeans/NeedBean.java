@@ -24,6 +24,7 @@ import java.util.List;
 @SessionScoped
 @ManagedBean(name = "needBean")
 public class NeedBean extends BasePageBean{
+
     @Inject
     private SolidaridadServices solidaridadServices;
     private Need need;
@@ -44,6 +45,7 @@ public class NeedBean extends BasePageBean{
     private Subject currentUser;
     private Session session;
     private boolean hide;
+    private List<Need> needs;
 
     public List<Category> getCategories() throws ServicesException {
         try {
@@ -64,7 +66,8 @@ public class NeedBean extends BasePageBean{
 
     public List<Need> getNeeds() throws ServicesException {
         try {
-            return solidaridadServices.loadNeeds();
+            needs = solidaridadServices.loadNeeds();
+            return needs;
         } catch (ServicesException ex){
             ex.printStackTrace();
             throw ex;
@@ -215,5 +218,9 @@ public class NeedBean extends BasePageBean{
 
     public void setHide(boolean hide) {
         this.hide = hide;
+    }
+
+    public void setNeeds(List<Need> needs) {
+        this.needs = needs;
     }
 }

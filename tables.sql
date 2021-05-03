@@ -57,7 +57,7 @@ create table if not exists answer(
 	name varchar(20) not null,
 	creationDate timestamp not null,
 	coments varchar(500) not null,
-	answerTo varchar(5) not null,
+	answerto varchar(5) not null,
 	toId int not null
 	
 );
@@ -135,7 +135,7 @@ as $$
 		--noffers := 
 		select nconfigoffer into noffers from parameters;
 		--ncount := 
-		select count(*) into ncount from offer where username = usname;
+		select count(*) into ncount from offer where username = 'admin';
 				
 	
 		if (noffers > ncount) then
