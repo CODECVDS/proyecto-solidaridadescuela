@@ -15,6 +15,12 @@
     <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
         <p:button outcome="needs2" value="Volver" icon="pi pi-arrow-left" iconPos="left" />
+        <p:commandButton value="XLS" icon="pi pi-download" style="margin-left:10px;">
+            <p:dataExporter type="xls" target="dt-needs" fileName="needs"/>
+        </p:commandButton>
+        <p:commandButton value="PDF" icon="pi pi-download" style="margin-left:10px; text-align:right;">
+            <p:dataExporter type="pdf" target="dt-needs" fileName="needsPDF"/>
+        </p:commandButton>
         <div class="card need">
             <p:growl id="messages" showDetail="true"/>
             <p:dataTable id="dt-needs" widgetVar="dtNeed" var="need" value="#{needBean.needs}"
