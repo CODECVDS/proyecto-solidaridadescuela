@@ -76,8 +76,8 @@
                             </p:selectOneMenu>
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="status" value="Status:"/>
-                            <p:selectOneMenu id="status" value="#{needBean.need.status}">
+                            <p:outputLabel for="status" value="Status:" rendered="#{!needBean.hide}"/>
+                            <p:selectOneMenu id="status" value="#{needBean.need.status}" rendered="#{!needBean.hide}">
                                 <f:selectItems value="#{needBean.allStatus}"/>
                             </p:selectOneMenu>
                         </div>

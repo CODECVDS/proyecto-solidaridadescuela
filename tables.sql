@@ -123,7 +123,7 @@ drop table answer;
 insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'materiales','Se necesita materiales para EG1',3,'2021/04/24','Active','2021/04/24','user');
 insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'mantenimiento','Se hacer mantenimiento en los equipos del b0',5,'2021/04/24','Active','2021/04/24','user');
 
-create or replace procedure confirm_noffers(cat int, n varchar, des varchar, st varchar, usname varchar)
+create or replace procedure confirm_noffers(cat int, n varchar, des varchar, usname varchar)
 language plpgsql
 as $$
 
@@ -140,7 +140,7 @@ as $$
 	
 		if (noffers > ncount) then
 			INSERT INTO offer (category,name,description,creationdate,status,modificationdate,username)
-        	VALUES (cat,n,des,CURRENT_TIMESTAMP,st,CURRENT_TIMESTAMP,usname);			
+        	VALUES (cat,n,des,CURRENT_TIMESTAMP,'Active',CURRENT_TIMESTAMP,usname);			
 		
 		elsif (noffers <= ncount) then
 			raise exception 'numero maximo de offertas registradas';
@@ -152,7 +152,7 @@ as $$
 $$
 
 
-create or replace procedure confirm_nneeds(cat int, n varchar, des varchar,urg int, st varchar, usname varchar)
+create or replace procedure confirm_nneeds(cat int, n varchar, des varchar,urg int, usname varchar)
 language plpgsql
 as $$
 
@@ -169,7 +169,7 @@ as $$
 	
 		if (nneeds > ncount) then
 			INSERT INTO need (category,name,description,urgency,creationdate,status,modificationdate,username)
-        	VALUES (cat,n,des,urg,CURRENT_TIMESTAMP,st,CURRENT_TIMESTAMP,usname);			
+        	VALUES (cat,n,des,urg,CURRENT_TIMESTAMP,'Active',CURRENT_TIMESTAMP,usname);			
 		
 		elsif (nneeds <= ncount) then
 			raise exception 'numero maximo de necesidades registradas';
@@ -179,5 +179,5 @@ as $$
 	end;
 
 $$
-
 */
+
