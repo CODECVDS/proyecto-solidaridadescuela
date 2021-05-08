@@ -190,6 +190,12 @@ public class NeedBean extends BasePageBean{
         pieModel.setData(data);
     }
 
+    public boolean editable(String needN){
+        currentUser = SecurityUtils.getSubject();
+        session = currentUser.getSession();
+        return currentUser.hasRole("Administrator")?false:!needN.equals(session.getAttribute("username"));
+    }
+
     public void setNeed(Need need) {
         this.need = need;
     }
