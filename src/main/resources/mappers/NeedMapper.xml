@@ -32,6 +32,11 @@
         SELECT * FROM need
     </select>
 
+    <!--loadNeeds whitout Closed & Solved-->
+    <select parameterType="map" id="loadNeedsWS" resultMap="NeedResult">
+        select * from need n where n.status != 'Closed' and n.status != 'Solved'
+    </select>
+
     <!--loadNeedsbyStatus-->
     <select parameterType="map" id="loadNeedsbyStatus" resultMap="CountResult">
         SELECT status, count(status) as conteo FROM need group by status order by status
