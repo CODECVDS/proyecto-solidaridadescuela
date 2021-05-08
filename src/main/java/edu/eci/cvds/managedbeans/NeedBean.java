@@ -19,10 +19,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @SessionScoped
 @ManagedBean(name = "needBean")
@@ -51,7 +48,7 @@ public class NeedBean extends BasePageBean{
     private List<Need> needs;
     private PieChartModel pieModel;
     private List<CountNeeds> needsbyStatus;
-
+    private HashMap<Integer,String> urgenciesHm;
 
     public List<Category> getCategories()  {
         try {
@@ -114,6 +111,25 @@ public class NeedBean extends BasePageBean{
     public List<Integer> getUrgencies() {
         urgencies = Arrays.asList(new Integer[]{1, 2, 3, 4, 5});
         return urgencies;
+    }
+
+    public HashMap<Integer,String> getUrgenciesHm(){
+        urgenciesHm = new HashMap<Integer,String>();
+        urgenciesHm.put(1,"Primary");
+        urgenciesHm.put(2,"success");
+        urgenciesHm.put(3,"info");
+        urgenciesHm.put(4,"warning");
+        urgenciesHm.put(5,"danger");
+        return urgenciesHm;
+    }
+
+    public String getStringUg(Integer i){
+        getUrgenciesHm();
+        return urgenciesHm.get(i);
+    }
+
+    public void setUrgenciesHm(HashMap<Integer, String> urgenciesHm) {
+        this.urgenciesHm = urgenciesHm;
     }
 
     public void updateNeedStatus(){
