@@ -29,7 +29,7 @@ public class OnlyNot extends AccessControlFilter {
         }else if(SecurityUtils.getSubject().hasRole("Graduate")){
             welcomeurl="/faces/homeB.xhtml";
         }else if(SecurityUtils.getSubject().hasRole("Administrative")){
-            welcomeurl="/faces/homeA.xhtml";
+            welcomeurl="/faces/homeB.xhtml";
         }
 
         WebUtils.issueRedirect(servletRequest, servletResponse, welcomeurl);

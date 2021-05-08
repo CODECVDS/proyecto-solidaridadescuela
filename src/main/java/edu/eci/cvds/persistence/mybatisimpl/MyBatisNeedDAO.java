@@ -15,11 +15,16 @@ public class MyBatisNeedDAO implements NeedDAO {
     private NeedMapper needMapper;
 
     @Override
-    public void save(Need necesidad) throws PersistenceException {
+    public void save(Need necesidad) throws PersistenceException{
         try{
             needMapper.addNeed(necesidad);
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Error al registrar la necesidad ",e);
+            if(e.getMessage().contains("numero maximo de necesidades registradas")){
+                throw new PersistenceException("Número máximo de necesidades registradas", e);
+            }
+            else {
+                throw new PersistenceException("Error al registrar necesidades", e);
+            }
         }
     }
 

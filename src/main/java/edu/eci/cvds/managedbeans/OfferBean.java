@@ -42,6 +42,26 @@ public class OfferBean  extends BasePageBean {
     private Subject currentUser;
     private Session session;
 
+    public  void register(){
+
+        try {
+            solidaridadServices.registerOffer(offer);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Added"));
+        } catch (ServicesException ex){
+            ex.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error",ex.getMessage()));
+        }
+    }
+
+    public void update(){
+        try {
+            solidaridadServices.updateOffer(offer);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Updated"));
+        } catch (ServicesException ex){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", ex.getMessage()));
+        }
+    }
+
     public void save(){
         currentUser = SecurityUtils.getSubject();
         session = currentUser.getSession();
@@ -59,41 +79,13 @@ public class OfferBean  extends BasePageBean {
         this.offer = new Offer();
     }
 
-    public  void register(){
-        try {
-            solidaridadServices.registerOffer(offer);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Added"));
-        } catch (ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error","Add Error"));
-            ex.printStackTrace();
-        }
-    }
-
-    public void update(){
-        try {
-            solidaridadServices.updateOffer(offer);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Updated"));
-        } catch (ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", ex.getMessage()));
-        }
-    }
 
     public List<Offer> getOffers() throws ServicesException{
-        try {
-            return solidaridadServices.loadOffers();
-        } catch (ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar ofertas", ex.getMessage()));
-        }
-        return null;
+        return solidaridadServices.loadOffers();
     }
 
     public List<Offer> getOffersWS() throws ServicesException{
-        try {
-            return solidaridadServices.loadAllOffersWS();
-        } catch (ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar ofertas", ex.getMessage()));
-        }
-        return null;
+        return solidaridadServices.loadAllOffersWS();
     }
 
     public Category getC(int cId) throws ServicesException {
@@ -118,12 +110,7 @@ public class OfferBean  extends BasePageBean {
     }
 
     public List<Category> getCategories() throws ServicesException {
-        try {
-            categories = solidaridadServices.loadActiveCategories(true);
-        } catch (ServicesException e) {
-            throw e;
-        }
-        return categories;
+        return solidaridadServices.loadActiveCategories(true);
     }
 
     public List<Status> getAllStatus() {

@@ -15,7 +15,7 @@
     <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
         <div class="card need">
-            <p:button outcome="needs" value="Reporte Necesidades" icon="pi pi-external-link" iconPos="right" />
+            <p:button outcome="needs" value="Reporte Necesidades" icon="pi pi-external-link" iconPos="right" rendered="#{currentUser.hasRole('Administrator') || currentUser.hasRole('Administrative')}"/>
             <p:growl id="messages" showDetail="true"/>
             <p:dataScroller id="dt-needs" widgetVar="dtNeed" var="need" value="#{needBean.needsWS}"
                          reflow="true" rowKey="#{need.id}">
@@ -69,11 +69,12 @@
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="name" rendered="#{needBean.hide}">Name</p:outputLabel>
-                            <p:inputText id="name" value="#{needBean.need.name}" rendered="#{needBean.hide}"/>
+                            <p:inputText id="name" value="#{needBean.need.name}" rendered="#{needBean.hide}" required="true">
+                            </p:inputText>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="description" rendered="#{needBean.hide}">Description</p:outputLabel>
-                            <p:inputTextarea id="description" value="#{needBean.need.description}" rendered="#{needBean.hide}"/>
+                            <p:inputTextarea id="description" value="#{needBean.need.description}" required="true" rendered="#{needBean.hide}"/>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="urgency" value="Urgency:" rendered="#{needBean.hide}"/>
@@ -119,7 +120,7 @@
             </p:dialog>
         </div>
         <p:commandButton class="rounded-button ui-button-success a-button" style="width: 50px;height: 50px;" icon="pi pi-plus" actionListener="#{needBean.openNew}"
-                         update=":form:manage-need-content" oncomplete="PF('manageNeedDialog').show()">
+                         rendered="#{currentUser.hasRole('Student')}" update=":form:manage-need-content" oncomplete="PF('manageNeedDialog').show()">
             <p:resetInput target=":form:manage-need-content"/>
             <f:setPropertyActionListener value="true" target="#{needBean.hide}"/>
         </p:commandButton>

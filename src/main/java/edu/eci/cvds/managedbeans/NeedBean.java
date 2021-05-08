@@ -51,41 +51,30 @@ public class NeedBean extends BasePageBean{
     private List<CountNeeds> needsbyStatus;
     private HashMap<Integer,String> urgenciesHm;
 
-    public List<Category> getCategories()  {
-        try {
-            categories = solidaridadServices.loadActiveCategories(true);
-        } catch (ServicesException e) {
-            e.printStackTrace();
-        }
-        return categories;
-    }
-
-    public Integer getNeedId() {
-        return needId;
-    }
-
-    public void setNeedId(Integer needId) {
-        this.needId = needId;
-    }
-
-    public List<Need> getNeeds() {
-        try {
-            needs = solidaridadServices.loadNeeds();
-        } catch (ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar reporte necesidades", ex.getMessage()));
-        }
-        return needs;
-    }
-
     public  void register(){
         try{
             solidaridadServices.registerNeed(need);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Added"));
         } catch (ServicesException ex){
             ex.printStackTrace();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error","Add Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error",ex.getMessage()));
         }
 
+    }
+
+    public void updateNeedStatus(){
+        try{
+            if (need.getUsername().equals(session.getAttribute("username")) | currentUser.hasRole("Administrator")) {
+                solidaridadServices.updateNeedStatus(need);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Updated"));
+            }
+            else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Not allowed"));
+            }
+        }catch(ServicesException ex){
+            ex.getCause().getMessage();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", ex.getMessage()));
+        }
     }
 
     public void save(){
@@ -133,19 +122,22 @@ public class NeedBean extends BasePageBean{
         this.urgenciesHm = urgenciesHm;
     }
 
-    public void updateNeedStatus(){
-        try{
-            if (need.getUsername().equals(session.getAttribute("username")) | currentUser.hasRole("Administrator")) {
-                solidaridadServices.updateNeedStatus(need);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Updated"));
-            }
-            else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Not allowed"));
-            }
-        }catch(ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Update Error"));
-        }
+    public List<Category> getCategories() throws ServicesException {
+        return solidaridadServices.loadActiveCategories(true);
     }
+
+    public Integer getNeedId() {
+        return needId;
+    }
+
+    public void setNeedId(Integer needId) {
+        this.needId = needId;
+    }
+
+    public List<Need> getNeeds() throws ServicesException {
+        return solidaridadServices.loadNeeds();
+    }
+
 
     public List<Status> getAllStatus() {
         return Arrays.asList(status.values());
