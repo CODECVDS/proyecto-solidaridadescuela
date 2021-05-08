@@ -82,16 +82,18 @@ public class OfferBean  extends BasePageBean {
         try {
             return solidaridadServices.loadOffers();
         } catch (ServicesException ex){
-            throw ex;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar ofertas", ex.getMessage()));
         }
+        return null;
     }
 
     public List<Offer> getOffersWS() throws ServicesException{
         try {
             return solidaridadServices.loadAllOffersWS();
         } catch (ServicesException ex){
-            throw ex;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar ofertas", ex.getMessage()));
         }
+        return null;
     }
 
     public Category getC(int cId) throws ServicesException {
