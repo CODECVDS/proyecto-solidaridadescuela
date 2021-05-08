@@ -86,6 +86,14 @@ public class OfferBean  extends BasePageBean {
         }
     }
 
+    public List<Offer> getOffersWS() throws ServicesException{
+        try {
+            return solidaridadServices.loadAllOffersWS();
+        } catch (ServicesException ex){
+            throw ex;
+        }
+    }
+
     public Category getC(int cId) throws ServicesException {
         return solidaridadServices.loadCategory(cId);
     }

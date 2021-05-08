@@ -9,5 +9,6 @@ public interface OfferDAO {
     public void updateOffer(Offer offer) throws PersistenceException;
     public Offer loadOffer(int offerId) throws PersistenceException;
     public List<Offer> loadAllOffers() throws PersistenceException;
+    public List<Offer> loadAllOffersWS() throws PersistenceException;
     public int loadParamNOffer() throws PersistenceException;
 }

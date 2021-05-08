@@ -10,5 +10,6 @@ public interface OfferMapper {
     public void updateOffer(@Param("offer") Offer offer);
     public Offer loadOffer(@Param("id") int id);
     public List<Offer> loadAllOffers();
+    public List<Offer> loadAllOffersWS();
     public int loadParamNOffer();
 }

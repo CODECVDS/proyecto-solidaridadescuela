@@ -17,7 +17,7 @@
         <div class="card">
             <p:button outcome="offers" value="Reporte Ofertas" icon="pi pi-external-link" iconPos="right" />
             <p:growl id="messages" showDetail="true"/>
-            <p:dataScroller id="dt-offers" widgetVar="dtOffer" var="offer" value="#{offerBean.offers}"
+            <p:dataScroller id="dt-offers" widgetVar="dtOffer" var="offer" value="#{offerBean.offersWS}"
                             reflow="true" rowKey="#{need.id}">
 
                 <p:card style="margin: 5px 0px; padding:0px; font-family: 'Raleway', sans-serif; font-weight: regular;">
