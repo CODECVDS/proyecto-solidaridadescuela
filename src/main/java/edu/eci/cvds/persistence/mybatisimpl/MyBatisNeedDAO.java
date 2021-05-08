@@ -59,4 +59,13 @@ public class MyBatisNeedDAO implements NeedDAO {
         }
     }
 
+    @Override
+    public List<Need> loadNeedsWS() throws PersistenceException {
+        try {
+            return needMapper.loadNeedsWS();
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar la necesidade en",e);
+        }
+    }
+
 }

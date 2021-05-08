@@ -17,4 +17,6 @@ public interface NeedMapper {
     public Need load(@Param("id") int needId);
 
     public List<CountNeeds> loadNeedsbyStatus();
+
+    public List<Need> loadNeedsWS();
 }

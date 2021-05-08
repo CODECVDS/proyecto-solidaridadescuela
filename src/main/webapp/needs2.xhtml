@@ -17,7 +17,7 @@
         <div class="card need">
             <p:button outcome="needs" value="Reporte Necesidades" icon="pi pi-external-link" iconPos="right" />
             <p:growl id="messages" showDetail="true"/>
-            <p:dataScroller id="dt-needs" widgetVar="dtNeed" var="need" value="#{needBean.needs}"
+            <p:dataScroller id="dt-needs" widgetVar="dtNeed" var="need" value="#{needBean.needsWS}"
                          reflow="true" rowKey="#{need.id}">
 
                 <p:card style="margin: 5px 0px; padding:0px; font-family: 'Raleway', sans-serif; font-weight: regular;">

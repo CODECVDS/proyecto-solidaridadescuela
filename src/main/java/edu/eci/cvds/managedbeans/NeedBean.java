@@ -46,6 +46,7 @@ public class NeedBean extends BasePageBean{
     private Session session;
     private boolean hide;
     private List<Need> needs;
+    private List<Need> needsWS;
     private PieChartModel pieModel;
     private List<CountNeeds> needsbyStatus;
     private HashMap<Integer,String> urgenciesHm;
@@ -71,7 +72,7 @@ public class NeedBean extends BasePageBean{
         try {
             needs = solidaridadServices.loadNeeds();
         } catch (ServicesException ex){
-            ex.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar reporte necesidades", ex.getMessage()));
         }
         return needs;
     }
@@ -307,5 +308,18 @@ public class NeedBean extends BasePageBean{
 
     public void setSolidaridadServices(SolidaridadServices solidaridadServices) {
         this.solidaridadServices = solidaridadServices;
+    }
+
+    public List<Need> getNeedsWS() {
+        try {
+            needsWS = solidaridadServices.loadNeedsWS();
+        } catch (ServicesException ex){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar necesidades", ex.getMessage()));
+        }
+        return needsWS;
+    }
+
+    public void setNeedsWS(List<Need> needsWS) {
+        this.needsWS = needsWS;
     }
 }
