@@ -69,8 +69,8 @@
                             <p:inputTextarea id="description" value="#{offerBean.offer.description}" rendered="#{offerBean.hide}"/>
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="status" value="Status:"/>
-                            <p:selectOneMenu id="status" value="#{offerBean.offer.status}">
+                            <p:outputLabel for="status" value="Status:" rendered="#{!offerBean.hide}"/>
+                            <p:selectOneMenu id="status" value="#{offerBean.offer.status}" rendered="#{!offerBean.hide}">
                                 <f:selectItems value="#{offerBean.allStatus}"/>
                             </p:selectOneMenu>
                         </div>

@@ -1,7 +1,7 @@
 package edu.eci.cvds.persistence;
 
+import edu.eci.cvds.entities.CountNeeds;
 import edu.eci.cvds.entities.Need;
-import edu.eci.cvds.entities.Status;
 
 import java.util.List;
 
@@ -14,5 +14,5 @@ public interface NeedDAO {
 
     public Need load(int needId) throws PersistenceException;
 
-    public List<Need> needsbyStatus() throws PersistenceException;
+    public List<CountNeeds> needsbyStatus() throws PersistenceException;
 }

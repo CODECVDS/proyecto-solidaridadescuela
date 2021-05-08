@@ -7,6 +7,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
 import com.google.inject.Injector;
+import edu.eci.cvds.services.ServicesException;
 
 public abstract class BasePageBean implements Serializable {
 

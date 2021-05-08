@@ -1,6 +1,7 @@
 package edu.eci.cvds.managedbeans;
 
 import edu.eci.cvds.entities.Category;
+import edu.eci.cvds.entities.CountNeeds;
 import edu.eci.cvds.entities.Need;
 import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.ServicesException;
@@ -9,12 +10,16 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.primefaces.PrimeFaces;
+import org.primefaces.model.charts.ChartData;
+import org.primefaces.model.charts.pie.PieChartDataSet;
+import org.primefaces.model.charts.pie.PieChartModel;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -44,12 +49,15 @@ public class NeedBean extends BasePageBean{
     private Session session;
     private boolean hide;
     private List<Need> needs;
+    private PieChartModel pieModel;
+    private List<CountNeeds> needsbyStatus;
 
-    public List<Category> getCategories() throws ServicesException {
+
+    public List<Category> getCategories()  {
         try {
             categories = solidaridadServices.loadActiveCategories(true);
         } catch (ServicesException e) {
-            throw e;
+            e.printStackTrace();
         }
         return categories;
     }
@@ -62,14 +70,13 @@ public class NeedBean extends BasePageBean{
         this.needId = needId;
     }
 
-    public List<Need> getNeeds() throws ServicesException {
+    public List<Need> getNeeds() {
         try {
             needs = solidaridadServices.loadNeeds();
-            return needs;
         } catch (ServicesException ex){
             ex.printStackTrace();
-            throw ex;
         }
+        return needs;
     }
 
     public  void register(){
@@ -132,6 +139,39 @@ public class NeedBean extends BasePageBean{
             need = solidaridadServices.loadNeed(needId);
         }
         return need;
+    }
+
+    private void createpieModel()  {
+        pieModel = new PieChartModel();
+        ChartData data = new ChartData();
+
+        try {
+            needsbyStatus = solidaridadServices.loadNeedsbyStatus();
+        } catch (ServicesException e) {
+            e.printStackTrace();
+        }
+
+        PieChartDataSet dataSet = new PieChartDataSet();
+        List<Number> values = new ArrayList<>();
+        needsbyStatus.stream().forEach(p -> values.add(p.getConteo()));
+        dataSet.setData(values);
+
+        List<String> bgColors = new ArrayList<>();
+        bgColors.add("rgb(82, 190, 128)");
+        bgColors.add("rgb(255, 99, 132)");
+        bgColors.add("rgb(255, 205, 86)");
+        bgColors.add("rgb(55, 105, 255)");
+        dataSet.setBackgroundColor(bgColors);
+
+        data.addChartDataSet(dataSet);
+        List<String> labels = new ArrayList<>();
+        labels.add("Active");
+        labels.add("Closed");
+        labels.add("InProcess");
+        labels.add("Solved");
+        data.setLabels(labels);
+
+        pieModel.setData(data);
     }
 
     public void setNeed(Need need) {
@@ -220,5 +260,30 @@ public class NeedBean extends BasePageBean{
 
     public void setNeeds(List<Need> needs) {
         this.needs = needs;
+    }
+
+    public List<CountNeeds> getNeedsbyStatus() {
+        return needsbyStatus;
+    }
+
+    public void setNeedsbyStatus(List<CountNeeds> needsbyStatus) {
+        this.needsbyStatus = needsbyStatus;
+    }
+
+    public void setPieModel(PieChartModel pieModel) {
+        this.pieModel = pieModel;
+    }
+
+    public PieChartModel getPieModel() {
+        createpieModel();
+        return pieModel;
+    }
+
+    public SolidaridadServices getSolidaridadServices() {
+        return solidaridadServices;
+    }
+
+    public void setSolidaridadServices(SolidaridadServices solidaridadServices) {
+        this.solidaridadServices = solidaridadServices;
     }
 }
