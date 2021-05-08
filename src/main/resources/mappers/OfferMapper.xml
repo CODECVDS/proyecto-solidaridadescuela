@@ -41,4 +41,9 @@
     <select parameterType="map" id="loadAllOffers" resultMap="OfferResult">
         SELECT * FROM offer
     </select>
+
+    <!--loadOffers without Closed & Solved-->
+    <select parameterType="map" id="loadAllOffersWS" resultMap="OfferResult">
+        SELECT * FROM offer WHERE status != 'Closed' and status != 'Solved'
+    </select>
 </mapper>
