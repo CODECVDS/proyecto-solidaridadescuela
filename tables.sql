@@ -143,7 +143,7 @@ as $$
         	VALUES (cat,n,des,CURRENT_TIMESTAMP,'Active',CURRENT_TIMESTAMP,usname);			
 		
 		elsif (noffers <= ncount) then
-			raise exception 'numero maximo de offertas registradas';
+			raise exception 'numero maximo de ofertas registradas';
 		
 		end if;
 		

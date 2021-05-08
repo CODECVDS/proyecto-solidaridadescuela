@@ -48,7 +48,7 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
         try{
             needDAO.save(need);
         }catch(PersistenceException ex){
-            throw new ServicesException("Error al crear la necesidad",ex);
+            throw new ServicesException(ex.getMessage(),ex);
         }
     }
 
@@ -66,7 +66,7 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
         try {
             offerDAO.registerOffer(offer);
         }catch (PersistenceException ex){
-            throw new ServicesException("Error al registrar oferta",ex);
+            throw new ServicesException(ex.getMessage(),ex);
         }
     }
 

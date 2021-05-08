@@ -18,7 +18,13 @@ public class MyBatisOfferDAO implements OfferDAO {
         try {
             offerMapper.addOffer(offer);
         } catch (org.apache.ibatis.exceptions.PersistenceException exception){
-            throw new PersistenceException("Error al registrar oferta",exception);
+            if(exception.getMessage().contains("numero maximo de ofertas registradas")){
+                throw new PersistenceException("Número máximo de ofertas registradas", exception);
+            }
+            else {
+                throw new PersistenceException("Error al registrar oferta", exception);
+            }
+
         }
     }
 

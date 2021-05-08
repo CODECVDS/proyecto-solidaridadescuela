@@ -14,7 +14,7 @@
 <h:body>
     <ui:include src="menuA.xhtml"></ui:include>
     <div class="w-text">
-        <p>Bienvenido User</p>
+        <p>Bienvenido #{userBean.currentUser.getSession().getAttribute("username")}</p>
     </div>
 </h:body>
 </html>
