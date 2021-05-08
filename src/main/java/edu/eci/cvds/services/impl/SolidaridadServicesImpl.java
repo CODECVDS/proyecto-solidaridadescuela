@@ -98,6 +98,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
+    public List<Offer> loadAllOffersWS() throws ServicesException {
+        try {
+            return offerDAO.loadAllOffersWS();
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar ofertas por estado",ex);
+        }
+    }
+
+    @Override
     public int loadParamNOffer() throws ServicesException {
         try {
             return offerDAO.loadParamNOffer();
@@ -134,6 +143,8 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             throw new ServicesException("Error al cargar necesidades por status",ex);
         }
     }
+
+
 
     @Override
     public List<Need> loadNeeds() throws ServicesException{

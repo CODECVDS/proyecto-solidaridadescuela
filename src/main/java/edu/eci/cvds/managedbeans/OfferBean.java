@@ -70,24 +70,25 @@ public class OfferBean  extends BasePageBean {
     }
 
     public void update(){
-        currentUser = SecurityUtils.getSubject();
-        session = currentUser.getSession();
         try {
-            if (offer.getUsername().equals(session.getAttribute("username"))) {
-                solidaridadServices.updateOffer(offer);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Updated"));
-            }
-            else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Update Error"));
-            }
+            solidaridadServices.updateOffer(offer);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Updated"));
         } catch (ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Update Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", ex.getMessage()));
         }
     }
 
     public List<Offer> getOffers() throws ServicesException{
         try {
             return solidaridadServices.loadOffers();
+        } catch (ServicesException ex){
+            throw ex;
+        }
+    }
+
+    public List<Offer> getOffersWS() throws ServicesException{
+        try {
+            return solidaridadServices.loadAllOffersWS();
         } catch (ServicesException ex){
             throw ex;
         }
@@ -106,6 +107,12 @@ public class OfferBean  extends BasePageBean {
             offer = solidaridadServices.loadOffer(offerId);
         }
         return offer;
+    }
+
+    public boolean editable(String offerN){
+        currentUser = SecurityUtils.getSubject();
+        session = currentUser.getSession();
+        return currentUser.hasRole("Administrator")?false:!offerN.equals(session.getAttribute("username"));
     }
 
     public List<Category> getCategories() throws ServicesException {

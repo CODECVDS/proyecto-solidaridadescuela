@@ -17,7 +17,7 @@
         <div class="card">
             <p:button outcome="offers" value="Reporte Ofertas" icon="pi pi-external-link" iconPos="right" />
             <p:growl id="messages" showDetail="true"/>
-            <p:dataScroller id="dt-offers" widgetVar="dtOffer" var="offer" value="#{offerBean.offers}"
+            <p:dataScroller id="dt-offers" widgetVar="dtOffer" var="offer" value="#{offerBean.offersWS}"
                             reflow="true" rowKey="#{need.id}">
 
                 <p:card style="margin: 5px 0px; padding:0px; font-family: 'Raleway', sans-serif; font-weight: regular;">
@@ -32,17 +32,19 @@
                             </td>
                             <td style="padding-left:200px;" width="400px">
                                 <h:outputText style="margin-right:30px; color: #689f38; text-transform: uppercase; font-weight: bold;" value=" #{offer.status}"/>
-                                <p:commandButton icon="pi pi-pencil" styleClass="edit-button rounded-button ui-button-success"
+                                <p:commandButton icon="pi pi-pencil" styleClass="edit-button rounded-button ui-button-success" disabled="#{offerBean.editable(offer.username)}"
                                                  update=":form:manage-offer-content" oncomplete="PF('manageOfferDialog').show()" process="@this">
                                     <f:setPropertyActionListener value="#{offer}" target="#{offerBean.offer}"/>
                                     <f:setPropertyActionListener value="false" target="#{offerBean.hide}"/>
                                     <p:resetInput target=":form:manage-offer-content"/>
                                 </p:commandButton>
-                                <p:commandButton class="rounded-button ui-button-success" icon="pi pi-plus" actionListener="#{answerBean.openNew}"
-                                                 update=":form:manage-answer-content" oncomplete="PF('manageAnswerDialog').show()">
-                                    <f:setPropertyActionListener value="#{offer}" target="#{offerBean.offer}"/>
-                                    <p:resetInput target=":form:manage-answer-content"/>
-                                </p:commandButton>
+                                <div>
+                                    <p:commandButton value="Responder" iconPos="right" class="rounded-button ui-button-success" icon="pi pi-plus" actionListener="#{answerBean.openNew}"
+                                                     update=":form:manage-answer-content" oncomplete="PF('manageAnswerDialog').show()" styleClass="ui-button-info" style="margin-top:5px;">
+                                        <f:setPropertyActionListener value="#{offer}" target="#{offerBean.offer}"/>
+                                        <p:resetInput target=":form:manage-answer-content"/>
+                                    </p:commandButton>
+                                </div>
                             </td>
                         </tr>
                         </tbody>
