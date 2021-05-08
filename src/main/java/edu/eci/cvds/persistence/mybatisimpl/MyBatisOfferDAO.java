@@ -51,6 +51,16 @@ public class MyBatisOfferDAO implements OfferDAO {
     }
 
     @Override
+    public List<Offer> loadAllOffersWS() throws PersistenceException {
+        try {
+            return offerMapper.loadAllOffersWS();
+        } catch (org.apache.ibatis.exceptions.PersistenceException exception){
+            exception.printStackTrace();
+            throw new PersistenceException("Error al cargar las ofertas por estado",exception);
+        }
+    }
+
+    @Override
     public int loadParamNOffer() throws PersistenceException {
         try {
             return offerMapper.loadParamNOffer();
