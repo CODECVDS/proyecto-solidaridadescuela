@@ -136,7 +136,7 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
-    public List<CountNeeds> loadNeedsbyStatus() throws ServicesException {
+    public List<CountStatus> loadNeedsbyStatus() throws ServicesException {
         try {
             return needDAO.needsbyStatus();
         }catch (PersistenceException ex){
@@ -152,6 +152,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             return needDAO.loadNeedsWS();
         }catch (PersistenceException ex){
             throw new ServicesException("Error al cargar las necesidades en",ex);
+        }
+    }
+
+    @Override
+    public List<CountStatus> loadOfferbyStatus() throws ServicesException {
+        try {
+            return offerDAO.loadOfferbyStatus();
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al cargar reporte ofertas",ex);
         }
     }
 

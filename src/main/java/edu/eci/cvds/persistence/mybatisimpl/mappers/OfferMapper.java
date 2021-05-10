@@ -1,5 +1,6 @@
 package edu.eci.cvds.persistence.mybatisimpl.mappers;
 
+import edu.eci.cvds.entities.CountStatus;
 import edu.eci.cvds.entities.Offer;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,4 +13,6 @@ public interface OfferMapper {
     public List<Offer> loadAllOffers();
     public List<Offer> loadAllOffersWS();
     public int loadParamNOffer();
+
+    public List<CountStatus> loadOfferbyStatus();
 }

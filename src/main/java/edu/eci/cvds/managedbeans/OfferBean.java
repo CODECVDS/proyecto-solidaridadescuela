@@ -1,6 +1,7 @@
 package edu.eci.cvds.managedbeans;
 
 import edu.eci.cvds.entities.Category;
+import edu.eci.cvds.entities.CountStatus;
 import edu.eci.cvds.entities.Offer;
 import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.ServicesException;
@@ -9,12 +10,16 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.primefaces.PrimeFaces;
+import org.primefaces.model.charts.ChartData;
+import org.primefaces.model.charts.pie.PieChartDataSet;
+import org.primefaces.model.charts.pie.PieChartModel;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +46,8 @@ public class OfferBean  extends BasePageBean {
     private Category c;
     private Subject currentUser;
     private Session session;
+    private PieChartModel pieModel;
+    private List<CountStatus> offerbyStatus;
 
     public  void register(){
 
@@ -75,10 +82,42 @@ public class OfferBean  extends BasePageBean {
         PrimeFaces.current().executeScript("PF('manageOfferDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-offers");
     }
+
+    private void createpieModel()  {
+        pieModel = new PieChartModel();
+        ChartData data = new ChartData();
+
+        try {
+            offerbyStatus = solidaridadServices.loadOfferbyStatus();
+        } catch (ServicesException e) {
+            e.printStackTrace();
+        }
+
+        PieChartDataSet dataSet = new PieChartDataSet();
+        List<Number> values = new ArrayList<>();
+        offerbyStatus.stream().forEach(p -> values.add(p.getConteo()));
+        dataSet.setData(values);
+
+        List<String> bgColors = new ArrayList<>();
+        bgColors.add("rgb(82, 190, 128)");
+        bgColors.add("rgb(255, 99, 132)");
+        bgColors.add("rgb(255, 205, 86)");
+        bgColors.add("rgb(55, 105, 255)");
+        dataSet.setBackgroundColor(bgColors);
+
+        data.addChartDataSet(dataSet);
+        List<String> labels = new ArrayList<>();
+        labels.add("Active");
+        labels.add("Closed");
+        labels.add("InProcess");
+        labels.add("Solved");
+        data.setLabels(labels);
+
+        pieModel.setData(data);
+    }
     public void openNew() {
         this.offer = new Offer();
     }
-
 
     public List<Offer> getOffers() throws ServicesException{
         return solidaridadServices.loadOffers();
@@ -187,5 +226,14 @@ public class OfferBean  extends BasePageBean {
 
     public void setHide(boolean hide) {
         this.hide = hide;
+    }
+
+    public void setPieModel(PieChartModel pieModel) {
+        this.pieModel = pieModel;
+    }
+
+    public PieChartModel getPieModel() {
+        createpieModel();
+        return pieModel;
     }
 }

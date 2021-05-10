@@ -16,6 +16,11 @@
         <result property="username" column="username"/>
     </resultMap>
 
+    <resultMap id="CountResult" type="CountStatus">
+        <result property="status" column="status"/>
+        <result property="conteo" column="conteo"/>
+    </resultMap>
+
     <!-- adicionar oferta -->
     <insert parameterType="map" id="addOffer">
         call confirm_noffers(#{offer.category},#{offer.name},#{offer.description},#{offer.username})
@@ -40,6 +45,11 @@
     <!--loadOffers-->
     <select parameterType="map" id="loadAllOffers" resultMap="OfferResult">
         SELECT * FROM offer
+    </select>
+
+    <!--loadOffersbyStatus-->
+    <select parameterType="map" id="loadOfferbyStatus" resultMap="CountResult">
+        SELECT status, count(status) as conteo FROM offer group by status order by status
     </select>
 
     <!--loadOffers without Closed & Solved-->
