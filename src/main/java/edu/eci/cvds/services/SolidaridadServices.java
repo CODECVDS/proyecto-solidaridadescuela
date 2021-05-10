@@ -40,9 +40,11 @@ public interface SolidaridadServices {
 
     public void registerAnswer(Answer answer) throws ServicesException;
 
-    public List<CountNeeds> loadNeedsbyStatus() throws ServicesException;
+    public List<CountStatus> loadNeedsbyStatus() throws ServicesException;
 
     public List<Offer> loadAllOffersWS() throws ServicesException;
 
     public List<Need> loadNeedsWS() throws ServicesException;
+
+    public List<CountStatus> loadOfferbyStatus() throws ServicesException;
 }

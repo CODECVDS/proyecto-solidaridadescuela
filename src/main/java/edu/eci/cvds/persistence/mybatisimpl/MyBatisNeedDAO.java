@@ -1,7 +1,7 @@
 package edu.eci.cvds.persistence.mybatisimpl;
 
 import com.google.inject.Inject;
-import edu.eci.cvds.entities.CountNeeds;
+import edu.eci.cvds.entities.CountStatus;
 import edu.eci.cvds.entities.Need;
 import edu.eci.cvds.persistence.NeedDAO;
 import edu.eci.cvds.persistence.PersistenceException;
@@ -56,7 +56,7 @@ public class MyBatisNeedDAO implements NeedDAO {
     }
 
     @Override
-    public List<CountNeeds> needsbyStatus() throws PersistenceException {
+    public List<CountStatus> needsbyStatus() throws PersistenceException {
         try {
             return needMapper.loadNeedsbyStatus();
         } catch (org.apache.ibatis.exceptions.PersistenceException e){

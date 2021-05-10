@@ -1,10 +1,10 @@
 package edu.eci.cvds.entities;
 
-public class CountNeeds {
+public class CountStatus {
     private String status;
     private int conteo;
 
-    public CountNeeds(String status, int conteo) {
+    public CountStatus(String status, int conteo) {
         this.status = status;
         this.conteo = conteo;
     }
@@ -25,7 +25,7 @@ public class CountNeeds {
         this.conteo = conteo;
     }
 
-    public CountNeeds(){
+    public CountStatus(){
         super();
     }
 }

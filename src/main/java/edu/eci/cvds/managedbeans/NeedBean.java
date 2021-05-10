@@ -1,7 +1,7 @@
 package edu.eci.cvds.managedbeans;
 
 import edu.eci.cvds.entities.Category;
-import edu.eci.cvds.entities.CountNeeds;
+import edu.eci.cvds.entities.CountStatus;
 import edu.eci.cvds.entities.Need;
 import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.ServicesException;
@@ -48,7 +48,7 @@ public class NeedBean extends BasePageBean{
     private List<Need> needs;
     private List<Need> needsWS;
     private PieChartModel pieModel;
-    private List<CountNeeds> needsbyStatus;
+    private List<CountStatus> needsbyStatus;
     private HashMap<Integer,String> urgenciesHm;
 
     public  void register(){
@@ -277,11 +277,11 @@ public class NeedBean extends BasePageBean{
         this.needs = needs;
     }
 
-    public List<CountNeeds> getNeedsbyStatus() {
+    public List<CountStatus> getNeedsbyStatus() {
         return needsbyStatus;
     }
 
-    public void setNeedsbyStatus(List<CountNeeds> needsbyStatus) {
+    public void setNeedsbyStatus(List<CountStatus> needsbyStatus) {
         this.needsbyStatus = needsbyStatus;
     }
 

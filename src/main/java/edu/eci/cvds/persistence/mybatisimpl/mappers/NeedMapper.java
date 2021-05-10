@@ -1,6 +1,6 @@
 package edu.eci.cvds.persistence.mybatisimpl.mappers;
 
-import edu.eci.cvds.entities.CountNeeds;
+import edu.eci.cvds.entities.CountStatus;
 import edu.eci.cvds.entities.Need;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,7 +16,7 @@ public interface NeedMapper {
 
     public Need load(@Param("id") int needId);
 
-    public List<CountNeeds> loadNeedsbyStatus();
+    public List<CountStatus> loadNeedsbyStatus();
 
     public List<Need> loadNeedsWS();
 }
