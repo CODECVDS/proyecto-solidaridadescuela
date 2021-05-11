@@ -47,4 +47,6 @@ public interface SolidaridadServices {
     public List<Need> loadNeedsWS() throws ServicesException;
 
     public List<CountStatus> loadOfferbyStatus() throws ServicesException;
+
+    public List<ReportCategory> loadReportCategory() throws ServicesException;
 }

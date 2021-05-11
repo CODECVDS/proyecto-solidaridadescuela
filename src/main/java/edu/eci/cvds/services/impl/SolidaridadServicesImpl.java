@@ -208,6 +208,16 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             throw new ServicesException("Error al cargar las categorias",ex);
         }
     }
+
+    @Override
+    public List<ReportCategory> loadReportCategory() throws ServicesException {
+        try {
+            return categoryDAO.loadReportCategory();
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar el reporte de categorias",ex);
+        }
+    }
+
     /*
     @Override
     public User getUser(String username) throws ServicesException {
