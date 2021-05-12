@@ -15,9 +15,9 @@
     <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
         <div class="card">
-            <p:button outcome="offers" value="Reporte Ofertas" icon="pi pi-external-link" iconPos="right" />
+            <p:button outcome="offers" value="Reporte Ofertas" icon="pi pi-external-link" iconPos="right" rendered="#{currentUser.hasRole('Administrator') || currentUser.hasRole('Administrative')}"/>
             <p:growl id="messages" showDetail="true"/>
-            <p:dataScroller id="dt-offers" widgetVar="dtOffer" var="offer" value="#{offerBean.offers}"
+            <p:dataScroller id="dt-offers" widgetVar="dtOffer" var="offer" value="#{offerBean.offersWS}"
                             reflow="true" rowKey="#{need.id}">
 
                 <p:card style="margin: 5px 0px; padding:0px; font-family: 'Raleway', sans-serif; font-weight: regular;">
@@ -32,17 +32,19 @@
                             </td>
                             <td style="padding-left:200px;" width="400px">
                                 <h:outputText style="margin-right:30px; color: #689f38; text-transform: uppercase; font-weight: bold;" value=" #{offer.status}"/>
-                                <p:commandButton icon="pi pi-pencil" styleClass="edit-button rounded-button ui-button-success"
+                                <p:commandButton icon="pi pi-pencil" styleClass="edit-button rounded-button ui-button-success" disabled="#{offerBean.editable(offer.username)}"
                                                  update=":form:manage-offer-content" oncomplete="PF('manageOfferDialog').show()" process="@this">
                                     <f:setPropertyActionListener value="#{offer}" target="#{offerBean.offer}"/>
                                     <f:setPropertyActionListener value="false" target="#{offerBean.hide}"/>
                                     <p:resetInput target=":form:manage-offer-content"/>
                                 </p:commandButton>
-                                <p:commandButton class="rounded-button ui-button-success" icon="pi pi-plus" actionListener="#{answerBean.openNew}"
-                                                 update=":form:manage-answer-content" oncomplete="PF('manageAnswerDialog').show()">
-                                    <f:setPropertyActionListener value="#{offer}" target="#{offerBean.offer}"/>
-                                    <p:resetInput target=":form:manage-answer-content"/>
-                                </p:commandButton>
+                                <div>
+                                    <p:commandButton value="Responder" iconPos="right" class="rounded-button ui-button-success" icon="pi pi-plus" actionListener="#{answerBean.openNew}"
+                                                     update=":form:manage-answer-content" oncomplete="PF('manageAnswerDialog').show()" styleClass="ui-button-info" style="margin-top:5px;">
+                                        <f:setPropertyActionListener value="#{offer}" target="#{offerBean.offer}"/>
+                                        <p:resetInput target=":form:manage-answer-content"/>
+                                    </p:commandButton>
+                                </div>
                             </td>
                         </tr>
                         </tbody>
@@ -62,15 +64,15 @@
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="name" rendered="#{offerBean.hide}">Name</p:outputLabel>
-                            <p:inputText id="name" value="#{offerBean.offer.name}" rendered="#{offerBean.hide}"/>
+                            <p:inputText id="name" value="#{offerBean.offer.name}" required="true" rendered="#{offerBean.hide}"/>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="description" rendered="#{offerBean.hide}">Description</p:outputLabel>
-                            <p:inputTextarea id="description" value="#{offerBean.offer.description}" rendered="#{offerBean.hide}"/>
+                            <p:inputTextarea id="description" value="#{offerBean.offer.description}" required="true" rendered="#{offerBean.hide}"/>
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="status" value="Status:"/>
-                            <p:selectOneMenu id="status" value="#{offerBean.offer.status}">
+                            <p:outputLabel for="status" value="Status:" rendered="#{!offerBean.hide}"/>
+                            <p:selectOneMenu id="status" value="#{offerBean.offer.status}" rendered="#{!offerBean.hide}">
                                 <f:selectItems value="#{offerBean.allStatus}"/>
                             </p:selectOneMenu>
                         </div>
@@ -106,7 +108,7 @@
             </p:dialog>
         </div>
         <p:commandButton class="rounded-button ui-button-success a-button" style="width: 50px;height: 50px;" icon="pi pi-plus" actionListener="#{offerBean.openNew}"
-                         update=":form:manage-offer-content" oncomplete="PF('manageOfferDialog').show()">
+                         rendered="#{!currentUser.hasRole('Administrator')}" update=":form:manage-offer-content" oncomplete="PF('manageOfferDialog').show()">
             <p:resetInput target=":form:manage-offer-content"/>
             <f:setPropertyActionListener value="true" target="#{offerBean.hide}"/>
         </p:commandButton>

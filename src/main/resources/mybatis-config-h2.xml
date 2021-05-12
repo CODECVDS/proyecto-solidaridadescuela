@@ -10,8 +10,10 @@
 		<typeAlias type='edu.eci.cvds.entities.Category' alias='Category' />
 		<typeAlias type='edu.eci.cvds.entities.Need' alias='Need' />
 		<typeAlias type='edu.eci.cvds.entities.User' alias='User' />
+		<typeAlias type='edu.eci.cvds.entities.CountStatus' alias='CountStatus' />
 		<typeAlias type='edu.eci.cvds.entities.Offer' alias='Offer' />
 		<typeAlias type='edu.eci.cvds.entities.Answer' alias='Answer' />
+		<typeAlias type='edu.eci.cvds.entities.ReportCategory' alias='ReportCategory' />
 	</typeAliases>
 
 	<environments default="test">

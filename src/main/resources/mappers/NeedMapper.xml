@@ -17,14 +17,29 @@
         <result property="username" column="username"/>
     </resultMap>
 
+    <resultMap id="CountResult" type="CountStatus">
+        <result property="status" column="status"/>
+        <result property="conteo" column="conteo"/>
+    </resultMap>
+
     <!--addNeed-->
     <insert parameterType="map" id="addNeed">
-        call confirm_nneeds(#{need.category},#{need.name},#{need.description},#{need.urgency},#{need.status},#{need.username})
+        call confirm_nneeds(#{need.category},#{need.name},#{need.description},#{need.urgency},#{need.username})
     </insert>
 
     <!--loadNeeds-->
     <select parameterType="map" id="loadNeeds" resultMap="NeedResult">
         SELECT * FROM need
+    </select>
+
+    <!--loadNeeds whitout Closed & Solved-->
+    <select parameterType="map" id="loadNeedsWS" resultMap="NeedResult">
+        select * from need n where n.status != 'Closed' and n.status != 'Solved'
+    </select>
+
+    <!--loadNeedsbyStatus-->
+    <select parameterType="map" id="loadNeedsbyStatus" resultMap="CountResult">
+        SELECT status, count(status) as conteo FROM need group by status order by status
     </select>
 
     <!--loadNeed-->
