@@ -33,6 +33,15 @@ public class MyBatisCategoryDAO implements CategoryDAO {
     }
 
     @Override
+    public void deleteCategory(Category category) throws PersistenceException {
+        try{
+            categoryMapper.eraseCategory(category);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al eliminar la categoria",e);
+        }
+    }
+
+    @Override
     public Category load(int categoryId) throws PersistenceException {
         try {
             return categoryMapper.loadC(categoryId);

@@ -78,6 +78,15 @@ public class CategoryBean extends BasePageBean {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-categories");
     }
 
+    public void erase() throws ServicesException {
+        try{
+            solidaridadServices.deleteCategory(category);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Category Deleted"));
+        }catch(ServicesException ex){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete Error","Delete Error"));
+        }
+    }
+
     public void openNew() {
         this.category = new Category();
         category.setStatus(true);
