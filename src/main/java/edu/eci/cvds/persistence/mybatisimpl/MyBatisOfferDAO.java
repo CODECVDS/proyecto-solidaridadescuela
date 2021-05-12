@@ -1,6 +1,7 @@
 package edu.eci.cvds.persistence.mybatisimpl;
 
 import com.google.inject.Inject;
+import edu.eci.cvds.entities.CountStatus;
 import edu.eci.cvds.entities.Offer;
 import edu.eci.cvds.persistence.OfferDAO;
 import edu.eci.cvds.persistence.PersistenceException;
@@ -18,7 +19,13 @@ public class MyBatisOfferDAO implements OfferDAO {
         try {
             offerMapper.addOffer(offer);
         } catch (org.apache.ibatis.exceptions.PersistenceException exception){
-            throw new PersistenceException("Error al registrar oferta",exception);
+            if(exception.getMessage().contains("numero maximo de ofertas registradas")){
+                throw new PersistenceException("Número máximo de ofertas registradas", exception);
+            }
+            else {
+                throw new PersistenceException("Error al registrar oferta", exception);
+            }
+
         }
     }
 
@@ -64,6 +71,15 @@ public class MyBatisOfferDAO implements OfferDAO {
     public int loadParamNOffer() throws PersistenceException {
         try {
             return offerMapper.loadParamNOffer();
+        } catch (org.apache.ibatis.exceptions.PersistenceException exception){
+            throw new PersistenceException("Error al cargar parametro nOffer",exception);
+        }
+    }
+
+    @Override
+    public List<CountStatus> loadOfferbyStatus() throws PersistenceException {
+        try {
+            return offerMapper.loadOfferbyStatus();
         } catch (org.apache.ibatis.exceptions.PersistenceException exception){
             throw new PersistenceException("Error al cargar parametro nOffer",exception);
         }

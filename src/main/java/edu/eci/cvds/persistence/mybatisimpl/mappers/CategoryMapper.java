@@ -1,6 +1,7 @@
 package edu.eci.cvds.persistence.mybatisimpl.mappers;
 
 import edu.eci.cvds.entities.Category;
+import edu.eci.cvds.entities.ReportCategory;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface CategoryMapper {
     public List<Category> loadAllC();
 
     public List<Category> loadAllActive(@Param("status") boolean status);
+
+    public List<ReportCategory> loadReportCategory();
 }

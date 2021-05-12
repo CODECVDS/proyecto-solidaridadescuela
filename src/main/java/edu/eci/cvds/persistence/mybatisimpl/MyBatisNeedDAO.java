@@ -1,7 +1,7 @@
 package edu.eci.cvds.persistence.mybatisimpl;
 
 import com.google.inject.Inject;
-import edu.eci.cvds.entities.CountNeeds;
+import edu.eci.cvds.entities.CountStatus;
 import edu.eci.cvds.entities.Need;
 import edu.eci.cvds.persistence.NeedDAO;
 import edu.eci.cvds.persistence.PersistenceException;
@@ -15,11 +15,16 @@ public class MyBatisNeedDAO implements NeedDAO {
     private NeedMapper needMapper;
 
     @Override
-    public void save(Need necesidad) throws PersistenceException {
+    public void save(Need necesidad) throws PersistenceException{
         try{
             needMapper.addNeed(necesidad);
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Error al registrar la necesidad ",e);
+            if(e.getMessage().contains("numero maximo de necesidades registradas")){
+                throw new PersistenceException("Número máximo de necesidades registradas", e);
+            }
+            else {
+                throw new PersistenceException("Error al registrar necesidades", e);
+            }
         }
     }
 
@@ -51,11 +56,20 @@ public class MyBatisNeedDAO implements NeedDAO {
     }
 
     @Override
-    public List<CountNeeds> needsbyStatus() throws PersistenceException {
+    public List<CountStatus> needsbyStatus() throws PersistenceException {
         try {
             return needMapper.loadNeedsbyStatus();
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al consultar la necesidad por status",e);
+        }
+    }
+
+    @Override
+    public List<Need> loadNeedsWS() throws PersistenceException {
+        try {
+            return needMapper.loadNeedsWS();
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar la necesidade en",e);
         }
     }
 

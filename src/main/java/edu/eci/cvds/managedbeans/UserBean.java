@@ -38,9 +38,10 @@ public class UserBean implements Serializable {
             session.setAttribute("currentUser",currentUser);
             if(currentUser.hasRole("Administrator")){
                 facesContext.getExternalContext().redirect("/faces/homeA.xhtml");
-            }else if(currentUser.hasRole("Student")){
+            } else if(currentUser.hasRole("Student") || currentUser.hasRole("Teacher") || currentUser.hasRole("Graduate") || currentUser.hasRole("Administrative")  ){
                 facesContext.getExternalContext().redirect("/faces/homeB.xhtml");
             }
+
         } catch ( UnknownAccountException e ) {
             //username wasn't in the system, show them an error message?
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Sign in Error", "Incorrect Credentials"));

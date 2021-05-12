@@ -15,7 +15,7 @@
     <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
         <div class="card">
-            <p:button outcome="offers" value="Reporte Ofertas" icon="pi pi-external-link" iconPos="right" />
+            <p:button outcome="offers" value="Reporte Ofertas" icon="pi pi-external-link" iconPos="right" rendered="#{currentUser.hasRole('Administrator') || currentUser.hasRole('Administrative')}"/>
             <p:growl id="messages" showDetail="true"/>
             <p:dataScroller id="dt-offers" widgetVar="dtOffer" var="offer" value="#{offerBean.offersWS}"
                             reflow="true" rowKey="#{need.id}">
@@ -64,11 +64,11 @@
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="name" rendered="#{offerBean.hide}">Name</p:outputLabel>
-                            <p:inputText id="name" value="#{offerBean.offer.name}" rendered="#{offerBean.hide}"/>
+                            <p:inputText id="name" value="#{offerBean.offer.name}" required="true" rendered="#{offerBean.hide}"/>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="description" rendered="#{offerBean.hide}">Description</p:outputLabel>
-                            <p:inputTextarea id="description" value="#{offerBean.offer.description}" rendered="#{offerBean.hide}"/>
+                            <p:inputTextarea id="description" value="#{offerBean.offer.description}" required="true" rendered="#{offerBean.hide}"/>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="status" value="Status:" rendered="#{!offerBean.hide}"/>
@@ -108,7 +108,7 @@
             </p:dialog>
         </div>
         <p:commandButton class="rounded-button ui-button-success a-button" style="width: 50px;height: 50px;" icon="pi pi-plus" actionListener="#{offerBean.openNew}"
-                         update=":form:manage-offer-content" oncomplete="PF('manageOfferDialog').show()">
+                         rendered="#{!currentUser.hasRole('Administrator')}" update=":form:manage-offer-content" oncomplete="PF('manageOfferDialog').show()">
             <p:resetInput target=":form:manage-offer-content"/>
             <f:setPropertyActionListener value="true" target="#{offerBean.hide}"/>
         </p:commandButton>

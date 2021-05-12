@@ -1,7 +1,7 @@
 package edu.eci.cvds.managedbeans;
 
 import edu.eci.cvds.entities.Category;
-import edu.eci.cvds.entities.CountNeeds;
+import edu.eci.cvds.entities.CountStatus;
 import edu.eci.cvds.entities.Need;
 import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.ServicesException;
@@ -46,35 +46,10 @@ public class NeedBean extends BasePageBean{
     private Session session;
     private boolean hide;
     private List<Need> needs;
+    private List<Need> needsWS;
     private PieChartModel pieModel;
-    private List<CountNeeds> needsbyStatus;
+    private List<CountStatus> needsbyStatus;
     private HashMap<Integer,String> urgenciesHm;
-
-    public List<Category> getCategories()  {
-        try {
-            categories = solidaridadServices.loadActiveCategories(true);
-        } catch (ServicesException e) {
-            e.printStackTrace();
-        }
-        return categories;
-    }
-
-    public Integer getNeedId() {
-        return needId;
-    }
-
-    public void setNeedId(Integer needId) {
-        this.needId = needId;
-    }
-
-    public List<Need> getNeeds() {
-        try {
-            needs = solidaridadServices.loadNeeds();
-        } catch (ServicesException ex){
-            ex.printStackTrace();
-        }
-        return needs;
-    }
 
     public  void register(){
         try{
@@ -82,9 +57,24 @@ public class NeedBean extends BasePageBean{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Added"));
         } catch (ServicesException ex){
             ex.printStackTrace();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error","Add Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error",ex.getMessage()));
         }
 
+    }
+
+    public void updateNeedStatus(){
+        try{
+            if (need.getUsername().equals(session.getAttribute("username")) | currentUser.hasRole("Administrator")) {
+                solidaridadServices.updateNeedStatus(need);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Updated"));
+            }
+            else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Not allowed"));
+            }
+        }catch(ServicesException ex){
+            ex.getCause().getMessage();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", ex.getMessage()));
+        }
     }
 
     public void save(){
@@ -132,19 +122,22 @@ public class NeedBean extends BasePageBean{
         this.urgenciesHm = urgenciesHm;
     }
 
-    public void updateNeedStatus(){
-        try{
-            if (need.getUsername().equals(session.getAttribute("username")) | currentUser.hasRole("Administrator")) {
-                solidaridadServices.updateNeedStatus(need);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Updated"));
-            }
-            else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Not allowed"));
-            }
-        }catch(ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Update Error"));
-        }
+    public List<Category> getCategories() throws ServicesException {
+        return solidaridadServices.loadActiveCategories(true);
     }
+
+    public Integer getNeedId() {
+        return needId;
+    }
+
+    public void setNeedId(Integer needId) {
+        this.needId = needId;
+    }
+
+    public List<Need> getNeeds() throws ServicesException {
+        return solidaridadServices.loadNeeds();
+    }
+
 
     public List<Status> getAllStatus() {
         return Arrays.asList(status.values());
@@ -284,11 +277,11 @@ public class NeedBean extends BasePageBean{
         this.needs = needs;
     }
 
-    public List<CountNeeds> getNeedsbyStatus() {
+    public List<CountStatus> getNeedsbyStatus() {
         return needsbyStatus;
     }
 
-    public void setNeedsbyStatus(List<CountNeeds> needsbyStatus) {
+    public void setNeedsbyStatus(List<CountStatus> needsbyStatus) {
         this.needsbyStatus = needsbyStatus;
     }
 
@@ -307,5 +300,18 @@ public class NeedBean extends BasePageBean{
 
     public void setSolidaridadServices(SolidaridadServices solidaridadServices) {
         this.solidaridadServices = solidaridadServices;
+    }
+
+    public List<Need> getNeedsWS() {
+        try {
+            needsWS = solidaridadServices.loadNeedsWS();
+        } catch (ServicesException ex){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar necesidades", ex.getMessage()));
+        }
+        return needsWS;
+    }
+
+    public void setNeedsWS(List<Need> needsWS) {
+        this.needsWS = needsWS;
     }
 }

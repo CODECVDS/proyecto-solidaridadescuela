@@ -15,6 +15,7 @@
     <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
         <div class="card category">
+            <p:button outcome="categories" value="Reporte categorias" icon="pi pi-external-link" iconPos="right"/>
             <p:growl id="messages" showDetail="true"/>
             <p:dataScroller id="dt-categories" widgetVar="dtCategory" var="category" value="#{categoryBean.categories}"
                             reflow="true" rowKey="#{category.id}">

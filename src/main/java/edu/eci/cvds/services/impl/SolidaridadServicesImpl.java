@@ -48,7 +48,7 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
         try{
             needDAO.save(need);
         }catch(PersistenceException ex){
-            throw new ServicesException("Error al crear la necesidad",ex);
+            throw new ServicesException(ex.getMessage(),ex);
         }
     }
 
@@ -66,7 +66,7 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
         try {
             offerDAO.registerOffer(offer);
         }catch (PersistenceException ex){
-            throw new ServicesException("Error al registrar oferta",ex);
+            throw new ServicesException(ex.getMessage(),ex);
         }
     }
 
@@ -136,7 +136,7 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
-    public List<CountNeeds> loadNeedsbyStatus() throws ServicesException {
+    public List<CountStatus> loadNeedsbyStatus() throws ServicesException {
         try {
             return needDAO.needsbyStatus();
         }catch (PersistenceException ex){
@@ -145,6 +145,24 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
 
+
+    @Override
+    public List<Need> loadNeedsWS() throws ServicesException {
+        try {
+            return needDAO.loadNeedsWS();
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al cargar las necesidades en",ex);
+        }
+    }
+
+    @Override
+    public List<CountStatus> loadOfferbyStatus() throws ServicesException {
+        try {
+            return offerDAO.loadOfferbyStatus();
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al cargar reporte ofertas",ex);
+        }
+    }
 
     @Override
     public List<Need> loadNeeds() throws ServicesException{
@@ -190,6 +208,16 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             throw new ServicesException("Error al cargar las categorias",ex);
         }
     }
+
+    @Override
+    public List<ReportCategory> loadReportCategory() throws ServicesException {
+        try {
+            return categoryDAO.loadReportCategory();
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar el reporte de categorias",ex);
+        }
+    }
+
     /*
     @Override
     public User getUser(String username) throws ServicesException {
