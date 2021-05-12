@@ -71,4 +71,10 @@
         modificationDate = CURRENT_TIMESTAMP
         WHERE id = #{category.id}
     </update>
+
+    <!--deleteCategory-->
+    <delete parameterType="map" id="eraseCategory">
+        DELETE FROM category
+        WHERE id = #{category.id}
+    </delete>
 </mapper>

@@ -44,6 +44,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
+    public void deleteCategory(Category category) throws ServicesException {
+        try{
+            categoryDAO.deleteCategory(category);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al eliminar la categoria",ex);
+        }
+    }
+
+    @Override
     public void registerNeed(Need need) throws ServicesException{
         try{
             needDAO.save(need);
