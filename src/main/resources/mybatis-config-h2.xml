@@ -14,6 +14,7 @@
 		<typeAlias type='edu.eci.cvds.entities.Offer' alias='Offer' />
 		<typeAlias type='edu.eci.cvds.entities.Answer' alias='Answer' />
 		<typeAlias type='edu.eci.cvds.entities.ReportCategory' alias='ReportCategory' />
+		<typeAlias type='edu.eci.cvds.entities.ReportAnswer' alias='ReportAnswer' />
 	</typeAliases>
 
 	<environments default="test">

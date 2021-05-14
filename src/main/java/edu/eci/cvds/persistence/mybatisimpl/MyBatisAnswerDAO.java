@@ -2,6 +2,7 @@ package edu.eci.cvds.persistence.mybatisimpl;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Answer;
+import edu.eci.cvds.entities.ReportAnswer;
 import edu.eci.cvds.persistence.AnswerDAO;
 import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.AnswerMapper;
@@ -39,4 +40,14 @@ public class MyBatisAnswerDAO implements AnswerDAO {
             throw new PersistenceException("Error al cargar las respuestas",e);
         }
     }
+
+    @Override
+    public List<ReportAnswer> loadReportAnswer() throws PersistenceException {
+        try {
+            return answerMapper.loadReportAnswer();
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al cargar Reporte", e);
+        }
+    }
+
 }

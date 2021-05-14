@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<h:head>
+    <title>Report Answer</title>
+    <link rel="stylesheet" href="/resources/style.css"/>
+</h:head>
+<h:body>
+    <ui:include src="menuA.xhtml"></ui:include>
+    <h:form id="form">
+        <p:button outcome="answers" value="Volver" icon="pi pi-arrow-left" iconPos="left" />
+        <p:commandButton value="XLS" icon="pi pi-download" style="margin-left:10px;">
+            <p:dataExporter type="xls" target="dt-ranswers" fileName="answers"/>
+        </p:commandButton>
+        <p:commandButton value="PDF" icon="pi pi-download" style="margin-left:10px; text-align:right;">
+            <p:dataExporter type="pdf" target="dt-ranswers" fileName="answersPDF"/>
+        </p:commandButton>
+        <div class="card answers">
+            <p:growl id="messages" showDetail="true"/>
+            <p:dataTable id="dt-ranswers" widgetVar="dtrAnswers" var="report" value="#{answerBean.report}"
+                         reflow="true" styleClass="answers-table">
+
+                <p:column headerText="Answer">
+                    <h:outputText value="#{report.answer}"/>
+                </p:column>
+                <p:column headerText="Type">
+                    <h:outputText value="#{report.type}"/>
+                </p:column>
+                <p:column headerText="Name">
+                    <h:outputText value="#{report.name}"/>
+                </p:column>
+            </p:dataTable>
+        </div>
+
+    </h:form>
+</h:body>
+</html>
