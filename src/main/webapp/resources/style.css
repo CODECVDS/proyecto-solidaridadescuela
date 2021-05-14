@@ -159,3 +159,10 @@ body .ui-datascroller .ui-datascroller-content {
   background: transparent;
   color: #495057;
   padding: 1rem; }
+
+.pie-title{
+    font-family: 'Play', sans-serif;
+    font-style: Regular;
+    font-size: 20px;
+    text-align:center
+}
