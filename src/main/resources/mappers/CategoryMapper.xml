@@ -52,7 +52,7 @@
             c.status,
             c.modificationDate
         FROM category c
-        WHERE c.id = #{id}
+        WHERE c.id = #{id} and c.status = true
     </select>
     
     <!--addCategory-->
@@ -73,8 +73,11 @@
     </update>
 
     <!--deleteCategory-->
-    <delete parameterType="map" id="eraseCategory">
-        DELETE FROM category
+    <update parameterType="map" id="eraseCategory">
+        UPDATE category
+        SET
+        status = false,
+        modificationDate = CURRENT_TIMESTAMP
         WHERE id = #{category.id}
-    </delete>
+    </update>
 </mapper>
