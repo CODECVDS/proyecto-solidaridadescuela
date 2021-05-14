@@ -1,6 +1,7 @@
 package edu.eci.cvds.persistence.mybatisimpl;
 
 import edu.eci.cvds.entities.Category;
+import edu.eci.cvds.entities.ReportCategory;
 import edu.eci.cvds.persistence.CategoryDAO;
 import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.CategoryMapper;
@@ -32,6 +33,15 @@ public class MyBatisCategoryDAO implements CategoryDAO {
     }
 
     @Override
+    public void deleteCategory(Category category) throws PersistenceException {
+        try{
+            categoryMapper.eraseCategory(category);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al eliminar la categoria",e);
+        }
+    }
+
+    @Override
     public Category load(int categoryId) throws PersistenceException {
         try {
             return categoryMapper.loadC(categoryId);
@@ -55,6 +65,15 @@ public class MyBatisCategoryDAO implements CategoryDAO {
             return categoryMapper.loadAllActive(true);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al consultar categorias activas",e);
+        }
+    }
+
+    @Override
+    public List<ReportCategory> loadReportCategory() throws PersistenceException {
+        try {
+            return categoryMapper.loadReportCategory();
+        } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al cargar el reporte de categorias",e);
         }
     }
 

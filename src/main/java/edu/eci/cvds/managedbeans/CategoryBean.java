@@ -1,6 +1,7 @@
 package edu.eci.cvds.managedbeans;
 
 import edu.eci.cvds.entities.Category;
+import edu.eci.cvds.entities.ReportCategory;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
 import org.primefaces.PrimeFaces;
@@ -27,6 +28,7 @@ public class CategoryBean extends BasePageBean {
     private Date creationDate;
     private Date modificationDate;
     private boolean button;
+    private List<ReportCategory> report;
 
     public void loadCategory() throws ServicesException{
         try {
@@ -66,7 +68,7 @@ public class CategoryBean extends BasePageBean {
     }
 
     public void save() throws ServicesException {
-        if (this.category.getId() == 0) {
+        if (this.category.getId() ==    0) {
             register();
         }
         else {
@@ -74,6 +76,15 @@ public class CategoryBean extends BasePageBean {
         }
         PrimeFaces.current().executeScript("PF('manageCategoryDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-categories");
+    }
+
+    public void erase() throws ServicesException {
+        try{
+            solidaridadServices.deleteCategory(category);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Category Deleted"));
+        }catch(ServicesException ex){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete Error","Delete Error"));
+        }
     }
 
     public void openNew() {
@@ -146,5 +157,18 @@ public class CategoryBean extends BasePageBean {
 
     public void setModificationDate(Date modificationDate) {
         this.modificationDate = modificationDate;
+    }
+
+    public List<ReportCategory> getReport() {
+        try {
+            report = solidaridadServices.loadReportCategory();
+        } catch (ServicesException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",e.getMessage()));
+        }
+        return report;
+    }
+
+    public void setReport(List<ReportCategory> report) {
+        this.report = report;
     }
 }

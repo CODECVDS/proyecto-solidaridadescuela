@@ -8,76 +8,55 @@
       xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 <h:head>
-    <title>Menu</title>
+    <title>Needs</title>
     <link rel="stylesheet" href="/resources/style.css"/>
 </h:head>
 <h:body>
     <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
+        <p:button outcome="needs2" value="Volver" icon="pi pi-arrow-left" iconPos="left" />
+        <p:commandButton value="XLS" icon="pi pi-download" style="margin-left:10px;">
+            <p:dataExporter type="xls" target="dt-needs" fileName="needs"/>
+        </p:commandButton>
+        <p:commandButton value="PDF" icon="pi pi-download" style="margin-left:10px; text-align:right;">
+            <p:dataExporter type="pdf" target="dt-needs" fileName="needsPDF"/>
+        </p:commandButton>
         <div class="card need">
             <p:growl id="messages" showDetail="true"/>
-            <p:toolbar>
-                <p:toolbarGroup>
-                    <p:commandButton value="New" icon="pi pi-plus" actionListener="#{needBean.openNew}"
-                                     update=":form:manage-need-content" oncomplete="PF('manageNeedDialog').show()"
-                                     styleClass="ui-button-success" style="margin-right: .5rem">
-                        <p:resetInput target=":form:manage-need-content"/>
-                    </p:commandButton>
-                </p:toolbarGroup>
-            </p:toolbar>
-
             <p:dataTable id="dt-needs" widgetVar="dtNeed" var="need" value="#{needBean.needs}"
-                         reflow="true" styleClass="needs-table" rowKey="#{need.id}" paginator="true"
-                         rows="10" paginatorPosition="bottom">
-                <f:facet name="header">
-                    <div class="products-table-header">
-                        <span style="font-weight: bold">NEEDS</span>
-                    </div>
-                </f:facet>
-
+                         reflow="true" styleClass="needs-table" rowKey="#{need.id}">
                 <p:column headerText="Id">
                     <h:outputText value="#{need.id}"/>
                 </p:column>
-
                 <p:column headerText="Category">
-                    <h:outputText value="#{need.category}"/>
+                    <h:outputText value="#{needBean.getC(need.category).name}"/>
                 </p:column>
-
                 <p:column headerText="Name">
                     <h:outputText value="#{need.name}"/>
                 </p:column>
-
                 <p:column headerText="Description">
                     <h:outputText value="#{need.description}"/>
                 </p:column>
-
                 <p:column headerText="Urgency" >
                     <h:outputText value="#{need.urgency}"/>
                 </p:column>
-
                 <p:column headerText="Creation Date">
                     <h:outputText value="#{need.creationDate}"/>
                 </p:column>
-
                 <p:column headerText="Status">
                     <h:outputText value="#{need.status}"/>
                 </p:column>
-
                 <p:column headerText="Modification Date">
                     <h:outputText value="#{need.modificationDate}"/>
                 </p:column>
                 <p:column headerText="User">
                     <h:outputText value="#{need.username}"/>
                 </p:column>
-
             </p:dataTable>
-
-
             <p:dialog header="Need Details" showEffect="fade" modal="true"
                       widgetVar="manageNeedDialog" responsive="true">
                 <p:outputPanel id="manage-need-content" class="ui-fluid">
                     <p:outputPanel rendered="#{not empty needBean.need}">
-
                         <div class="p-field">
                             <p:outputLabel for="category" value="Category:"/>
                             <p:selectOneMenu id="category" value="#{needBean.need.category}">
@@ -85,41 +64,33 @@
                                                itemValue="#{c.id}" itemLabel="#{c.name}"/>
                             </p:selectOneMenu>
                         </div>
-
                         <div class="p-field">
                             <p:outputLabel for="name">Name</p:outputLabel>
                             <p:inputText id="name" value="#{needBean.need.name}"/>
                         </div>
-
                         <div class="p-field">
                             <p:outputLabel for="description">Description</p:outputLabel>
                             <p:inputTextarea id="description" value="#{needBean.need.description}"/>
                         </div>
-
                         <div class="p-field">
                             <p:outputLabel for="urgency" value="Urgency:"/>
                             <p:selectOneMenu id="urgency" value="#{needBean.need.urgency}">
                                 <f:selectItems value="#{needBean.urgencies}"/>
                             </p:selectOneMenu>
                         </div>
-
                         <div class="p-field">
                             <p:outputLabel for="status" value="Status:"/>
                             <p:selectOneMenu id="status" value="#{needBean.need.status}">
                                 <f:selectItems value="#{needBean.allStatus}"/>
                             </p:selectOneMenu>
                         </div>
-
                     </p:outputPanel>
                 </p:outputPanel>
-
-                <f:facet name="footer">
-                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{needBean.save}"
-                                     update="manage-need-content" process="manage-need-content @this"/>
-                    <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageNeedDialog').hide()"
-                                     class="ui-button-secondary"/>
-                </f:facet>
             </p:dialog>
+        </div>
+        <div class="card">
+            <h2>Grafica necesidades agrupadas por status</h2>
+            <p:pieChart model="#{needBean.pieModel}" style="width: 100%; height: 500px;"/>
         </div>
     </h:form>
 </h:body>

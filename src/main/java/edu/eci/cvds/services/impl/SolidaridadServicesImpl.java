@@ -15,12 +15,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
 
     @Inject
     private CategoryDAO categoryDAO;
-
+    /*
     @Inject
     private UserDAO userDAO;
-
+    */
     @Inject
     private OfferDAO offerDAO;
+
+    @Inject
+    private AnswerDAO answerDAO;
 
     @Override
     public void registerCategory(Category c) throws ServicesException {
@@ -41,18 +44,27 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
-    public void registerNeed(Need need) throws ServicesException{
+    public void deleteCategory(Category category) throws ServicesException {
         try{
-            needDAO.save(need);
-        }catch(PersistenceException ex){
-            throw new ServicesException("Error al crear la necesidad",ex);
+            categoryDAO.deleteCategory(category);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al eliminar la categoria",ex);
         }
     }
 
     @Override
-    public void updateNeedStatus(Status status) throws ServicesException {
+    public void registerNeed(Need need) throws ServicesException{
         try{
-            needDAO.updateNeedStatus(status);
+            needDAO.save(need);
+        }catch(PersistenceException ex){
+            throw new ServicesException(ex.getMessage(),ex);
+        }
+    }
+
+    @Override
+    public void updateNeedStatus(Need need) throws ServicesException {
+        try{
+            needDAO.updateNeedStatus(need);
         }catch(PersistenceException ex){
             throw new ServicesException("Error al actualizar la necesidad",ex);
         }
@@ -63,7 +75,7 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
         try {
             offerDAO.registerOffer(offer);
         }catch (PersistenceException ex){
-            throw new ServicesException("Error al registrar oferta",ex);
+            throw new ServicesException(ex.getMessage(),ex);
         }
     }
 
@@ -91,6 +103,73 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             return offerDAO.loadAllOffers();
         } catch (PersistenceException ex) {
             throw new ServicesException("Error al cargar ofertas",ex);
+        }
+    }
+
+    @Override
+    public List<Offer> loadAllOffersWS() throws ServicesException {
+        try {
+            return offerDAO.loadAllOffersWS();
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar ofertas por estado",ex);
+        }
+    }
+
+    @Override
+    public int loadParamNOffer() throws ServicesException {
+        try {
+            return offerDAO.loadParamNOffer();
+        } catch (PersistenceException ex){
+            throw new ServicesException("Error al cargar parametro NOffer",ex);
+        }
+    }
+
+    @Override
+    public List<Answer> loadAnswers() throws ServicesException {
+        try {
+            return answerDAO.answers();
+        } catch (PersistenceException ex){
+            throw new ServicesException("Error al cargar las respuestas ",ex);
+        }
+    }
+
+    @Override
+    public void registerAnswer(Answer answer) throws ServicesException {
+        try {
+            answerDAO.save(answer);
+        } catch (PersistenceException ex){
+            ex.printStackTrace();
+            throw new ServicesException("Error al cargar las respuestas ",ex);
+        }
+
+    }
+
+    @Override
+    public List<CountStatus> loadNeedsbyStatus() throws ServicesException {
+        try {
+            return needDAO.needsbyStatus();
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al cargar necesidades por status",ex);
+        }
+    }
+
+
+
+    @Override
+    public List<Need> loadNeedsWS() throws ServicesException {
+        try {
+            return needDAO.loadNeedsWS();
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al cargar las necesidades en",ex);
+        }
+    }
+
+    @Override
+    public List<CountStatus> loadOfferbyStatus() throws ServicesException {
+        try {
+            return offerDAO.loadOfferbyStatus();
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al cargar reporte ofertas",ex);
         }
     }
 
@@ -140,6 +219,16 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
+    public List<ReportCategory> loadReportCategory() throws ServicesException {
+        try {
+            return categoryDAO.loadReportCategory();
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar el reporte de categorias",ex);
+        }
+    }
+
+    /*
+    @Override
     public User getUser(String username) throws ServicesException {
         try {
             return userDAO.getUser(username);
@@ -147,6 +236,8 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             throw new ServicesException("Error al cargar el usuario",ex);
         }
     }
+    */
+
 
 
 }

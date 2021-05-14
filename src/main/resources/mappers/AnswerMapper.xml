@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.AnswerMapper">
+
+    <resultMap type='Answer' id='AnswerResult'>
+        <id property='id' column='id' />
+        <result property='name' column='name' />
+        <result property='creationDate' column='creationDate' />
+        <result property='comments' column='coments' />
+        <result property='answerTo' column='answerto' />
+        <result property='toId' column='toId' />
+    </resultMap>
+
+    <!--addAnswer-->
+    <insert parameterType="map" id="addAnswer">
+        INSERT INTO Answer (name,creationDate,coments,answerto,toId)
+        VALUES (#{answer.name},CURRENT_TIMESTAMP,#{answer.comments},#{answer.answerTo},#{answer.toId})
+    </insert>
+
+    <!--loadAnswers-->
+    <select parameterType="map" id="answers" resultMap="AnswerResult">
+        SELECT * FROM Answer
+    </select>
+</mapper>
