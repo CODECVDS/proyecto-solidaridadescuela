@@ -1,6 +1,7 @@
 package edu.eci.cvds.persistence.mybatisimpl.mappers;
 
 import edu.eci.cvds.entities.Answer;
+import edu.eci.cvds.entities.ReportAnswer;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface AnswerMapper {
 
     public List<Answer> answers();
 
+    public List<ReportAnswer> loadReportAnswer();
 }
