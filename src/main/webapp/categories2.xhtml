@@ -38,6 +38,13 @@
                                     <f:setPropertyActionListener value="true" target="#{categoryBean.button}"/>
                                     <p:resetInput target=":form:manage-category-content"/>
                                 </p:commandButton>
+                                <p:commandButton type="button" icon="pi pi-times" update=":form:manage-category-content"
+                                                 oncomplete="PF('manageCategoryDialog').show()"
+                                                 styleClass="rounded-button ui-button-danger" process="@this">
+                                    <f:setPropertyActionListener value="#{category}" target="#{categoryBean.category}"/>
+                                    <f:setPropertyActionListener value="true" target="#{categoryBean.erase}"/>
+                                    <p:resetInput target=":form:manage-category-content"/>
+                                </p:commandButton>
                             </td>
                         </tr>
                         </tbody>
