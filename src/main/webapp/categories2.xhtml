@@ -14,7 +14,7 @@
 <h:body>
     <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
-        <div class="card category">
+        <div class="card">
             <p:button outcome="categories" value="Reporte categorias" icon="pi pi-external-link" iconPos="right"/>
             <p:growl id="messages" showDetail="true"/>
             <p:dataScroller id="dt-categories" widgetVar="dtCategory" var="category" value="#{categoryBean.categories}"
@@ -38,11 +38,8 @@
                                     <f:setPropertyActionListener value="true" target="#{categoryBean.button}"/>
                                     <p:resetInput target=":form:manage-category-content"/>
                                 </p:commandButton>
-                                <p:commandButton type="button" icon="pi pi-times" update=":form:manage-category-content"
-                                                 oncomplete="PF('manageCategoryDialog').show()"
-                                                 styleClass="rounded-button ui-button-danger" process="@this">
-                                    <f:setPropertyActionListener value="#{category}" target="#{categoryBean.category}"/>
-                                    <f:setPropertyActionListener value="true" target="#{categoryBean.erase}"/>
+                                <p:commandButton icon="pi pi-times" actionListener="#{categoryBean.erase(category)}" update=":form"
+                                                 styleClass="rounded-button ui-button-danger">
                                     <p:resetInput target=":form:manage-category-content"/>
                                 </p:commandButton>
                             </td>
