@@ -14,6 +14,11 @@
         <result property='toId' column='toId' />
     </resultMap>
 
+    <resultMap id="ReportResult" type="ReportAnswer">
+        <result property="answer" column="answer"/>
+        <result property="type" column="atype"/>
+        <result property="name" column="name"/>
+    </resultMap>
     <!--addAnswer-->
     <insert parameterType="map" id="addAnswer">
         INSERT INTO Answer (name,creationDate,coments,answerto,toId)
@@ -24,4 +29,11 @@
     <select parameterType="map" id="answers" resultMap="AnswerResult">
         SELECT * FROM Answer
     </select>
+
+    <!--loadReportAnswers-->
+    <select parameterType="map" id="loadReportAnswer" resultMap="ReportResult">
+        select a.name as answer ,a.answerto as atype, n.name as name from answer a join need n on a.toid = n.id where answerto = 'Need' union
+        select a.name as answer ,a.answerto as atype,o.name as name from answer a join offer o on a.toid = o.id where answerto = 'Offer'
+    </select>
+
 </mapper>

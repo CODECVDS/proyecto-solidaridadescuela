@@ -227,6 +227,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
         }
     }
 
+    @Override
+    public List<ReportAnswer> loadReportAnswer() throws ServicesException {
+        try {
+            return answerDAO.loadReportAnswer();
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar el reporte de Respuestas",ex);
+        }
+    }
+
     /*
     @Override
     public User getUser(String username) throws ServicesException {
