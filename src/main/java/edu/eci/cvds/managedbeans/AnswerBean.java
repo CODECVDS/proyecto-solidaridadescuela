@@ -1,6 +1,7 @@
 package edu.eci.cvds.managedbeans;
 
 import edu.eci.cvds.entities.Answer;
+import edu.eci.cvds.entities.ReportAnswer;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
 import org.primefaces.PrimeFaces;
@@ -26,6 +27,7 @@ public class AnswerBean extends BasePageBean {
     private String comments;
     private int answerTo;
     private int toId;
+    private List<ReportAnswer> report;
 
     public List<Answer> getAnswers() throws ServicesException{
         try{
@@ -118,5 +120,18 @@ public class AnswerBean extends BasePageBean {
 
     public void setToId(int toId) {
         this.toId = toId;
+    }
+
+    public List<ReportAnswer> getReport() {
+        try {
+            report = solidaridadServices.loadReportAnswer();
+        }catch (ServicesException e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",e.getMessage()));
+        }
+        return report;
+    }
+
+    public void setReport(List<ReportAnswer> report) {
+        this.report = report;
     }
 }

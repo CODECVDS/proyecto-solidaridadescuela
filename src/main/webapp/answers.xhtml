@@ -15,6 +15,7 @@
     <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
         <div class="card">
+            <p:button outcome="answers2" value="Reporte answers" icon="pi pi-external-link" iconPos="right"/>
             <p:growl id="messages" showDetail="true"/>
             <p:dataScroller id="dt-answers" widgetVar="dtAnswer" var="answer" value="#{answerBean.answers}"
                             reflow="true" rowKey="#{answer.id}">

@@ -44,6 +44,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
     }
 
     @Override
+    public void deleteCategory(Category category) throws ServicesException {
+        try{
+            categoryDAO.deleteCategory(category);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al eliminar la categoria",ex);
+        }
+    }
+
+    @Override
     public void registerNeed(Need need) throws ServicesException{
         try{
             needDAO.save(need);
@@ -215,6 +224,15 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             return categoryDAO.loadReportCategory();
         } catch (PersistenceException ex) {
             throw new ServicesException("Error al cargar el reporte de categorias",ex);
+        }
+    }
+
+    @Override
+    public List<ReportAnswer> loadReportAnswer() throws ServicesException {
+        try {
+            return answerDAO.loadReportAnswer();
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error al cargar el reporte de Respuestas",ex);
         }
     }
 

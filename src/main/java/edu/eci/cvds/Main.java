@@ -1,11 +1,8 @@
 package edu.eci.cvds;
 
+/**
 
-/*
-import edu.eci.cvds.entities.Answer;
-import edu.eci.cvds.entities.Need;
-import edu.eci.cvds.entities.Offer;
-import edu.eci.cvds.entities.Status;
+import edu.eci.cvds.entities.*;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
 import edu.eci.cvds.services.SolidaridadServicesFactory;
@@ -45,11 +42,15 @@ public class Main {
         //Answer a = new Answer(12,"Carlos",null,"los que sea manda decir kevin",0,5);
         //services.registerAnswer(a);
         //System.out.println(services.loadAnswers().get(0).getName());
-        Need n = services.loadNeed(5);
-        n.setStatus(Status.Closed);
-        services.updateNeedStatus(n);
+        //Need n = services.loadNeed(5);
+        //n.setStatus(Status.Closed);
+        //services.updateNeedStatus(n);
+        Category c = services.loadCategory(9);
+        services.deleteCategory(c);
+        Category k = services.loadCategory(9);
+        System.out.println(k.getStatus());
         sqlss.commit();
         sqlss.close();
     }
 }
-*/
+**/

@@ -10,6 +10,8 @@ public interface SolidaridadServices {
 
     public void updateCategory(Category category) throws ServicesException;
 
+    public void deleteCategory(Category category) throws ServicesException;
+
     public void registerNeed(Need need) throws ServicesException;
 
     public void updateNeedStatus(Need need) throws ServicesException;
@@ -49,4 +51,8 @@ public interface SolidaridadServices {
     public List<CountStatus> loadOfferbyStatus() throws ServicesException;
 
     public List<ReportCategory> loadReportCategory() throws ServicesException;
+
+    public  List<ReportAnswer> loadReportAnswer() throws ServicesException;
+
+
 }

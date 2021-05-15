@@ -12,6 +12,8 @@ public interface CategoryMapper {
 
     public void modifyCategory(@Param("category") Category category);
 
+    public void eraseCategory(@Param("category") Category category);
+
     public Category loadC(@Param("id") int categoryId);
 
     public List<Category> loadAllC();
