@@ -15,6 +15,12 @@
     <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
         <p:button outcome="offers2" value="Volver" icon="pi pi-arrow-left" iconPos="left" />
+        <p:commandButton value="XLS" icon="pi pi-download" style="margin-left:10px;">
+            <p:dataExporter type="xls" target="dt-offers" fileName="offers"/>
+        </p:commandButton>
+        <p:commandButton value="PDF" icon="pi pi-download" style="margin-left:10px; text-align:right;">
+            <p:dataExporter type="pdf" target="dt-offers" fileName="offers"/>
+        </p:commandButton>
         <div class="card">
             <p:growl id="messages" showDetail="true"/>
             <p:dataTable id="dt-offers" widgetVar="dtOffer" var="offer" value="#{offerBean.offers}"
@@ -73,10 +79,13 @@
                 </p:outputPanel>
             </p:dialog>
         </div>
-        <div class="pie-title">
-            <h2>Grafica ofertas agrupadas por status</h2>
-            <p:pieChart model="#{offerBean.pieModel}" style="width: 100%; height: 500px;"/>
-        </div>
+
     </h:form>
+    <div class="card">
+        <div class="p-text-bold">
+            Grafica ofertas agrupadas por status
+        </div>
+        <p:pieChart model="#{offerBean.pieModel}" style="width: 100%; height: 500px;"/>
+    </div>
 </h:body>
 </html>
