@@ -5,7 +5,9 @@ create table if not exists category(
 	description varchar(500) not null,
 	creationDate timestamp not null,
 	status boolean not null,
-	modificationdate timestamp not null
+	modificationdate timestamp not null,
+	isvalid boolean not null,
+	descriptinvalid varchar(500) not null
 );
 
 create table if not exists need(
@@ -70,27 +72,27 @@ create table if not exists answer(
 alter table need
 add constraint fk_need_category
 	foreign key(category)
-	references category(id);
+	references category(id) on delete cascade;
 	
 alter table users
 add constraint fk_usertype
 	foreign key(usertype)
-	references rol(id);
+	references rol(id) on delete cascade;
 	
 alter table offer
 add constraint fk_offer_category
 	foreign key(category)
-	references category(id);
+	references category(id) on delete cascade;
 
 alter table offer
 add constraint fk_offer_user
 	foreign key(username)
-	references users(username);
+	references users(username) on delete cascade;
 
 alter table need 
 add constraint fk_need_user
 	foreign key(username)
-	references users(username);
+	references users(username) on delete cascade;
 
 --Poblar
 
@@ -109,13 +111,13 @@ insert into users (username,fullname,status,mail,userpassword,usertype) values (
 insert into parameters (nconfigneed,nconfigoffer) values (5,5)
 
 --Delete
-drop table category;
 drop table need;
 drop table users;
 drop table rol;
 drop table offer;
 drop table nmax;
 drop table answer;
+drop table category;
 
 --Poblar offer
 
