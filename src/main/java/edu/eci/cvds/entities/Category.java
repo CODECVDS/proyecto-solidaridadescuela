@@ -9,6 +9,8 @@ public class Category {
     private Date creationDate;
     private boolean status;
     private Date modificationDate;
+    private boolean isValid;
+    private String descriptinvalid;
 
     public Category() {
         super();
@@ -20,13 +22,15 @@ public class Category {
 
     }
 
-    public Category(int id, String name, String description, Date creationDate, boolean status, Date modificationDate) {
+    public Category(int id, String name, String description, Date creationDate, boolean status, Date modificationDate, boolean isValid, String descriptinvalid) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.creationDate = creationDate;
         this.status = status;
         this.modificationDate = modificationDate;
+        this.isValid = isValid;
+        this.descriptinvalid = descriptinvalid;
     }
 
     public int getId() {
@@ -75,5 +79,21 @@ public class Category {
 
     public void setModificationDate(Date modificationDate) {
         this.modificationDate = modificationDate;
+    }
+
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
+    }
+
+    public String getDescriptinvalid() {
+        return descriptinvalid;
+    }
+
+    public void setDescriptinvalid(String descriptinvalid) {
+        this.descriptinvalid = descriptinvalid;
     }
 }
