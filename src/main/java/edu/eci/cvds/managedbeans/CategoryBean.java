@@ -32,6 +32,8 @@ public class CategoryBean extends BasePageBean {
     private int id;
     private Date creationDate;
     private Date modificationDate;
+    private boolean isValid;
+    private String descriptinvalid;
     private boolean button;
     private List<ReportCategory> report;
     private PieChartModel pieModel;
@@ -221,5 +223,21 @@ public class CategoryBean extends BasePageBean {
 
     public void setPieModel(PieChartModel pieModel) {
         this.pieModel = pieModel;
+    }
+
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
+    }
+
+    public String getDescriptinvalid() {
+        return descriptinvalid;
+    }
+
+    public void setDescriptinvalid(String descriptinvalid) {
+        this.descriptinvalid = descriptinvalid;
     }
 }
