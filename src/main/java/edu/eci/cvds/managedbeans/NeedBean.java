@@ -53,7 +53,7 @@ public class NeedBean extends BasePageBean{
 
     public  void register(){
         try{
-            if(solidaridadServices.loadCategory(need.getCategory()).isValid() == true){
+            if(solidaridadServices.loadCategory(need.getCategory()).getIsValid()){
                 solidaridadServices.registerNeed(need);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Added"));
             }else{
