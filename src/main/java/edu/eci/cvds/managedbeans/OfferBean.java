@@ -50,10 +50,13 @@ public class OfferBean  extends BasePageBean {
     private List<CountStatus> offerbyStatus;
 
     public  void register(){
-
         try {
-            solidaridadServices.registerOffer(offer);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Added"));
+            if(solidaridadServices.loadCategory(offer.getCategory()).isValid() == true){
+                solidaridadServices.registerOffer(offer);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Added"));
+            }else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Categoria Invalida",solidaridadServices.loadCategory(offer.getCategory()).getDescriptinvalid()));
+            }
         } catch (ServicesException ex){
             ex.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error",ex.getMessage()));
