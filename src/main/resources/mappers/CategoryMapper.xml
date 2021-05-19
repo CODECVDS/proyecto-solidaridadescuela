@@ -52,7 +52,9 @@
             c.description,
             c.creationDate,
             c.status,
-            c.modificationDate
+            c.modificationDate,
+            c.isvalid,
+            c.descriptinvalid
         FROM category c
         WHERE c.id = #{id} and c.status = true
     </select>
