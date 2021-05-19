@@ -51,7 +51,7 @@ public class OfferBean  extends BasePageBean {
 
     public  void register(){
         try {
-            if(solidaridadServices.loadCategory(offer.getCategory()).isValid() == true){
+            if(solidaridadServices.loadCategory(offer.getCategory()).getIsValid()){
                 solidaridadServices.registerOffer(offer);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Added"));
             }else{
