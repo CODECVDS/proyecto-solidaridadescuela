@@ -120,10 +120,19 @@ drop table answer;
 drop table category;
 
 --Poblar offer
+insert into offer (category,name,description,creationdate,status,modificationdate,username) values (5,'RAM 8gb','Memoria RAM HyperX','2021/05/17','Active','2021/05/17','user');
+insert into offer (category,name,description,creationdate,status,modificationdate,username) values (2,'Microeconomía1','Autor:Ferguson','2021/05/17','Active','2021/05/17','user');
 
 --Poblar necesidad
-insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'materiales','Se necesita materiales para EG1',3,'2021/04/24','Active','2021/04/24','user');
-insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'mantenimiento','Se hacer mantenimiento en los equipos del b0',5,'2021/04/24','Active','2021/04/24','user');
+insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'materiales','Se necesita materiales para EG1',3,'2021/05/17','Active','2021/05/17','user');
+insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (5,'mantenimiento','Se necesita hacer mantenimiento en los equipos del b0',5,'2021/05/17','Active','2021/05/17','user');
+
+--Poblar category
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Materiales','Elementos usados en Ing. Civil','2021/05/17',true,'2021/05/17',true,'');
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Libros','Aplicados a la economía','2021/05/17',true,'2021/05/17',true,'');
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Deportes','Elementos deportivos, balones, pelotas, redes, equipamento, etc','2021/05/17',true,'2021/05/17',true,'');
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Dinero','Solicitar u ofertar en la plataforma','2021/05/17',true,'2021/05/17',false,'Según políticas esta no es una categoría válida');
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Sistemas y computadores','Elementos computacionales','2021/05/17',true,'2021/05/17',true,'');
 
 create or replace procedure confirm_noffers(cat int, n varchar, des varchar, usname varchar)
 language plpgsql
