@@ -26,12 +26,13 @@
     <!--loadReport-->
     <select parameterType="map" id="loadReportCategory" resultMap="ReportResult">
         select c.name as category,
-            coalesce(n.count,0) as needs,
-            coalesce(o.count,0) as offers,
-            coalesce(n.count,0) + coalesce(o.count,0) as total
+        coalesce(n.count,0) as needs,
+        coalesce(o.count,0) as offers,
+        coalesce(n.count,0) + coalesce(o.count,0) as total
         from category c full join
         (select category, count(*) from need group by category) n on n.category = c.id full join
         (select category, count(*) from offer o group by category) o on o.category = c.id
+        where coalesce(n.count,0) + coalesce(o.count,0) != 0
     </select>
 
     <!--loadActiveCategorys-->
@@ -62,7 +63,7 @@
     <!--addCategory-->
     <insert parameterType="map" id="addCategory">
         INSERT INTO category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid)
-        VALUES (#{category.name},#{category.description},CURRENT_TIMESTAMP,true,CURRENT_TIMESTAMP,#{category.isValid},#{category.descriptinvalid})
+        VALUES (#{category.name},#{category.description},CURRENT_TIMESTAMP,true,CURRENT_TIMESTAMP,#{category.isvalid},#{category.descriptinvalid})
     </insert>
 
     <!--updateCategory-->

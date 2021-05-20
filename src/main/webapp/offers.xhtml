@@ -82,10 +82,11 @@
 
     </h:form>
     <div class="card">
-        <div class="p-text-bold">
-            Grafica ofertas agrupadas por status
+        <div class="pie-title">
+            <h2>Grafica ofertas agrupadas por status</h2>
+            <p:pieChart model="#{offerBean.pieModel}" style="width: 100%; height: 500px;"/>
         </div>
-        <p:pieChart model="#{offerBean.pieModel}" style="width: 100%; height: 500px;"/>
+
     </div>
 </h:body>
 </html>
