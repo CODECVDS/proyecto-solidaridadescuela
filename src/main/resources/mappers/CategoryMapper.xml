@@ -53,8 +53,13 @@
             c.creationDate,
             c.status,
             c.modificationDate,
+<<<<<<< Updated upstream
             c.isvalid,
             c.descriptinvalid
+=======
+            c.isValid,
+            c.descriptinValid
+>>>>>>> Stashed changes
         FROM category c
         WHERE c.id = #{id} and c.status = true
     </select>
@@ -62,7 +67,7 @@
     <!--addCategory-->
     <insert parameterType="map" id="addCategory">
         INSERT INTO category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid)
-        VALUES (#{category.name},#{category.description},CURRENT_TIMESTAMP,true,CURRENT_TIMESTAMP,#{category.isValid},#{category.descriptinvalid})
+        VALUES (#{category.name},#{category.description},CURRENT_TIMESTAMP,true,CURRENT_TIMESTAMP,#{category.isvalid},#{category.descriptinvalid})
     </insert>
 
     <!--updateCategory-->

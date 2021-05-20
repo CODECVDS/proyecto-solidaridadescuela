@@ -122,10 +122,15 @@ drop table category;
 --Poblar offer
 insert into offer (category,name,description,creationdate,status,modificationdate,username) values (5,'RAM 8gb','Memoria RAM HyperX','2021/05/17','Active','2021/05/17','user');
 insert into offer (category,name,description,creationdate,status,modificationdate,username) values (2,'Microeconomía1','Autor:Ferguson','2021/05/17','Active','2021/05/17','user');
+insert into offer (category,name,description,creationdate,status,modificationdate,username) values (5,'Teclado','Mini Teclado Inalambrico Bluetooth Mac, iPad, Pc, Celular','2021/05/19','Active','2021/05/19','teach');
+insert into offer (category,name,description,creationdate,status,modificationdate,username) values (3,'Disco','Disco Ultimate Frisbee Discraft Ultra Star 175 Gr Blanco','2021/05/19','Active','2021/05/19','teach');
+insert into offer (category,name,description,creationdate,status,modificationdate,username) values (2,'Lógica','Autor: Wilmer Garzón','2021/05/19','Active','2021/05/19','teach');
 
 --Poblar necesidad
 insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'materiales','Se necesita materiales para EG1',3,'2021/05/17','Active','2021/05/17','user');
 insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (5,'mantenimiento','Se necesita hacer mantenimiento en los equipos del b0',5,'2021/05/17','Active','2021/05/17','user');
+insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (5,'Dispositivos móviles','Requerido para la materia de ARSW',4,'2021/05/19','Active','2021/05/19','user');
+insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (2,'Ciencia ficción','Requerido para la materia CLYS',2,'2021/05/19','Active','2021/05/19','user');
 
 --Poblar category
 insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Materiales','Elementos usados en Ing. Civil','2021/05/17',true,'2021/05/17',true,'');
