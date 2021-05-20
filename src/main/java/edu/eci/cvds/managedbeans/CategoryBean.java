@@ -56,7 +56,6 @@ public class CategoryBean extends BasePageBean {
         }
     }
 
-
     public void update(){
         try {
             solidaridadServices.updateCategory(category);
@@ -99,6 +98,7 @@ public class CategoryBean extends BasePageBean {
     public void openNew() {
         this.category = new Category();
         category.setStatus(true);
+        category.setIsValid(true);
     }
 
     public Category getCategory() throws ServicesException {
@@ -241,3 +241,4 @@ public class CategoryBean extends BasePageBean {
         this.descriptinvalid = descriptinvalid;
     }
 }
+

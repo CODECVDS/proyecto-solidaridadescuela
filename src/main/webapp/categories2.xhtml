@@ -52,6 +52,15 @@
                       widgetVar="manageCategoryDialog" responsive="true">
                 <p:outputPanel id="manage-category-content" class="ui-fluid">
                     <p:outputPanel rendered="#{not empty categoryBean.category}">
+                        <div id="div-isValid" class="p-field">
+                            <p:selectBooleanCheckbox value="#{categoryBean.category.isValid}" itemLabel="Is valid">
+                                <p:ajax update="manage-category-content"/>
+                            </p:selectBooleanCheckbox>
+                        </div>
+                        <div id="div-DescriptionInvalid" class="p-field">
+                            <p:outputLabel for="descriptionInvalid" rendered="#{!categoryBean.category.isValid}">Message</p:outputLabel>
+                            <p:inputTextarea id="descriptionInvalid" value="#{categoryBean.category.descriptinvalid}" rendered="#{!categoryBean.category.isValid}"/>
+                        </div>
                         <div class="p-field">
                             <p:outputLabel for="name">Name</p:outputLabel>
                             <p:inputText id="name" value="#{categoryBean.category.name}"/>
