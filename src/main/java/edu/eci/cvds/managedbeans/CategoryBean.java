@@ -225,11 +225,11 @@ public class CategoryBean extends BasePageBean {
         this.pieModel = pieModel;
     }
 
-    public boolean isValid() {
+    public boolean getIsValid() {
         return isValid;
     }
 
-    public void setValid(boolean valid) {
+    public void setIsValid(boolean valid) {
         isValid = valid;
     }
 

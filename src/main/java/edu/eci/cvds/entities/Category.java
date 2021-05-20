@@ -81,11 +81,11 @@ public class Category {
         this.modificationDate = modificationDate;
     }
 
-    public boolean isValid() {
+    public boolean getisValid() {
         return isValid;
     }
 
-    public void setValid(boolean valid) {
+    public void setisValid(boolean valid) {
         isValid = valid;
     }
 
