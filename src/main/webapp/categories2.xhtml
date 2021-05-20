@@ -73,13 +73,6 @@
                             <p:outputLabel for="status" rendered="#{categoryBean.button}">Status</p:outputLabel>
                             <p:selectBooleanButton id="status" onLabel="Active" offLabel="Inactive" value="#{categoryBean.category.status}" rendered="#{categoryBean.button}"/>
                         </div>
-                        <div id="div-isValid" class="p-field">
-                            <p:selectBooleanButton id="isValid" onLabel="Valid" offLabel="Invalid" value="#{categoryBean.isValid}"/>
-                        </div>
-                        <div id="div-DescriptionInvalid" class="p-field">
-                            <p:outputLabel for="descriptionInvalid" rendered="#{categoryBean.category.isValid}">Message</p:outputLabel>
-                            <p:inputTextarea id="descriptionInvalid" value="#{categoryBean.category.descriptinvalid}" rendered="#{categoryBean.category.isValid}"/>
-                        </div>
                     </p:outputPanel>
                 </p:outputPanel>
                 <f:facet name="footer">

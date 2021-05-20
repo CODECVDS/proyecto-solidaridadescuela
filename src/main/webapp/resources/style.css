@@ -6,6 +6,13 @@ body {
     background: url("/resources/pattern.jpg");
 }
 
+.center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
 
 .w-text{
     position: absolute;
@@ -15,6 +22,20 @@ body {
     font-family: 'Play', sans-serif;
     font-style: Regular;
     font-size: 80px;
+}
+
+.a-text{
+    margin: 0px;
+    font-family: 'Play', sans-serif;
+    font-style: Regular;
+    font-size: 80px;
+}
+
+.b-text{
+    font-family: 'Play', sans-serif;
+    font-style: Regular;
+    font-size: 20px;
+    text-align: justify;
 }
 
 .icon{
@@ -85,12 +106,31 @@ body {
     width: 100%;
 }
 
-.button{
-    display:inline-block;
-    overflow: auto;
-    width: 50%;
-}
 
+button {
+    appearance: auto;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+    box-sizing: border-box;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 10px 20px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
 
 body .ui-dataview .ui-dataview-content {
     position:absolute;
@@ -114,6 +154,13 @@ body .ui-dataview .ui-dataview-header {
 body .ui-card {
     background: #ffffff;
     border-radius: 20px;
+}
+
+.card2 {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px 20px;
+    border: 5px solid #dee2e6;
 }
 
 .a-button{
@@ -165,4 +212,10 @@ body .ui-datascroller .ui-datascroller-content {
     font-style: Regular;
     font-size: 20px;
     text-align:center
+}
+
+.box {
+    display: flex;
+    align-text: center;
+    justify-content: center;
 }
