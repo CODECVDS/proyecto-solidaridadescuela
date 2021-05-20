@@ -54,13 +54,8 @@
             c.creationDate,
             c.status,
             c.modificationDate,
-<<<<<<< Updated upstream
             c.isvalid,
             c.descriptinvalid
-=======
-            c.isValid,
-            c.descriptinValid
->>>>>>> Stashed changes
         FROM category c
         WHERE c.id = #{id} and c.status = true
     </select>
