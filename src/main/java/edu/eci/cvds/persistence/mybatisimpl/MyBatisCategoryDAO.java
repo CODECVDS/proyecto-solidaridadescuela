@@ -19,10 +19,6 @@ public class MyBatisCategoryDAO implements CategoryDAO {
         try {
             categoryMapper.addCategory(category);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println(category.getDescriptinvalid());
-            System.out.println(category.getName());
-            System.out.println(category.getIsValid());
-            e.printStackTrace();
             throw new PersistenceException("Error al registrar categoria",e);
         }
     }
