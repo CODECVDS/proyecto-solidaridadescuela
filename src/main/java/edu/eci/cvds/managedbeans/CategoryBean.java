@@ -68,9 +68,9 @@ public class CategoryBean extends BasePageBean {
     public  void register(){
         try {
             solidaridadServices.registerCategory(category);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Category Added"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Category Added", category.getName()));
         } catch (ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error","Add Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error",ex.getMessage()));
         }
     }
 

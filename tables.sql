@@ -7,7 +7,7 @@ create table if not exists category(
 	status boolean not null,
 	modificationdate timestamp not null,
 	isvalid boolean not null,
-	descriptinvalid varchar(500) not null
+	descriptinvalid varchar(500)
 );
 
 create table if not exists need(
@@ -39,7 +39,7 @@ create table if not exists users(
 create table if not exists offer(
 	id serial primary key,
 	category int,
-	name varchar(20) unique not null,
+	name varchar(50) unique not null,
 	description varchar(500) not null,
 	creationDate timestamp not null,
 	status varchar(10) not null,
@@ -56,7 +56,7 @@ create table if not exists parameters(
 
 create table if not exists answer(
 	id serial primary key,
-	name varchar(20) not null,
+	name varchar(50) not null,
 	creationDate timestamp not null,
 	coments varchar(500) not null,
 	answerto varchar(5) not null,
