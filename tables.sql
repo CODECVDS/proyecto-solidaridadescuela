@@ -5,7 +5,9 @@ create table if not exists category(
 	description varchar(500) not null,
 	creationDate timestamp not null,
 	status boolean not null,
-	modificationdate timestamp not null
+	modificationdate timestamp not null,
+	isvalid boolean not null,
+	descriptinvalid varchar(500)
 );
 
 create table if not exists need(
@@ -37,7 +39,7 @@ create table if not exists users(
 create table if not exists offer(
 	id serial primary key,
 	category int,
-	name varchar(20) unique not null,
+	name varchar(50) unique not null,
 	description varchar(500) not null,
 	creationDate timestamp not null,
 	status varchar(10) not null,
@@ -54,7 +56,7 @@ create table if not exists parameters(
 
 create table if not exists answer(
 	id serial primary key,
-	name varchar(20) not null,
+	name varchar(50) not null,
 	creationDate timestamp not null,
 	coments varchar(500) not null,
 	answerto varchar(5) not null,
@@ -70,27 +72,27 @@ create table if not exists answer(
 alter table need
 add constraint fk_need_category
 	foreign key(category)
-	references category(id);
+	references category(id) on delete cascade;
 	
 alter table users
 add constraint fk_usertype
 	foreign key(usertype)
-	references rol(id);
+	references rol(id) on delete cascade;
 	
 alter table offer
 add constraint fk_offer_category
 	foreign key(category)
-	references category(id);
+	references category(id) on delete cascade;
 
 alter table offer
 add constraint fk_offer_user
 	foreign key(username)
-	references users(username);
+	references users(username) on delete cascade;
 
 alter table need 
 add constraint fk_need_user
 	foreign key(username)
-	references users(username);
+	references users(username) on delete cascade;
 
 --Poblar
 
@@ -109,19 +111,33 @@ insert into users (username,fullname,status,mail,userpassword,usertype) values (
 insert into parameters (nconfigneed,nconfigoffer) values (5,5)
 
 --Delete
-drop table category;
 drop table need;
 drop table users;
 drop table rol;
 drop table offer;
 drop table nmax;
 drop table answer;
+drop table category;
 
 --Poblar offer
+insert into offer (category,name,description,creationdate,status,modificationdate,username) values (5,'RAM 8gb','Memoria RAM HyperX','2021/05/17','Active','2021/05/17','user');
+insert into offer (category,name,description,creationdate,status,modificationdate,username) values (2,'Microeconomía1','Autor:Ferguson','2021/05/17','Active','2021/05/17','user');
+insert into offer (category,name,description,creationdate,status,modificationdate,username) values (5,'Teclado','Mini Teclado Inalambrico Bluetooth Mac, iPad, Pc, Celular','2021/05/19','Active','2021/05/19','teach');
+insert into offer (category,name,description,creationdate,status,modificationdate,username) values (3,'Disco','Disco Ultimate Frisbee Discraft Ultra Star 175 Gr Blanco','2021/05/19','Active','2021/05/19','teach');
+insert into offer (category,name,description,creationdate,status,modificationdate,username) values (2,'Lógica','Autor: Wilmer Garzón','2021/05/19','Active','2021/05/19','teach');
 
 --Poblar necesidad
-insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'materiales','Se necesita materiales para EG1',3,'2021/04/24','Active','2021/04/24','user');
-insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'mantenimiento','Se hacer mantenimiento en los equipos del b0',5,'2021/04/24','Active','2021/04/24','user');
+insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (1,'materiales','Se necesita materiales para EG1',3,'2021/05/17','Active','2021/05/17','user');
+insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (5,'mantenimiento','Se necesita hacer mantenimiento en los equipos del b0',5,'2021/05/17','Active','2021/05/17','user');
+insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (5,'Dispositivos móviles','Requerido para la materia de ARSW',4,'2021/05/19','Active','2021/05/19','user');
+insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (2,'Ciencia ficción','Requerido para la materia CLYS',2,'2021/05/19','Active','2021/05/19','user');
+
+--Poblar category
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Materiales','Elementos usados en Ing. Civil','2021/05/17',true,'2021/05/17',true,'');
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Libros','Aplicados a la economía','2021/05/17',true,'2021/05/17',true,'');
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Deportes','Elementos deportivos, balones, pelotas, redes, equipamento, etc','2021/05/17',true,'2021/05/17',true,'');
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Dinero','Solicitar u ofertar en la plataforma','2021/05/17',true,'2021/05/17',false,'Según políticas esta no es una categoría válida');
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Sistemas y computadores','Elementos computacionales','2021/05/17',true,'2021/05/17',true,'');
 
 create or replace procedure confirm_noffers(cat int, n varchar, des varchar, usname varchar)
 language plpgsql

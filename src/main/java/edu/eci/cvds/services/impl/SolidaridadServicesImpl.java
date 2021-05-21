@@ -15,10 +15,7 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
 
     @Inject
     private CategoryDAO categoryDAO;
-    /*
-    @Inject
-    private UserDAO userDAO;
-    */
+
     @Inject
     private OfferDAO offerDAO;
 
@@ -153,8 +150,6 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
         }
     }
 
-
-
     @Override
     public List<Need> loadNeedsWS() throws ServicesException {
         try {
@@ -235,18 +230,5 @@ public class SolidaridadServicesImpl implements SolidaridadServices {
             throw new ServicesException("Error al cargar el reporte de Respuestas",ex);
         }
     }
-
-    /*
-    @Override
-    public User getUser(String username) throws ServicesException {
-        try {
-            return userDAO.getUser(username);
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error al cargar el usuario",ex);
-        }
-    }
-    */
-
-
 
 }

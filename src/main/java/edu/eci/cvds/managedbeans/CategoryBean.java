@@ -5,14 +5,19 @@ import edu.eci.cvds.entities.ReportCategory;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.SolidaridadServices;
 import org.primefaces.PrimeFaces;
+import org.primefaces.model.charts.ChartData;
+import org.primefaces.model.charts.pie.PieChartDataSet;
+import org.primefaces.model.charts.pie.PieChartModel;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 @ManagedBean(name = "categoryBean")
 @SessionScoped
@@ -27,8 +32,11 @@ public class CategoryBean extends BasePageBean {
     private int id;
     private Date creationDate;
     private Date modificationDate;
+    private boolean isValid;
+    private String descriptinvalid;
     private boolean button;
     private List<ReportCategory> report;
+    private PieChartModel pieModel;
 
     public void loadCategory() throws ServicesException{
         try {
@@ -48,7 +56,6 @@ public class CategoryBean extends BasePageBean {
         }
     }
 
-
     public void update(){
         try {
             solidaridadServices.updateCategory(category);
@@ -61,14 +68,14 @@ public class CategoryBean extends BasePageBean {
     public  void register(){
         try {
             solidaridadServices.registerCategory(category);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Category Added"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Category Added", category.getName()));
         } catch (ServicesException ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error","Add Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error",ex.getMessage()));
         }
     }
 
     public void save() throws ServicesException {
-        if (this.category.getId() ==    0) {
+        if (this.category.getId() == 0) {
             register();
         }
         else {
@@ -78,11 +85,12 @@ public class CategoryBean extends BasePageBean {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-categories");
     }
 
-    public void erase() throws ServicesException {
+    public void erase(Category c) throws ServicesException {
         try{
-            solidaridadServices.deleteCategory(category);
+            solidaridadServices.deleteCategory(c);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Category Deleted"));
         }catch(ServicesException ex){
+            ex.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Delete Error","Delete Error"));
         }
     }
@@ -90,6 +98,7 @@ public class CategoryBean extends BasePageBean {
     public void openNew() {
         this.category = new Category();
         category.setStatus(true);
+        category.setIsValid(true);
     }
 
     public Category getCategory() throws ServicesException {
@@ -97,6 +106,41 @@ public class CategoryBean extends BasePageBean {
             category = solidaridadServices.loadCategory(categoryId);
         }
         return category;
+    }
+
+    private void createpieModel()  {
+        pieModel = new PieChartModel();
+        ChartData data = new ChartData();
+
+        try {
+            report = solidaridadServices.loadReportCategory();
+        } catch (ServicesException e) {
+            e.printStackTrace();
+        }
+
+        PieChartDataSet dataSet = new PieChartDataSet();
+        List<Number> values = new ArrayList<>();
+        report.stream().forEach(p -> values.add(p.getTotal()));
+        dataSet.setData(values);
+
+        List<String> bgColors = new ArrayList<>();
+        bgColors.add("rgb(82, 190, 128)");
+        bgColors.add("rgb(255, 99, 132)");
+        bgColors.add("rgb(255, 205, 86)");
+        bgColors.add("rgb(193, 86, 255)");
+        bgColors.add("rgb(255, 86, 86)");
+
+        for (int i=5; i < report.size(); i++){
+            bgColors.add(bgColors.get(i-5));
+        }
+        dataSet.setBackgroundColor(bgColors);
+        data.addChartDataSet(dataSet);
+
+        List<String> labels = new ArrayList<>();
+        report.stream().forEach(p -> labels.add(p.getCategory()));
+        data.setLabels(labels);
+
+        pieModel.setData(data);
     }
 
     public boolean isButton() {
@@ -171,4 +215,30 @@ public class CategoryBean extends BasePageBean {
     public void setReport(List<ReportCategory> report) {
         this.report = report;
     }
+
+    public PieChartModel getPieModel() {
+        createpieModel();
+        return pieModel;
+    }
+
+    public void setPieModel(PieChartModel pieModel) {
+        this.pieModel = pieModel;
+    }
+
+    public boolean getIsValid() {
+        return isValid;
+    }
+
+    public void setIsValid(boolean valid) {
+        isValid = valid;
+    }
+
+    public String getDescriptinvalid() {
+        return descriptinvalid;
+    }
+
+    public void setDescriptinvalid(String descriptinvalid) {
+        this.descriptinvalid = descriptinvalid;
+    }
 }
+

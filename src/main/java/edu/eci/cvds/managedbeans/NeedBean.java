@@ -53,13 +53,16 @@ public class NeedBean extends BasePageBean{
 
     public  void register(){
         try{
-            solidaridadServices.registerNeed(need);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Added"));
+            if(solidaridadServices.loadCategory(need.getCategory()).getIsValid()){
+                solidaridadServices.registerNeed(need);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Added"));
+            }else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Categoria Invalida",solidaridadServices.loadCategory(need.getCategory()).getDescriptinvalid()));
+            }
         } catch (ServicesException ex){
             ex.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add Error",ex.getMessage()));
         }
-
     }
 
     public void updateNeedStatus(){

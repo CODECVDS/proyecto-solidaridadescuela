@@ -2,10 +2,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap');
 
-body {
-    background: url("/resources/pattern.jpg");
+html {
+  height: 100%;
 }
 
+body {
+    background: url("/resources/pattern.jpg");
+    height: 97%;
+}
+
+.center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.center2{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    margin: 0% 10%;
+}
 
 .w-text{
     position: absolute;
@@ -15,6 +35,20 @@ body {
     font-family: 'Play', sans-serif;
     font-style: Regular;
     font-size: 80px;
+}
+
+.a-text{
+    margin: 0px;
+    font-family: 'Play', sans-serif;
+    font-style: Regular;
+    font-size: 80px;
+}
+
+.b-text{
+    font-family: 'Play', sans-serif;
+    font-style: Regular;
+    font-size: 20px;
+    text-align: justify;
 }
 
 .icon{
@@ -85,13 +119,6 @@ body {
     width: 100%;
 }
 
-.button{
-    display:inline-block;
-    overflow: auto;
-    width: 50%;
-}
-
-
 body .ui-dataview .ui-dataview-content {
     position:absolute;
     top:12%;
@@ -116,10 +143,24 @@ body .ui-card {
     border-radius: 20px;
 }
 
+.card2 {
+     width: 60%;
+     background: #ffffff;
+     border-radius: 10px;
+     padding: 20px 20px;
+     border: 5px solid #dee2e6;
+ }
+
 .a-button{
     position:fixed;
     right: 30px;
     bottom: 30px;
+}
+
+.b-button{
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 4px;
 }
 
 .topbar {
@@ -159,3 +200,10 @@ body .ui-datascroller .ui-datascroller-content {
   background: transparent;
   color: #495057;
   padding: 1rem; }
+
+.pie-title{
+    font-family: 'Play', sans-serif;
+    font-style: Regular;
+    font-size: 20px;
+    text-align:center
+}

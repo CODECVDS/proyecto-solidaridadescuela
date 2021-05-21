@@ -14,7 +14,7 @@
 <h:body>
     <ui:include src="menuA.xhtml"></ui:include>
     <h:form id="form">
-        <div class="card category">
+        <div class="card">
             <p:button outcome="categories" value="Reporte categorias" icon="pi pi-external-link" iconPos="right"/>
             <p:growl id="messages" showDetail="true"/>
             <p:dataScroller id="dt-categories" widgetVar="dtCategory" var="category" value="#{categoryBean.categories}"
@@ -38,6 +38,10 @@
                                     <f:setPropertyActionListener value="true" target="#{categoryBean.button}"/>
                                     <p:resetInput target=":form:manage-category-content"/>
                                 </p:commandButton>
+                                <p:commandButton icon="pi pi-times" actionListener="#{categoryBean.erase(category)}" update=":form"
+                                                 styleClass="rounded-button ui-button-danger">
+                                    <p:resetInput target=":form:manage-category-content"/>
+                                </p:commandButton>
                             </td>
                         </tr>
                         </tbody>
@@ -48,6 +52,15 @@
                       widgetVar="manageCategoryDialog" responsive="true">
                 <p:outputPanel id="manage-category-content" class="ui-fluid">
                     <p:outputPanel rendered="#{not empty categoryBean.category}">
+                        <div id="div-isValid" class="p-field">
+                            <p:selectBooleanCheckbox value="#{categoryBean.category.isValid}" itemLabel="Is valid">
+                                <p:ajax update="manage-category-content"/>
+                            </p:selectBooleanCheckbox>
+                        </div>
+                        <div id="div-DescriptionInvalid" class="p-field">
+                            <p:outputLabel for="descriptionInvalid" rendered="#{!categoryBean.category.isValid}">Message</p:outputLabel>
+                            <p:inputTextarea id="descriptionInvalid" value="#{categoryBean.category.descriptinvalid}" rendered="#{!categoryBean.category.isValid}"/>
+                        </div>
                         <div class="p-field">
                             <p:outputLabel for="name">Name</p:outputLabel>
                             <p:inputText id="name" value="#{categoryBean.category.name}"/>
