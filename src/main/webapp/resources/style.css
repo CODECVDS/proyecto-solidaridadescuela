@@ -2,8 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap');
 
+html {
+  height: 100%;
+}
+
 body {
     background: url("/resources/pattern.jpg");
+    height: 97%;
 }
 
 .center{
@@ -12,6 +17,14 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+}
+
+.center2{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    margin: 0% 10%;
 }
 
 .w-text{
@@ -106,32 +119,6 @@ body {
     width: 100%;
 }
 
-
-button {
-    appearance: auto;
-    -webkit-writing-mode: horizontal-tb !important;
-    text-rendering: auto;
-    color: -internal-light-dark(black, white);
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: center;
-    align-items: flex-start;
-    cursor: default;
-    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
-    box-sizing: border-box;
-    margin: 0em;
-    font: 400 13.3333px Arial;
-    padding: 10px 20px;
-    border-width: 2px;
-    border-style: outset;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
-}
-
 body .ui-dataview .ui-dataview-content {
     position:absolute;
     top:12%;
@@ -157,16 +144,23 @@ body .ui-card {
 }
 
 .card2 {
-    background: #ffffff;
-    border-radius: 10px;
-    padding: 20px 20px;
-    border: 5px solid #dee2e6;
-}
+     width: 60%;
+     background: #ffffff;
+     border-radius: 10px;
+     padding: 20px 20px;
+     border: 5px solid #dee2e6;
+ }
 
 .a-button{
     position:fixed;
     right: 30px;
     bottom: 30px;
+}
+
+.b-button{
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 4px;
 }
 
 .topbar {
@@ -212,10 +206,4 @@ body .ui-datascroller .ui-datascroller-content {
     font-style: Regular;
     font-size: 20px;
     text-align:center
-}
-
-.box {
-    display: flex;
-    align-text: center;
-    justify-content: center;
 }
