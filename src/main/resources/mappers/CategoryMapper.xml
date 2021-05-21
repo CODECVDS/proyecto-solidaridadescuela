@@ -63,7 +63,7 @@
     <!--addCategory-->
     <insert parameterType="map" id="addCategory">
         INSERT INTO category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid)
-        VALUES (#{category.name},#{category.description},CURRENT_TIMESTAMP,true,CURRENT_TIMESTAMP,#{category.isvalid},#{category.descriptinvalid})
+        VALUES (#{category.name},#{category.description},CURRENT_TIMESTAMP,true,CURRENT_TIMESTAMP,#{category.isValid},#{category.descriptinvalid})
     </insert>
 
     <!--updateCategory-->

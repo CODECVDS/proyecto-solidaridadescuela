@@ -29,27 +29,29 @@ public class AppTest
     SolidaridadServices solidaridadServices;
 
     public AppTest(){
-        solidaridadServices = SolidaridadServicesFactory.getInstance().getSolidaridadServicios();
+        solidaridadServices = SolidaridadServicesFactory.getInstance().getSolidaridadServicesTesting();
     }
 
     private Date dateTest;
-    /*
+
     @Before
     public void setUp(){
     }
     @Test
     public void DeberiaIniciarSesion(){}
 
+    /*
     @Test
     public void DeberiaRegistrarCategoria(){
         try {
-            Category categorytest = new Category("CategoryTest","Esta es la categoria de prueba");
+            int before = solidaridadServices.loadCategories().size();
+            Category categorytest = new Category(999,"Categorytest","Esta es una categoria de prueba",null,true,null,true,null);
             solidaridadServices.registerCategory(categorytest);
-            Category categoryresult = solidaridadServices.loadCategory(1);
-            dateTest = categoryresult.getCreationDate();
-            Assert.assertTrue(categoryresult != null);
+            int after = solidaridadServices.loadCategories().size();
+            Assert.assertTrue(before<after);
         } catch (ServicesException ex){
-            assertTrue(false);
+            ex.printStackTrace();
+            Assert.assertTrue(false);
         }
     }
 
@@ -61,7 +63,7 @@ public class AppTest
             category.setDescription("Test modificacion");
             category.setStatus(true);
             solidaridadServices.updateCategory(category);
-            Category categoryTestUpdate = new Category(1,"Categoria1Test1","Test modificacion",null,true, null);
+            Category categoryTestUpdate = new Category(1,"Categoria1Test1","Test modificacion",null,true, null,true,null);
             Assert.assertEquals(category,categoryTestUpdate);
         } catch (ServicesException ex){
             assertTrue(false);
@@ -118,6 +120,6 @@ public class AppTest
             assertTrue(false);
         }
     }
+*/
 
-     */
 }
