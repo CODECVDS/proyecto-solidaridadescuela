@@ -29,7 +29,7 @@ body {
 
 .w-text{
     position: absolute;
-    top: 10%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: 'Play', sans-serif;
