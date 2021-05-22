@@ -137,6 +137,13 @@ y la herramienta **myBatis** para mapear sentencias SQL
 
 ### Enlace al sistema de integración continua.
 
+### Descripción del proceso
+Se usó java para crear las clases que se necesitarían para generar los principales procesos de la aplicación,
+también se hizo uso de xhtml para hacer la interfaz agradable al usuario, y un motor de base de datos (Postgresql)
+para generar los espacios en donde se guardaría la información. Todo esto se implementó de manera que hubiera conexión 
+entre estas y poder cumplir con el proyecto descrito anteriormente. También se usó la metodología SCRUM dividido en tres
+sprints, para obtener efectividad a la hora de desarrollar las historias de usuario requeridas por el cliente.
+
 ### Descripción sprint1
 Burndown chart and backlog
 •	Burndown chart: https://tree.taiga.io/project/nicolaspineros-solidaridad-escuela/taskboard/sprint-1-16929
