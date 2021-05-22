@@ -65,35 +65,6 @@ create table if not exists answer(
 );
 
 
-
-
---foreign keys
-
-alter table need
-add constraint fk_need_category
-	foreign key(category)
-	references category(id) on delete cascade;
-	
-alter table users
-add constraint fk_usertype
-	foreign key(usertype)
-	references rol(id) on delete cascade;
-	
-alter table offer
-add constraint fk_offer_category
-	foreign key(category)
-	references category(id) on delete cascade;
-
-alter table offer
-add constraint fk_offer_user
-	foreign key(username)
-	references users(username) on delete cascade;
-
-alter table need 
-add constraint fk_need_user
-	foreign key(username)
-	references users(username) on delete cascade;
-
 --Poblar
 
 --Poblar rol
@@ -103,21 +74,17 @@ insert into rol (name) values ('Teacher');
 insert into rol (name) values ('Graduate');
 insert into rol (name) values ('Administrative');
 
---Poblar Usuario
-insert into users (username,fullname,status,mail,userpassword,usertype) values ('user','Estudiante',true,'usuario@gmail.com','75cee5b221098c39dc19feca49b7b7cfe46405057d0361b18726990a5f91bf25',2);
-insert into users (username,fullname,status,mail,userpassword,usertype) values ('admin','Administrador',true,'admin@gmail.com','a74a6393d8fba6e2178e4e36e32c73c5bef049290e03fdc3ada929eb03770138',1);
 
 --Poblar nmax
 insert into parameters (nconfigneed,nconfigoffer) values (5,5)
 
---Delete
-drop table need;
-drop table users;
-drop table rol;
-drop table offer;
-drop table nmax;
-drop table answer;
-drop table category;
+
+--Poblar category
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Materiales','Elementos usados en Ing. Civil','2021/05/17',true,'2021/05/17',true,'');
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Libros','Aplicados a la economía','2021/05/17',true,'2021/05/17',true,'');
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Deportes','Elementos deportivos, balones, pelotas, redes, equipamento, etc','2021/05/17',true,'2021/05/17',true,'');
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Dinero','Solicitar u ofertar en la plataforma','2021/05/17',true,'2021/05/17',false,'Según políticas esta no es una categoría válida');
+insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Sistemas y computadores','Elementos computacionales','2021/05/17',true,'2021/05/17',true,'');
 
 --Poblar offer
 insert into offer (category,name,description,creationdate,status,modificationdate,username) values (5,'RAM 8gb','Memoria RAM HyperX','2021/05/17','Active','2021/05/17','user');
@@ -132,12 +99,6 @@ insert into need (category,name,description,urgency,creationdate,status,modifica
 insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (5,'Dispositivos móviles','Requerido para la materia de ARSW',4,'2021/05/19','Active','2021/05/19','user');
 insert into need (category,name,description,urgency,creationdate,status,modificationdate,username) values (2,'Ciencia ficción','Requerido para la materia CLYS',2,'2021/05/19','Active','2021/05/19','user');
 
---Poblar category
-insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Materiales','Elementos usados en Ing. Civil','2021/05/17',true,'2021/05/17',true,'');
-insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Libros','Aplicados a la economía','2021/05/17',true,'2021/05/17',true,'');
-insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Deportes','Elementos deportivos, balones, pelotas, redes, equipamento, etc','2021/05/17',true,'2021/05/17',true,'');
-insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Dinero','Solicitar u ofertar en la plataforma','2021/05/17',true,'2021/05/17',false,'Según políticas esta no es una categoría válida');
-insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Sistemas y computadores','Elementos computacionales','2021/05/17',true,'2021/05/17',true,'');
 
 create or replace procedure confirm_noffers(cat int, n varchar, des varchar, usname varchar)
 language plpgsql
@@ -195,5 +156,49 @@ as $$
 	end;
 
 $$
+
+truncate offer , need , category , parameters, rol, answer cascade; 
+
+
+--Delete
+drop table need;
+drop table users;
+drop table rol;
+drop table offer;
+drop table nmax;
+drop table answer;
+drop table category;
+drop table parameters;
+
+--Poblar Usuario
+insert into users (username,fullname,status,mail,userpassword,usertype) values ('user','Estudiante',true,'usuario@gmail.com','75cee5b221098c39dc19feca49b7b7cfe46405057d0361b18726990a5f91bf25',2);
+insert into users (username,fullname,status,mail,userpassword,usertype) values ('admin','Administrador',true,'admin@gmail.com','a74a6393d8fba6e2178e4e36e32c73c5bef049290e03fdc3ada929eb03770138',1);
+
+--foreign keys
+
+alter table need
+add constraint fk_need_category
+	foreign key(category)
+	references category(id) on delete cascade;
+	
+alter table users
+add constraint fk_usertype
+	foreign key(usertype)
+	references rol(id) on delete cascade;
+	
+alter table offer
+add constraint fk_offer_category
+	foreign key(category)
+	references category(id) on delete cascade;
+
+alter table offer
+add constraint fk_offer_user
+	foreign key(username)
+	references users(username) on delete cascade;
+
+alter table need 
+add constraint fk_need_user
+	foreign key(username)
+	references users(username) on delete cascade;
 */
 
