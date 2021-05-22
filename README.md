@@ -89,7 +89,6 @@ Para todas las anteriores el administrador puede obtener un reporte
     Username:adminis
     Password:administrative
    
-
 ### Usuarios:
 **username, password, rol**
 
@@ -102,3 +101,36 @@ Para todas las anteriores el administrador puede obtener un reporte
 4. gradu,graduate,Graduate
 
 5. adminis,administrative,Administrative
+
+## Arquitectura y Diseño detallado:
+### Modelo E-R.
+### Diagrama de clases 
+### Descripción de la arquitectura 
+
+La aplicación esta formada por 3 capas:
+
+#### Capa de Presentación 
+
+En esta capa se hizo uso de las tecnologías como:
+
+    * JSF(Java Server Faces) es un Framework
+    * Primefaces(Biboloteca de componentes)
+
+#### Capa de aplicación 
+
+En esta capa se hizo uso de las tecnologías como:
+    
+    * Java
+    * Google Guice (Framework de inyección de dependencias)
+    * Apache Shiro (Framework para la autenticación)
+    
+### Capa de persistencia de datos
+
+Para lograr una persistencia sobre los datos es necesario del motor de base de datos **PostgresSQL**
+y la herramienta **myBatis** para mapear sentencias SQL
+
+### Enlace a la aplicación en Heroku.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://proyecto-solidaridadescuela.herokuapp.com/) 
+
+### Enlace al sistema de integración continua.
