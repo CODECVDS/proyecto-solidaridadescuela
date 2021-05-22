@@ -171,6 +171,20 @@
     <build>
         <finalName>solidaridadescuela</finalName>
         <plugins>
+            <!-- clean project (also local H2 database)-->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.6.1</version>
+                <executions>
+                    <execution>
+                        <id>auto-clean</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -227,9 +241,9 @@
                 </dependencies>
                 <configuration>
                     <driver>org.h2.Driver</driver>
-                    <url>jdbc:h2:file:./target/db/testdb;MODE=MYSQL</url>
-                    <username>anonymous</username>
-                    <password>anonymous</password>
+                    <url>jdbc:h2:file:./target/db/testdb;MODE=PostgreSQL</url>
+                    <username>sa</username>
+                    <password></password>
                     <autocommit>false</autocommit>
                     <skip>${maven.test.skip}</skip>
                 </configuration>
@@ -242,7 +256,7 @@
                         </goals>
                         <configuration>
                             <srcFiles>
-                                <srcFile>tables.sql</srcFile>
+                                <srcFile>sql/tables.sql</srcFile>
                             </srcFiles>
                         </configuration>
                     </execution>
@@ -259,6 +273,37 @@
                     <path>/</path>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.2</version>
+                <configuration>
+                    <excludes></excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report-t</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 </project>
