@@ -37,6 +37,7 @@ public class AppTest
     @Before
     public void setUp(){
     }
+    /*
     @Test
     public void DeberiaIniciarSesion(){}
     @Test
@@ -103,7 +104,7 @@ public class AppTest
             assertTrue(false);
         }
     }
-    /*
+
     @Test
     public void deberiaActualizar(){
         try{
