@@ -1,7 +1,4 @@
 # proyecto-solidaridadescuela
-[![CircleCI](https://img.shields.io/circleci/build/gh/CODECVDS/proyecto-solidaridadescuela)](https://app.circleci.com/pipelines/github/CODECVDS/proyecto-solidaridadescuela)
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/67a58da9f61d4c119880734d1fca22e5)](https://www.codacy.com/gh/CODECVDS/proyecto-solidaridadescuela/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CODECVDS/proyecto-solidaridadescuela&amp;utm_campaign=Badge_Grade)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://proyecto-solidaridadescuela.herokuapp.com/)
 
@@ -104,7 +101,9 @@ Para todas las anteriores el administrador puede obtener un reporte
 
 ## Arquitectura y Diseño detallado:
 ### Modelo E-R.
+![Pagina](img/modeloe-r.png)
 ### Diagrama de clases 
+![Pagina](img/ClassDiagram.png)
 ### Descripción de la arquitectura 
 
 La aplicación esta formada por 3 capas:
@@ -134,3 +133,47 @@ y la herramienta **myBatis** para mapear sentencias SQL
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://proyecto-solidaridadescuela.herokuapp.com/) 
 
 ### Enlace al sistema de integración continua.
+
+[![CircleCI](https://img.shields.io/circleci/build/gh/CODECVDS/proyecto-solidaridadescuela)](https://app.circleci.com/pipelines/github/CODECVDS/proyecto-solidaridadescuela)
+
+### Descripción del proceso
+Se usó java para crear las clases que se necesitarían para generar los principales procesos de la aplicación,
+también se hizo uso de xhtml para hacer la interfaz agradable al usuario, y un motor de base de datos (Postgresql)
+para generar los espacios en donde se guardaría la información. Todo esto se implementó de manera que hubiera conexión 
+entre estas y poder cumplir con el proyecto descrito anteriormente. También se usó la metodología SCRUM dividido en tres
+sprints, para obtener efectividad a la hora de desarrollar las historias de usuario requeridas por el cliente.
+
+### Descripción sprint1
+Burndown chart and backlog
+•	Burndown chart: https://tree.taiga.io/project/nicolaspineros-solidaridad-escuela/taskboard/sprint-1-16929
+Estos fueron los issues que nos hicieron falta por completar en el primer sprint, cada uno de los miembros del equipo trabajó de acuerdo con lo exigido, pero como era la primera vez que usábamos las aplicaciones como taiga, se nos dificultó hacerlo, y por eso no cumplimos con estos issues, aunque fueron cumplidos en el siguiente sprint.
+•	Pendiente de revisión 
+•	El estado debería ser creado por defecto en true
+•	Mensaje de error al crear categoría con el mismo nombre 
+•	Mensaje de error de categoría con el mismo nombre
+•	Status no debería ser un campo de texto 
+•	Las categorías no deberían ser visible el id sino el nombre
+•	El estado debería ser active por defecto
+•	El usuario no puede crear más de N necesidades
+![Pagina](img/sprint1.PNG)
+
+### Descripción sprint2
+•	Burndown chart: https://tree.taiga.io/project/nicolaspineros-solidaridad-escuela/taskboard/sprint-2-9441
+Estos fueron los issues que nos hicieron falta por completar en el primer sprint, cada uno de los miembros del equipo trabajó de acuerdo con lo exigido, y los pocos issues que se mencionaran fueron cumplidos en el siguiente sprint.
+•	Mensaje de error explicito 
+•	Mensaje de error explicito 
+•	Estandarizar botones en necesidad y oferta
+•	Validar estado de la necesidad/oferta al responder 
+•	Validar usuarios al actualizar estado
+![Pagina](img/sprint2.PNG)
+
+### Descripción sprint3
+•	Burndown chart: https://tree.taiga.io/project/nicolaspineros-solidaridad-escuela/taskboard/sprint-3-6363
+En este sprint se terminó todas las historias de usuario, como ya teníamos la práctica de los anteriores sprints, manejamos mucho mejor el tiempo, acercándonos cada vez más al trabajo realizado por día.
+![Pagina](img/sprint3.PNG)
+### Sprint-backlog
+![Pagina](img/sprintBack-log.PNG)
+
+### Reporte de análisis estático de código.
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/67a58da9f61d4c119880734d1fca22e5)](https://www.codacy.com/gh/CODECVDS/proyecto-solidaridadescuela/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CODECVDS/proyecto-solidaridadescuela&amp;utm_campaign=Badge_Grade)
