@@ -19,7 +19,7 @@
 
 ### Docente 
 
--Julian Mauricio Velasco Briceño (Dueño de Producto)
+- Julian Mauricio Velasco Briceño (Dueño de Producto)
 
 ### Descripción del producto
 #### Descripción general
@@ -33,7 +33,7 @@ lo que le permite controlar el funcionamiento de la plataforma y el alcance de i
 
 ### Manual de usuario
 Primero al ingresar al sigiente link [enlace](https://proyecto-solidaridadescuela.herokuapp.com/)
-![Pagina Principal][Imagen1.PNG]
+![Pagina Principal](\Users\danie\Desktop\CVDS\proyecto-solidaridadescuela\img\ManualUsuario\Imagen1.PNG)
 
 Al dar Click en el boton "Sing in" podremos iniciar sesión de forma correcta al ingresar
 nos pedira diligenciar el Username y Password, se tiene la opción de recordar el usuario 
@@ -51,7 +51,7 @@ para salir de la pagina.
     -Username:admin 
     -Password:admineci
     
-*Como estudiante:
+* Como estudiante:
     -Username:user
     -Password:invitado
    
