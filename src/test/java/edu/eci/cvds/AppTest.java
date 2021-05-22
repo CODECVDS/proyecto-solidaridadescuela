@@ -22,7 +22,7 @@ import java.util.Date;
 
 public class AppTest 
 {
-
+/*
     @Inject
     private SqlSession sqlSession;
 
@@ -39,8 +39,6 @@ public class AppTest
     }
     @Test
     public void DeberiaIniciarSesion(){}
-
-    /*
     @Test
     public void DeberiaRegistrarCategoria(){
         try {
