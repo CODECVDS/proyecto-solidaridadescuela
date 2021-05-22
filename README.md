@@ -104,7 +104,9 @@ Para todas las anteriores el administrador puede obtener un reporte
 
 ## Arquitectura y Diseño detallado:
 ### Modelo E-R.
+![Pagina](img/modelo e-r.PNG)
 ### Diagrama de clases 
+![Pagina](img/Class Diagram.PNG)
 ### Descripción de la arquitectura 
 
 La aplicación esta formada por 3 capas:
