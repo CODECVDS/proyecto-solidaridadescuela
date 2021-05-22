@@ -53,7 +53,7 @@ public class OfferBean  extends BasePageBean {
         try {
             if(solidaridadServices.loadCategory(offer.getCategory()).getIsValid()){
                 solidaridadServices.registerOffer(offer);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Added"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Offer Added",offer.getName()));
             }else{
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Categoria Invalida",solidaridadServices.loadCategory(offer.getCategory()).getDescriptinvalid()));
             }
@@ -66,7 +66,7 @@ public class OfferBean  extends BasePageBean {
     public void update(){
         try {
             solidaridadServices.updateOffer(offer);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Offer Updated"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Offer Updated",offer.getName()));
         } catch (ServicesException ex){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", ex.getMessage()));
         }
