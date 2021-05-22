@@ -29,7 +29,7 @@ public class AppTest
     SolidaridadServices solidaridadServices;
 
     public AppTest(){
-        solidaridadServices = SolidaridadServicesFactory.getInstance().getSolidaridadServicesTesting();
+        solidaridadServices = SolidaridadServicesFactory.getInstance().getSolidaridadServicios();
     }
 
     private Date dateTest;
@@ -37,10 +37,9 @@ public class AppTest
     @Before
     public void setUp(){
     }
+    /*
     @Test
     public void DeberiaIniciarSesion(){}
-
-/*
     @Test
     public void DeberiaRegistrarCategoria(){
         try {
@@ -53,7 +52,6 @@ public class AppTest
             Assert.assertTrue(false);
         }
     }
-
 
     @Test
     public void DeberiaActualizarCategoria(){
@@ -69,12 +67,11 @@ public class AppTest
         }
     }
 
-
     @Test
     public void DeberiaRegistrarNecesidad(){
         try {
             int before = solidaridadServices.loadNeeds().size();
-            Need necesidadtest = new Need(999,"Necesidad Test","Esta es la prueba de creacion de la necesidad",1, Status.Active);
+            Need necesidadtest = new Need(1,"Necesidad Test","Esta es la prueba de creacion de la necesidad",1, Status.Active);
             solidaridadServices.registerNeed(necesidadtest);
             int after = solidaridadServices.loadNeeds().size();
             Assert.assertTrue(before < after);
@@ -82,8 +79,6 @@ public class AppTest
             assertTrue(false);
         }
     }
-
-
     @Test
     public void DeberiaRegistrarOferta(){
         try {
@@ -101,7 +96,7 @@ public class AppTest
     public void DeberiaRegistrarRespuestas(){
         try {
             int before = solidaridadServices.loadAnswers().size();
-            Answer respuesta = new Answer(1,"RespuestaTest",null,"Comentario Prueba",1,0);
+            Answer respuesta = new Answer(1,"RespuestaTest",null,"Comentario Prueba","Offer",0);
             solidaridadServices.registerAnswer(respuesta);
             int after = solidaridadServices.loadAnswers().size();
             Assert.assertTrue(before < after);
@@ -109,7 +104,6 @@ public class AppTest
             assertTrue(false);
         }
     }
-
 
     @Test
     public void deberiaActualizar(){
@@ -125,6 +119,5 @@ public class AppTest
             assertTrue(false);
         }
     }
-*/
-
+ */
 }
