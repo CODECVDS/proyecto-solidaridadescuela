@@ -1,7 +1,4 @@
 # proyecto-solidaridadescuela
-[![CircleCI](https://img.shields.io/circleci/build/gh/CODECVDS/proyecto-solidaridadescuela)](https://app.circleci.com/pipelines/github/CODECVDS/proyecto-solidaridadescuela)
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/67a58da9f61d4c119880734d1fca22e5)](https://www.codacy.com/gh/CODECVDS/proyecto-solidaridadescuela/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CODECVDS/proyecto-solidaridadescuela&amp;utm_campaign=Badge_Grade)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://proyecto-solidaridadescuela.herokuapp.com/)
 
@@ -137,6 +134,8 @@ y la herramienta **myBatis** para mapear sentencias SQL
 
 ### Enlace al sistema de integración continua.
 
+[![CircleCI](https://img.shields.io/circleci/build/gh/CODECVDS/proyecto-solidaridadescuela)](https://app.circleci.com/pipelines/github/CODECVDS/proyecto-solidaridadescuela)
+
 ### Descripción del proceso
 Se usó java para crear las clases que se necesitarían para generar los principales procesos de la aplicación,
 también se hizo uso de xhtml para hacer la interfaz agradable al usuario, y un motor de base de datos (Postgresql)
@@ -175,4 +174,6 @@ En este sprint se terminó todas las historias de usuario, como ya teníamos la 
 ### Sprint-backlog
 ![Pagina](img/sprintBack-log.PNG)
 
-### No importa $$$
+### Reporte de análisis estático de código.
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/67a58da9f61d4c119880734d1fca22e5)](https://www.codacy.com/gh/CODECVDS/proyecto-solidaridadescuela/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CODECVDS/proyecto-solidaridadescuela&amp;utm_campaign=Badge_Grade)
