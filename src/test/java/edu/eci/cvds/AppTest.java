@@ -29,64 +29,69 @@ public class AppTest
     SolidaridadServices solidaridadServices;
 
     public AppTest(){
-        solidaridadServices = SolidaridadServicesFactory.getInstance().getSolidaridadServicios();
+        solidaridadServices = SolidaridadServicesFactory.getInstance().getSolidaridadServicesTesting();
     }
 
     private Date dateTest;
-    /*
+
     @Before
     public void setUp(){
     }
     @Test
     public void DeberiaIniciarSesion(){}
 
+/*
     @Test
     public void DeberiaRegistrarCategoria(){
         try {
-            Category categorytest = new Category("CategoryTest","Esta es la categoria de prueba");
+            int before = solidaridadServices.loadCategories().size();
+            Category categorytest = new Category(999,"Categorytest","Esta es una categoria de prueba",null,true,null,true,null);
             solidaridadServices.registerCategory(categorytest);
-            Category categoryresult = solidaridadServices.loadCategory(1);
-            dateTest = categoryresult.getCreationDate();
-            Assert.assertTrue(categoryresult != null);
+            int after = solidaridadServices.loadCategories().size();
+            Assert.assertTrue(before<after);
         } catch (ServicesException ex){
-            assertTrue(false);
+            Assert.assertTrue(false);
         }
     }
+
 
     @Test
     public void DeberiaActualizarCategoria(){
         try {
-            Category category = solidaridadServices.loadCategory(1);
+            Category category = solidaridadServices.loadCategory(solidaridadServices.loadCategories().get(solidaridadServices.loadCategories().size()-1).getId());
             category.setName("Categoria1Test1");
             category.setDescription("Test modificacion");
             category.setStatus(true);
             solidaridadServices.updateCategory(category);
-            Category categoryTestUpdate = new Category(1,"Categoria1Test1","Test modificacion",null,true, null);
-            Assert.assertEquals(category,categoryTestUpdate);
+            Assert.assertEquals("Categoria1Test1",category.getName());
         } catch (ServicesException ex){
             assertTrue(false);
         }
     }
+
 
     @Test
     public void DeberiaRegistrarNecesidad(){
         try {
-            Need necesidadtest = new Need(1,"Necesidad Test","Esta es la prueba de creacion de la necesidad",1, Status.Active);
+            int before = solidaridadServices.loadNeeds().size();
+            Need necesidadtest = new Need(999,"Necesidad Test","Esta es la prueba de creacion de la necesidad",1, Status.Active);
             solidaridadServices.registerNeed(necesidadtest);
-            Need necesidadresult = solidaridadServices.loadNeed(1);
-            Assert.assertTrue(necesidadresult != null);
+            int after = solidaridadServices.loadNeeds().size();
+            Assert.assertTrue(before < after);
         } catch (ServicesException ex){
             assertTrue(false);
         }
     }
 
+
     @Test
     public void DeberiaRegistrarOferta(){
         try {
+            int before = solidaridadServices.loadOffers().size();
             Offer offer = new Offer(124,2,"offertest","offer created by Apptest",null,Status.Active,null,"user");
             solidaridadServices.registerOffer(offer);
-            Offer offerResult = solidaridadServices.loadOffer(124);
-            Assert.assertTrue(offerResult != null);
+            int after = solidaridadServices.loadOffers().size();
+            Assert.assertTrue(before < after);
         } catch (ServicesException ex){
             assertTrue(false);
         }
@@ -95,9 +100,11 @@ public class AppTest
     @Test
     public void DeberiaRegistrarRespuestas(){
         try {
+            int before = solidaridadServices.loadAnswers().size();
             Answer respuesta = new Answer(1,"RespuestaTest",null,"Comentario Prueba",1,0);
             solidaridadServices.registerAnswer(respuesta);
-            assertTrue(true);
+            int after = solidaridadServices.loadAnswers().size();
+            Assert.assertTrue(before < after);
         } catch (ServicesException ex){
             assertTrue(false);
         }
@@ -118,6 +125,6 @@ public class AppTest
             assertTrue(false);
         }
     }
+*/
 
-     */
 }
