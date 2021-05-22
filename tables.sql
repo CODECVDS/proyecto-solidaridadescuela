@@ -139,6 +139,13 @@ insert into category (name,description,creationdate,status,modificationdate,isva
 insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Dinero','Solicitar u ofertar en la plataforma','2021/05/17',true,'2021/05/17',false,'Según políticas esta no es una categoría válida');
 insert into category (name,description,creationdate,status,modificationdate,isvalid,descriptinvalid) values ('Sistemas y computadores','Elementos computacionales','2021/05/17',true,'2021/05/17',true,'');
 
+--Poblar answer
+insert into answer (name,creationdate,coments,answerto,toid) values ('Solicitud de compra','2021-05-20 19:49:12','Confirmar lo más pronto posible por favor','Offer',1);
+insert into answer (name,creationdate,coments,answerto,toid) values ('Oferta de servicio','2021-05-20 19:49:12','Yo trabajo en el área de mantenimiento de servidores y salas de sistemas','Need',2);
+insert into answer (name,creationdate,coments,answerto,toid) values ('Solicitud de compra','2021-05-20 19:49:12','Si tiene más libros del mismo tema los puedo comprar','Offer',5);
+insert into answer (name,creationdate,coments,answerto,toid) values ('Oferta de materiales','2021-05-20 19:49:12','Te ofrezco los materiales que usé cuando vi esa materia','Need',1);
+insert into answer (name,creationdate,coments,answerto,toid) values ('Solicitud de compra','2021-05-20 19:49:12','Si tienes más discos los puedo comprar','Offer',4);
+
 create or replace procedure confirm_noffers(cat int, n varchar, des varchar, usname varchar)
 language plpgsql
 as $$
