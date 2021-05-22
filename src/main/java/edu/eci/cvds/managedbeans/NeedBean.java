@@ -55,7 +55,7 @@ public class NeedBean extends BasePageBean{
         try{
             if(solidaridadServices.loadCategory(need.getCategory()).getIsValid()){
                 solidaridadServices.registerNeed(need);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Added"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Need Added",need.getName()));
             }else{
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Categoria Invalida",solidaridadServices.loadCategory(need.getCategory()).getDescriptinvalid()));
             }
@@ -69,7 +69,7 @@ public class NeedBean extends BasePageBean{
         try{
             if (need.getUsername().equals(session.getAttribute("username")) | currentUser.hasRole("Administrator")) {
                 solidaridadServices.updateNeedStatus(need);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Need Updated"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Need Updated",need.getName()));
             }
             else{
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Update Error", "Not allowed"));
