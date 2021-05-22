@@ -174,6 +174,10 @@ En este sprint se terminó todas las historias de usuario, como ya teníamos la 
 ### Sprint-backlog
 ![Pagina](img/sprintBack-log.PNG)
 
+### Reporte de pruebas SolidaridadEscuela Maven webapp
+
+![Pagina](img/ManualUsuario/Imagen8.PNG)
+
 ### Reporte de análisis estático de código.
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/67a58da9f61d4c119880734d1fca22e5)](https://www.codacy.com/gh/CODECVDS/proyecto-solidaridadescuela/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CODECVDS/proyecto-solidaridadescuela&amp;utm_campaign=Badge_Grade)
